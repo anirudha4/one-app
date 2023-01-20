@@ -1,0 +1,10 @@
+{
+  "name": "react-sails-template",
+  "version": "1.0.0",
+  "description": "A Full Stack Boilerplate powered by sails and react.",
+  "main": "index.js",
+  "repository": "https://github.com/anirudha4/react-sails-template.git",
+  "author": "Anirudha Gandhare",
+  "license": "MIT",
+  "private": true
+}
