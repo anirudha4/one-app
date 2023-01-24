@@ -30,7 +30,8 @@ module.exports = {
       ({ currentUser: user } = this.req);
 
       if (this.req.isSocket) {
-        sails.sockets.join(this.req, `user:${user.id}`);
+        // sails.sockets.join(this.req, `user:${user.id}`);
+        sails.sockets.join(this.req, `organization:${user.organizationId}`);
       }
     } else {
       user = await sails.helpers.users.getOne(inputs.id);

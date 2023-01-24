@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import Model, { attr } from "redux-orm";
+import Model, { attr, fk } from "redux-orm";
 import { loginSuccess } from "../shared/slices/auth";
 
 // actions
@@ -15,7 +15,15 @@ export class User extends Model {
             id: attr(),
             email: attr(),
             name: attr(),
-            isAdmin: attr()
+            isAdmin: attr(),
+            username: attr(),
+            phone: attr(),
+            registrationType: attr(),
+            organizationId: fk({
+                to: 'Organization',
+                as: 'organization',
+                relatedName: 'users'
+            })
         };
     }
 

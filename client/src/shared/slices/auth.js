@@ -1,20 +1,41 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { createAction, createSlice } from '@reduxjs/toolkit'
 import { getAccessTokenFromLocalStore } from '../../utils/authentication';
 
-// actions
+// logout actions
+export const requestLogout = createAction('/auth/logout');
+
+// login actions
+export const requestLogin = createAction('auth/login', function prepare(payload) {
+    return {
+        payload: {
+            emailOrUsername: payload.email,
+            password: payload.password
+        }
+    }
+});
+const loginRequested = (state) => {
+    state.loading = true;
+}
 const loginAction = (state, action) => {
     state.isLoggedIn = true;
     state.currentUser = action.payload
+    state.loading = false;
 }
-const registerAction = (state, action) => {
+// register actions
+export const requestRegister = createAction('auth/register');
+
+const registerRequested = (state) => {
+    state.loading = true;
 }
-
-
+const registerAction = (state) => {
+    state.loading = false;
+}
 
 const initialState = {
     currentUser: null,
     isLoggedIn: false,
-    accessToken: getAccessTokenFromLocalStore()
+    accessToken: getAccessTokenFromLocalStore(),
+    loading: false
 };
 
 export const authSlice = createSlice({
@@ -22,7 +43,11 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         loginSuccess: loginAction,
-        registerSuccess: registerAction
+        registerSuccess: registerAction,
+    },
+    extraReducers: {
+        [requestRegister.type]: registerRequested,
+        [requestLogin.type]: loginRequested,
     }
 });
 

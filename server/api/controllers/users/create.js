@@ -2,10 +2,22 @@ const zxcvbn = require('zxcvbn');
 
 const Errors = {
   EMAIL_ALREADY_IN_USE: {
-    emailAlreadyInUse: 'Email already in use',
+    emailAlreadyInUse: {
+      code: '9001',
+      message: 'Email already in use'
+    },
   },
   USERNAME_ALREADY_IN_USE: {
-    usernameAlreadyInUse: 'Username already in use',
+    usernameAlreadyInUse: {
+      code: '9002',
+      message: 'Username already in use'
+    },
+  },
+  ORGANIZATION_NAME_ALREADY_IN_USE: {
+    organizationNameAlreadyInUse: {
+      code: '9003',
+      message: 'Organization Name already in use'
+    },
   },
 };
 
@@ -45,6 +57,10 @@ module.exports = {
       isNotEmptyString: true,
       allowNull: true,
     },
+    organizationName: {
+      type: 'string',
+      required: true
+    }
   },
 
   exits: {
@@ -54,6 +70,9 @@ module.exports = {
     usernameAlreadyInUse: {
       responseType: 'conflict',
     },
+    organizationNameAlreadyInUse: {
+      responseType: 'conflict'
+    }
   },
 
   async fn(inputs) {
@@ -64,6 +83,7 @@ module.exports = {
       'username',
       'phone',
       'language',
+      'organizationName'
     ]);
 
     const user = await sails.helpers.users.createOne
@@ -72,7 +92,8 @@ module.exports = {
         request: this.req,
       })
       .intercept('emailAlreadyInUse', () => Errors.EMAIL_ALREADY_IN_USE)
-      .intercept('usernameAlreadyInUse', () => Errors.USERNAME_ALREADY_IN_USE);
+      .intercept('usernameAlreadyInUse', () => Errors.USERNAME_ALREADY_IN_USE)
+      .intercept('organizationNameAlreadyInUse', () => Errors.ORGANIZATION_NAME_ALREADY_IN_USE);
 
     return {
       item: user,

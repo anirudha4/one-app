@@ -30,4 +30,5 @@ module.exports.custom = {
 
   attachmentsPath: path.join(sails.config.appPath, 'private', 'attachments'),
   attachmentsUrl: `${process.env.BASE_URL}/attachments`,
+
 };

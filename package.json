@@ -1,10 +1,11 @@
 {
-  "name": "react-sails-template",
+  "name": "one-app",
   "version": "1.0.0",
   "description": "A Full Stack Boilerplate powered by sails and react.",
   "main": "index.js",
-  "repository": "https://github.com/anirudha4/react-sails-template.git",
+  "repository": "https://github.com/anirudha4/one-app.git",
   "author": "Anirudha Gandhare",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {}
 }

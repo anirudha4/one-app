@@ -49,7 +49,6 @@ module.exports = function defineCurrentUserHook(sails) {
                   accessToken,
                   currentUser,
                 });
-
                 if (req.isSocket) {
                   sails.sockets.join(req, `@user:${currentUser.id}`);
                 }

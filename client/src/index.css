@@ -1,9 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&display=swap');
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif !important;
+    box-sizing: border-box !important;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* typography */
+.heading-text {
+    font-family: 'Outfit' !important;
+}
+
+/* form */
+.field {
+    @apply flex flex-col gap-2 relative;
+}
+
+.input {
+    @apply p-2 text-xs outline-none border border-gray-300 rounded hover:border-gray-700 focus:border-gray-900 transition-all;
+}
+
+.label {
+    @apply text-xs text-gray-500;
+}
+
+/* utils */
+.divider {
+    @apply border-b border-slate-100;
+}
+
+/* buttons */
+.btn {
+    @apply p-3 bg-black text-white border rounded-md text-xs font-medium outline-none transition-all cursor-pointer;
+}
+.btn-danger {
+    @apply bg-rose-50 text-rose-500 border-none hover:bg-rose-100;
+}
+.btn-primary {
+    @apply py-2 px-3 font-medium bg-black rounded text-slate-200 text-xs flex items-center gap-2 transition-all hover:text-white;
+}
+
+/* layouts */
+
+.sidebar {
+    @apply h-screen border-r border-slate-200;
+}
+
+
+/* select */
+.select {
+    position: absolute;
+    top: 105%;
+    width: 100%;
+    @apply p-1 bg-white rounded-md shadow-md cursor-pointer;
+    max-height: 300px;
+    overflow: scroll;
+}
+.select-option {
+    @apply flex flex-col transition-all rounded  duration-75 hover:bg-slate-100;
+}
+.select-option label {
+    @apply text-xs p-2;
+}
+.select-option input {
+    display: none;
+}
+.show-select {
+    display: none;
+}

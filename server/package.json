@@ -1,11 +1,12 @@
 {
-  "name": "planka-server",
+  "name": "one-app-server",
   "private": true,
   "main": "app.js",
   "scripts": {
     "console": "dotenv sails console",
     "db:init": "node db/init.js",
     "db:migrate": "knex migrate:latest --cwd db",
+    "db:make": "npx knex migrate:make create_categories_table --cwd db",
     "db:seed": "knex seed:run --cwd db",
     "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
     "start": "node app.js --prod",

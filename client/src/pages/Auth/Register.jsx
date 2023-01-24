@@ -1,35 +1,70 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { requestRegister } from './saga';
+import React, { useRef, useState } from 'react'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Field from '../../components/Field';
+import { requestRegister } from '../../shared/slices/auth';
 
 function Register() {
   // get dispatch
   const dispatch = useDispatch();
+  // selectors
+  const { loading } = useSelector(state => state.auth);
+  // local state
   const [form, setForm] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    organizationName: ''
   });
+  const onChange = e => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(requestRegister(form));
+    dispatch(requestRegister({ ...form }));
   }
+
   return (
-    <div className='form-container'>
-      <h3 className='form-header'>react-sails-template</h3>
-      <br />
-      <form onSubmit={handleSubmit} className='form'>
-        {Object.keys(form).map(key => {
-          return (
-            <div className="field" key={key}>
-              <label htmlFor={key}>{key}</label>
-              <input className='form-field-input' key={key} type={key} placeholder={key} onChange={e => setForm({ ...form, [key]: e.target.value })} />
-            </div>
-          )
-        })}
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="flex flex-col max-w-[500px] w-full gap-3" >
+      <Field
+        autoFocus
+        name={'name'}
+        id={'name'}
+        type={'name'}
+        label={'Name'}
+        placeholder={'Eg. John Doe'}
+        value={form.name}
+        onChange={onChange}
+      />
+      <Field
+        name={'email'}
+        id={'email'}
+        type={'email'}
+        label={'Email'}
+        placeholder={'Eg. john@gmail.com'}
+        value={form.email}
+        onChange={onChange}
+      />
+      <Field
+        name={'password'}
+        id={'password'}
+        type={'password'}
+        label={'Password'}
+        placeholder={'*********'}
+        value={form.password}
+        onChange={onChange}
+      />
+      <Field
+        name={'organizationName'}
+        id={'organizationName'}
+        type={'text'}
+        label={'Organization Name'}
+        placeholder={'Eg. Apple'}
+        value={form.organizationName}
+        onChange={onChange}
+      />
+      <button disabled={loading} className="btn">{loading ? 'Please wait...' : 'Register'}</button>
+    </form >
   )
 }
 

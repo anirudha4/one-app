@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { currentUserSelector } from '../../selectors/current';
-import { requestLogout } from '../../pages/Auth/saga';
+import { requestLogout } from '../../shared/slices/auth';
 
 function Navbar() {
     // dispatch
@@ -16,26 +16,19 @@ function Navbar() {
     }
     return (
         <header className='navbar-container'>
-            <nav className="navbar">
-                <div className="left">
-                    <Link to={'/'}>
-                        <div className="logo">react-sails-template</div>
-                    </Link>
-                </div>
-                <div className="right">
+            <nav className="flex justify-between p-3 shadow items-center">
+                <NavLink
+                    to={'/'}
+                    className="text-gray-700 h-fit"
+                >
+                    OneApp
+                </NavLink>
+                <div className="flex align-middle gap-3">
                     {user ? (
-                        <div className="auth-link">
-                            <span className="primary">Welcome, {user.name}</span>
-                            <button className='btn-danger' onClick={handleLogout}>Logout</button>
-                        </div>
+                        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
                     ) : (
-                        <div className='navbar-links'>
-                            <Link to={'/auth'} className="navbar-links-link">
-                                Login
-                            </Link>
-                            <Link to={'/auth/register'} className="navbar-links-link">
-                                Register
-                            </Link>
+                        <div className="flex align-middle gap-2">
+                            <Link to={'/auth'} className="btn btn-primary-fill">Register</Link>
                         </div>
                     )}
                 </div>

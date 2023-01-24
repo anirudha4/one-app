@@ -1,0 +1,33 @@
+.app-layout {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: 1fr 20px;
+}
+
+.transaction-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 300px 1fr;
+    grid-template-areas: 
+    "overview transaction-list transaction-list"
+    "manage transaction-list transaction-list";
+
+}
+
+.transactions-overview {
+    grid-area: overview;
+    height: 100%;
+}
+
+.transaction-list {
+    grid-area: transaction-list;
+}
+
+.manage {
+    grid-area: manage;
+    height: 100%;
+}

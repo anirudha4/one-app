@@ -29,10 +29,11 @@ module.exports.routes = {
   'POST /api/users/:id/avatar': 'users/update-avatar',
   'DELETE /api/users/:id': 'users/delete',
 
+  // organization
+  'GET /api/organizations/init': 'organizations/init',
 
   // test route
   'GET /api/test': 'test/index',
-
 
   'GET /*': {
     view: 'index',

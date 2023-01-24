@@ -1,21 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { createAction } from "@reduxjs/toolkit"
 import { authorizeSelf, generateAccessToken, register } from '../../api/user';
-import { loginSuccess, registerSuccess } from '../../shared/slices/auth';
-import { clearAccessTokenToLocalStore, generateAuthenticationHeaders, setAccessTokenToLocalStore } from '../../utils/authentication';
-
-export const requestRegister = createAction('auth/register');
-
-export const requestLogin = createAction('auth/login', function prepare(payload) {
-  return {
-    payload: {
-      emailOrUsername: payload.email,
-      password: payload.password
-    }
-  }
-});
-
-export const requestLogout = createAction('/auth/logout');
+import { loginSuccess, registerSuccess, requestLogin, requestLogout, requestRegister } from '../../shared/slices/auth';
+import { clearAccessTokenToLocalStore, generateAuthenticationHeaders, handleAuthenticationErrorCodes, setAccessTokenToLocalStore } from '../../utils/authentication';
 
 /**
  * 
@@ -29,9 +15,13 @@ export const requestLogout = createAction('/auth/logout');
 export function* registerWorker({ payload }) {
   try {
     yield call(register, payload);
+    window.location.href = '/auth'
+  } catch (error) {
+    const { code } = error.message;
+    const message = handleAuthenticationErrorCodes(code);
+    alert(message);
+  } finally {
     yield put(registerSuccess(payload));
-  } catch (err) {
-    console.error(err.message);
   }
 }
 /**
@@ -46,10 +36,9 @@ export function* loginWorker({ payload }) {
   try {
     // get access token
     const { item: accessToken } = yield call(generateAccessToken, payload);
-    // get user from access token
-    yield call(authorize, accessToken);
     // store the access token in local storage
     yield call(setAccessTokenToLocalStore, accessToken);
+    window.location.href = '/app'
   } catch (err) {
     console.log(err.message);
   }

@@ -9,6 +9,7 @@ exports.seed = (knex) => {
     isAdmin: true,
     name: 'Anirudha',
     username: 'anirudha',
+    registration_type: 'standard',
     createdAt: date,
     updatedAt: date,
   });

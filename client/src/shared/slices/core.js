@@ -1,4 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
+
+// actions for init
+export const appInit = createAction('app/init');
 
 const coreSlice = createSlice({
     name: 'core',

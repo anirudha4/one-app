@@ -11,14 +11,12 @@ module.exports.up = (knex) =>
       table.text('name').notNullable();
       table.text('username');
       table.text('phone');
-
+      table.text('registration_type').notNullable().defaultTo('standard');
+      table.bigInteger('organization_id').notNullable();
       table.timestamp('created_at', true);
       table.timestamp('updated_at', true);
       table.timestamp('deleted_at', true);
     })
-    .raw(
-      'ALTER TABLE "user_account" ADD CONSTRAINT "user_email_unique" EXCLUDE ("email" WITH =) WHERE ("deleted_at" IS NULL)',
-    )
     .raw(
       'ALTER TABLE "user_account" ADD CONSTRAINT "user_username_unique" EXCLUDE ("username" WITH =) WHERE ("username" IS NOT NULL AND "deleted_at" IS NULL)',
     );
