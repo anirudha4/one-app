@@ -10,17 +10,18 @@ import Layout from './shared/components/Layout';
 import { history } from './shared/slices/router';
 import { currentAuthStatusSelector } from './selectors/current';
 import AppLayout from './shared/components/AppLayout';
-
-import './styles/app.css';
 import Invoices from './pages/Dashboard/Invoices';
 import Tasks from './pages/Dashboard/Tasks';
+
+import './styles/app.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
   const { isLoggedIn } = useSelector(currentAuthStatusSelector);
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Layout />}>
-        <Route index element={<Transactions />} />
+        <Route index element={<AppLayout />} />
         <Route path='auth' element={<AuthLayout />}>
           <Route index loader={() => {
             if (isLoggedIn) {

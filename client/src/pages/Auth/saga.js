@@ -56,7 +56,11 @@ export function* authWatcher() {
 }
 
 export function* authorize(accessToken) {
-  const { item: user } = yield call(authorizeSelf, generateAuthenticationHeaders(accessToken));
-  yield put(loginSuccess(user));
-  return user;
+  try {
+    const { item: user } = yield call(authorizeSelf, generateAuthenticationHeaders(accessToken));
+    yield put(loginSuccess(user));
+    return user;
+  } catch (err) {
+    yield call(logoutWorker);
+  }
 }

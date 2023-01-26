@@ -6,6 +6,8 @@ import rootSaga from './shared/sagas';
 import auth from './shared/slices/auth'
 import router from './shared/slices/router';
 import core from './shared/slices/core';
+import tag from './shared/slices/tag';
+import transaction from './shared/slices/transaction';
 
 // create saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -21,8 +23,10 @@ export const store = configureStore({
     reducer: {
         core,
         auth,
+        tag,
+        transaction,
         orm: ormReducer,
-        router
+        router,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({ thunk: false }).prepend(sagaMiddleware).concat(getCustomMiddlewares());

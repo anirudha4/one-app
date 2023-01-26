@@ -1,15 +1,17 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types';
 
-const Field = ({ id, name, placeholder, label, type, value, onChange, ...props }) => {
+const TextField = ({ id, name, placeholder, label, type, value, onChange, ...props }) => {
     return (
         <div className="field group">
             <label className='label' htmlFor={id}>{label}</label>
-            <input className='input' name={name} type={type} placeholder={placeholder} value={value} onChange={onChange} {...props} />
+            <textarea className='input resize-none' name={name} type={type} placeholder={placeholder} onChange={onChange} {...props} >
+                {value}
+            </textarea>
         </div>
     )
 };
-Field.propTypes = {
+TextField.propTypes = {
     id: PropTypes.string,
     placeholder: PropTypes.string,
     label: PropTypes.string,
@@ -18,4 +20,4 @@ Field.propTypes = {
     onChange: PropTypes.func,
     useInputMask: PropTypes.bool,
 }
-export default Field
+export default TextField

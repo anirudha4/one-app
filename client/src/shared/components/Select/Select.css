@@ -1,0 +1,76 @@
+
+
+.react-select__option--is-focused {
+    background-color: black !important;
+    color: white !important;
+    border-radius: 5px !important;
+}
+
+.react-select__control {
+    border: rgb(209, 213, 219);
+    min-height: 34px !important;
+    height: fit-content;
+    line-height: 24px !important;
+}
+
+.react-select__control--is-focused {
+    box-shadow: unset !important;
+}
+
+.react-select__control:hover {
+    border-color: black !important;
+}
+
+.react-select__placeholder {
+    font-size: 12px;
+}
+
+.react-select__single-value {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.react-select__option {
+    font-size: 11px !important;
+    padding: 8px 10px !important;
+}
+
+.react-select__value-container {
+    padding: 0 8px !important;
+}
+
+.react-select__multi-value {
+    background-color: black !important;
+    border-radius: 5px;
+}
+.react-select__multi-value__label {
+    font-size: 11px !important;
+    color: white !important;
+    padding: 0 6px !important;
+}
+.react-select__multi-value__remove {
+    color: white;
+    border-radius: 5px;
+}
+.react-select__multi-value__remove:hover {
+    background-color: #333 !important;
+    color: white !important;
+}
+.react-select__indicator {
+    padding: 0 !important;
+    min-width: 34px;
+    @apply flex justify-center;
+}
+
+.react-select__menu {
+    margin: 0 !important;
+}
+.react-select__menu-notice {
+    @apply text-xs font-medium;
+}
+.react-select__input {
+    font-size: 12px !important;
+}
+.react-select__menu-list {
+    padding: 5px !important;
+}

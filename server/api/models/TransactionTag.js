@@ -1,5 +1,5 @@
 /**
- * Organization.js
+ * TransactionTag.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -8,19 +8,10 @@
 module.exports = {
 
   attributes: {
-    name: {
-      type: 'string',
-      required: true
-    },
-    isParentOrganization: {
-      type: 'boolean',
-      defaultsTo: true,
-      columnName: 'is_parent_organization'
-    },
+
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -30,19 +21,17 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    users: {
-      collection: 'User',
-      via: 'organizationId',
+    transactionId: {
+      model: 'Transaction',
+      required: true,
+      columnName: 'transaction_id'
     },
-    categories: {
-      collection: 'Category',
-      via: 'organizationId'
-    },
-    tags: {
-      collection: 'Tag',
-      via: 'organizationId'
+    tagId: {
+      model: 'Tag',
+      required: true,
+      columnName: 'tag_id'
     }
   },
-  tableName: 'organization'
+  tableName: 'transaction_tag'
 };
 
