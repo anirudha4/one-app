@@ -14,12 +14,12 @@ const TAB_OPTIONS = [
     {
         id: 2,
         label: 'Categories',
-        component: <TagList />
+        component: <CategoryList />
     },
     {
         id: 3,
         label: 'Tags',
-        component: <CategoryList />
+        component: <TagList />
     }
 ];
 function Manage() {

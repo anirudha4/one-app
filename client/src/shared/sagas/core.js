@@ -3,11 +3,15 @@ import socket from "../../api/socket";
 import { authorize, authWatcher } from "../../pages/Auth/saga";
 import { getAccessTokenFromLocalStore } from "../../utils/authentication";
 import { coreInitialized } from "../slices/core";
+import { tagWatcher } from "./entity/tag";
+import { transactionWatcher } from "./entity/transaction";
 import { loadDataForOrganization } from "./init";
 import socketWatchers from "./socket-event-channel";
 
 const watchers = [
     authWatcher,
+    tagWatcher,
+    transactionWatcher,
     socketWatchers
 ]
 export function* coreSaga() {

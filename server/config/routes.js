@@ -17,7 +17,7 @@ module.exports.routes = {
   'DELETE /api/access-tokens/me': 'access-tokens/delete',
 
   /**
-   * @route:users
+   * users
    */
   'GET /api/users': 'users/index',
   'POST /api/users': 'users/create',
@@ -29,8 +29,17 @@ module.exports.routes = {
   'POST /api/users/:id/avatar': 'users/update-avatar',
   'DELETE /api/users/:id': 'users/delete',
 
-  // organization
+  // organizations
   'GET /api/organizations/init': 'organizations/init',
+
+  // tags
+  'POST /api/tags': 'tags/create',
+
+  // transactions
+  'POST /api/transactions': 'transactions/create',
+
+  // transaction-tag
+  'POST /api/transaction-tag': 'transaction-tag/create',
 
   // test route
   'GET /api/test': 'test/index',

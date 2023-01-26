@@ -1,6 +1,6 @@
 import { ERROR_CODES } from "../constants/errors";
 
-export const generateAuthenticationHeaders = (accessToken, headers = {}) => {
+export const generateAuthenticationHeaders = (accessToken = getAccessTokenFromLocalStore(), headers = {}) => {
     return {
         ...headers,
         'Authorization': `Bearer ${accessToken}`

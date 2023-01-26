@@ -17,7 +17,6 @@ module.exports = {
   fn: async function (inputs) {
     const { categories, userId, organizationId } = inputs;
     const categoryValues = categories.map(category => ({ ...category, createdBy: userId, organizationId }));
-    console.log({ categoryValues });
 
     return await Category.createEach(categoryValues).fetch();
   }
