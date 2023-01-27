@@ -8,7 +8,6 @@ import { allCategoriesSelector, allTagsSelector } from '../../selectors/all';
 import Divider from '../../shared/components/Divider'
 import Field from '../Field';
 import NumberField from '../Field/NumberField';
-import { COLOR_BY_TRANSACTION_TYPE } from '../../constants/transactions';
 import { createObjectFromFormData, validateTransaction } from '../../utils/transactions';
 import CustomSelect, { CreatableSelect } from '../../shared/components/Select/CustomSelect';
 import { createTagAction } from '../../shared/actions/entry/tags';
@@ -39,7 +38,7 @@ function AddTransaction() {
   // memoize categories
   const CATEGORY_OPTIONS = useMemo(() =>
     categories.map(category => (
-      { id: category.id, label: category.name, value: category.id }
+      { id: category.id, label: category.name, value: category.id, type: category.type }
     )), []);
 
   const TAG_OPTIONS = useMemo(() =>
@@ -53,7 +52,9 @@ function AddTransaction() {
   const handleCreateTag = async tag => {
     dispatch(createTagAction({ name: tag }));
   }
-
+  const handleCategoryChange = category => {
+    formRef.current.type.value = category.type
+  }
   const handleSubmit = async e => {
     e.preventDefault();
     try {
@@ -73,7 +74,7 @@ function AddTransaction() {
   return (
     <div className='add-transaction-modal-container flex items-center justify-center'>
       <div className="fixed top-0 left-0 w-full h-screen bg-black opacity-40 z-10"></div>
-      <div className="fixed rounded z-20 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] add-transaction-card p-4 bg-white max-w-[500px] w-full">
+      <div className="fixed rounded-md z-20 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] add-transaction-card p-4 bg-white max-w-[500px] w-full">
         <div className="mb-2 flex items-center justify-between">
           <div className="heading-text text-slate-700 text-lg font-medium">New Transaction</div>
           <Link replace to={'/app/transactions'} className="h-7 w-7 bg-slate-100 flex items-center justify-center rounded-md hover:bg-slate-200 cursor-pointer transition-all">
@@ -81,7 +82,7 @@ function AddTransaction() {
           </Link>
         </div>
         <Divider />
-        {error && <div className="p-2 text-xs capitalize bg-red-100 text-red-500 mb-3 rounded font-medium">{error}</div>}
+        {error && <div className="p-2 text-xs capitalize bg-red-100 text-red-500 mb-3 rounded">{error}</div>}
         <form ref={formRef} onSubmit={handleSubmit} className='mb-2 flex flex-col gap-4'>
           <Field
             label={'Name'}
@@ -105,6 +106,14 @@ function AddTransaction() {
               autoComplete={false}
             />
           </div>
+          <CustomSelect
+            options={CATEGORY_OPTIONS}
+            name="categoryId"
+            label="Categories"
+            id="categories"
+            defaultValue={CATEGORY_OPTIONS[0]}
+            onChange={handleCategoryChange}
+          />
           <SegmentedField
             label={'Type'}
             name="type"
@@ -113,13 +122,6 @@ function AddTransaction() {
               { id: 2, label: 'Income', value: 'income' },
               { id: 3, label: 'Investment', value: 'investment' }
             ]}
-          />
-          <CustomSelect
-            options={CATEGORY_OPTIONS}
-            name="categoryId"
-            label="Categories"
-            id="categories"
-            defaultValue={CATEGORY_OPTIONS[0]}
           />
           <CreatableSelect
             options={TAG_OPTIONS}

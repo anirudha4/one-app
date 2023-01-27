@@ -18,7 +18,7 @@ exports.defaultCategories = [
     { name: 'Venture capital', type: 'investment' },
     { name: 'Commodities', type: 'investment' },
     { name: 'Cryptocurrency', type: 'investment' },
-    { name: 'Other', type: 'other' },
+    { name: 'Other', type: 'expense' },
 ];
 
 exports.COLORS = [

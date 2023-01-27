@@ -35,3 +35,14 @@ export const validateTransaction = (values, checkAgainst) => {
         }
     });
 }
+
+export const getTransactionTypeColor = (type) => {
+    switch(type) {
+        case 'expense':
+            return 'red';
+        case 'income':
+            return 'teal';
+        case 'investment':
+            return 'green';
+    }
+}

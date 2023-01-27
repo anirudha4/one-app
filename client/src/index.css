@@ -30,7 +30,7 @@
 
 /* segmented control */
 .segmented-control {
-    @apply p-[2px] gap-[2px] bg-slate-100 flex items-center justify-between rounded-md border border-slate-200 hover:border-slate-500 focus-within:border-black transition-all;
+    @apply p-[2px] bg-slate-100 flex items-center justify-between rounded border border-slate-200 hover:border-slate-500 focus-within:border-black transition-all;
 }
 .segmented-control-option {
     @apply p-2 text-center text-xs flex-1 cursor-pointer rounded select-none font-medium transition-all duration-100;

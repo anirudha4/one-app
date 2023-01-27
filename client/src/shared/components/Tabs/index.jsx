@@ -10,8 +10,8 @@ function Tabs({ tabs, onChange, activeTab }) {
         return tabs.find(tab => tab.id === activeTab).component
     }, [activeTab])
     return (
-        <div className={styles.tabsContainer}>
-            <div className='p-1 bg-slate-100 rounded-md flex justify-between items-center'>
+        <>
+            <div className='p-1 bg-slate-100 rounded-md flex justify-between items-center mb-2'>
                 {tabs.map(tab => {
                     return (
                         <div key={tab.id} onClick={() => onChange(tab.id)} className={classNames("p-[7px] text-xs font-medium flex-1 text-center rounded cursor-pointer select-none text-slate-700", {
@@ -21,7 +21,7 @@ function Tabs({ tabs, onChange, activeTab }) {
                 })}
             </div>
             {Component}
-        </div>
+        </>
     )
 }
 
