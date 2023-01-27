@@ -10,9 +10,9 @@ import {
 function* createTransactionWorker({ payload }) {
     try {
         const { transaction, transactionTags } = yield call(createTransaction, payload, generateAuthenticationHeaders());
-        console.log({ transaction, transactionTags });
+        yield put(createTransactionSucceededAction({ transaction, transactionTags }));
     } catch (error) {
-        console.log(error.message);
+        yield put(createTransactionErrorAction(error));
     }
 }
 

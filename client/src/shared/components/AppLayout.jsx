@@ -8,7 +8,7 @@ function AppLayout() {
     return (
         <div className='app-layout h-screen w-full bg-slate-50 shadow-lg'>
             <Sidebar />
-            <main className='h-full flex flex-col gap-2'>
+            <main className='h-full flex flex-col'>
                 <Header />
                 <Outlet />
             </main>

@@ -40,7 +40,7 @@ export class Transaction extends Model {
                 })
                 break;
             case createTransactionSucceededAction.type:
-                Transaction.upsert(payload.tag);
+                Transaction.upsert(payload.transaction);
                 break;
             default:
                 break;

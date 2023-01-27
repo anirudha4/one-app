@@ -4,28 +4,42 @@ import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const createDataForOverviewChart = (income, expense) => ({
-    innerHeight: 200,
-    innerWidth: 200,
-    backgroundColor: 'black',
+const DoughnutChartOptions = {
+    plugins: {
+        legend: {
+            display: false
+        }
+    }
+}
+
+export const createDataForOverviewChart = (income, expense, investment) => ({
+    labels: ['Income', 'Expense', 'Investment'],
     datasets: [
         {
             label: 'Statistics',
-            data: [income, expense],
+            data: [income, expense, investment],
             backgroundColor: [
                 'rgba(75, 192, 192, 1)',
                 'rgba(255, 99, 132, 1)',
+                'rgba(255, 199, 132, 1)',
             ],
             borderColor: [
                 'rgba(75, 192, 192, 1)',
                 'rgba(255, 99, 132, 1)',
+                'rgba(255, 199, 132, 1)',
             ],
-            radius: 80,
-            cutout: 70
+            radius: 90,
+            cutout: 90,
+            borderWidth: 1
         },
     ],
 });
 
-export function OverviewChart({ income, expense }) {
-    return <Doughnut data={createDataForOverviewChart(income, expense)} />;
+export function OverviewChart({ income, expense, investment }) {
+    return (
+        <Doughnut
+            options={DoughnutChartOptions}
+            data={createDataForOverviewChart(income, expense, investment)}
+        />
+    );
 }
