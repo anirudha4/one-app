@@ -43,6 +43,6 @@ export const getTransactionTypeColor = (type) => {
         case 'income':
             return 'teal';
         case 'investment':
-            return 'green';
+            return 'blue';
     }
 }

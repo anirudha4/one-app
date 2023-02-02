@@ -11,11 +11,17 @@
 .transaction-grid {
     display: grid;
     align-items: flex-start;
-    grid-template-rows: repeat(auto-fill, minmax(290px, auto));
+    /* grid-template-rows: repeat(auto-fill, minmax(290px, auto)); */
+    grid-template-rows: auto 1fr;
     grid-template-areas: 
     "overview transaction-list"
     "manage transaction-list"
-
+}
+.transaction-column-grid {
+    display: grid;
+    grid-template-columns: 14px 1fr 130px 130px 50px;
+    align-items: center;
+    gap: 10px;
 }
 .list-grid {
     display: grid;
