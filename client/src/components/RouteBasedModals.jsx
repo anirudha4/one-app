@@ -12,7 +12,7 @@ function RouteBasedModals() {
     }, [searchParams]);
     return (
         <>
-        {addTransaction && <AddTransaction />}
+            {addTransaction && <AddTransaction />}
         </>
     )
 }

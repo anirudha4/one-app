@@ -11,6 +11,7 @@
     min-height: 34px !important;
     height: fit-content;
     line-height: 24px !important;
+    cursor: pointer !important;
 }
 
 .react-select__control--is-focused {
@@ -33,6 +34,8 @@
 .react-select__option {
     font-size: 11px !important;
     padding: 8px 10px !important;
+    cursor: pointer !important;
+    border-radius: 5px !important;
 }
 
 .react-select__value-container {

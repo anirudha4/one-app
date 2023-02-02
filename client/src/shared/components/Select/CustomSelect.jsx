@@ -7,7 +7,7 @@ import './Select.css';
 function CustomSelect({ options, name, value, onChange, label, id, ...props }) {
     return (
         <div className="field">
-            <label className='label' htmlFor={id}>{label}</label>
+            {label && <label className='label' htmlFor={id}>{label}</label>}
             <Select
                 id={id}
                 value={value}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import RouteBasedModals from '../../components/RouteBasedModals'
+import withGaurd from '../hoc/withGaurd'
 import Header from './Header'
 import Sidebar from './Sidebar'
 
@@ -17,4 +18,4 @@ function AppLayout() {
     )
 }
 
-export default AppLayout
+export default withGaurd(AppLayout);
