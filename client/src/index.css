@@ -15,6 +15,10 @@
     font-family: 'Outfit' !important;
 }
 
+.card {
+    @apply bg-white border border-slate-100 rounded;
+}
+
 /* form */
 .field {
     @apply flex flex-col gap-2 relative;
@@ -58,6 +62,10 @@
 }
 .btn-primary {
     @apply py-2 px-3 font-medium bg-black outline-none rounded text-slate-200 text-xs flex items-center gap-2 transition-all hover:text-white;
+}
+
+.btn-sm {
+    @apply px-2  py-1 font-medium rounded text-xs bg-slate-100 transition-all duration-75 flex items-center gap-2 hover:bg-slate-200;
 }
 
 /* layouts */

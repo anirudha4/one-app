@@ -16,6 +16,22 @@ const ACCESS_TOKEN_VERSION = '1';
 const POSITION_GAP = 65535;
 const ACTIVITIES_LIMIT = 50;
 
+export const INTEGRATIONS = [
+    {
+        id: 1,
+        name: 'Splitwise',
+        icon: '/integrations/splitwise.png',
+        description: 'Splitwise Integration offers a hassle-free solution for keeping track of shared expenses. With this integration, users can easily sync all their expenses.',
+        connect: '/app/integrations/splitwise/connect'
+    },
+    {
+        id: 2,
+        name: 'Notion',
+        icon: '/integrations/notion.png',
+        description: 'Notion Integration offers a comprehensive solution for tracking and managing expenses. With this integration, users can easily add and track expenses in Notion.'
+    },
+]
+
 export default {
     VERSION,
     BASE_PATH,

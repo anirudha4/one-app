@@ -27,7 +27,8 @@
     "redux-saga": "^1.2.2",
     "sails.io.js": "^1.2.1",
     "socket.io-client": "^2.3.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "vite-plugin-svgr": "^2.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

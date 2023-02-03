@@ -32,7 +32,7 @@ function Manage() {
         setActiveTab(tab);
     }
     return (
-        <div className="manage flex flex-col bg-white p-4 rounded h-full overflow-hidden">
+        <div className="manage flex flex-col  p-4 card h-full overflow-hidden">
             <div className="heading-text text-slate-700 text-lg font-medium mb-2">Manage {tab.label}</div>
             <Divider />
             <Tabs tabs={TAB_OPTIONS} onChange={handleTabChange} activeTab={activeTab} />

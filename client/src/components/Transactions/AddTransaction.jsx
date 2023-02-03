@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useRef } from 'react';
 import { TbX } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { allCategoriesSelector, allTagsSelector } from '../../selectors/all';
@@ -16,6 +16,8 @@ import DateField from '../Field/DateField';
 import TextField from '../Field/TextField';
 import SegmentedField from '../Field/SegmentedField';
 import { createTransactionAction } from '../../shared/actions/entry/transactions';
+import { useEffect } from 'react';
+import { closeOnEsc } from '../../utils';
 
 
 function AddTransaction() {
@@ -23,6 +25,8 @@ function AddTransaction() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [persistModal, setPersistModal] = useState(false);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
   // refs
   const formRef = useRef();
 
@@ -55,6 +59,7 @@ function AddTransaction() {
   const handleCategoryChange = category => {
     formRef.current.type.value = category.type
   }
+  const handleClose = () => navigate('/app/transactions');
   const handleSubmit = async e => {
     e.preventDefault();
     try {
@@ -71,9 +76,17 @@ function AddTransaction() {
     }
   }
 
+  // useEffect(() => {
+  //   document.addEventListener('keydown', e => closeOnEsc(e, handleClose));
+
+  //   return () => document.removeEventListener('keydown', closeOnEsc);
+  // }, []);
+
   return (
     <div className='add-transaction-modal-container flex items-center justify-center'>
-      <div className="fixed top-0 left-0 w-full h-screen bg-black opacity-40 z-10"></div>
+      <Link to={'/app/transactions'}>
+        <div className="fixed top-0 left-0 w-full h-screen bg-black opacity-40 z-10"></div>
+      </Link>
       <div className="fixed z-20 top-0 right-0 h-full add-transaction-card p-4 bg-white max-w-[500px] w-full transition-all duration-75">
         <div className="mb-2 flex items-center justify-between">
           <div className="heading-text text-slate-700 text-lg font-medium">New Transaction</div>
@@ -83,7 +96,7 @@ function AddTransaction() {
         </div>
         <Divider />
         {error && <div className="p-2 text-xs capitalize bg-red-100 text-red-500 mb-3 rounded">{error}</div>}
-        <form ref={formRef} onSubmit={handleSubmit} className='mb-2 flex flex-col gap-4'>
+        <form ref={formRef} onSubmit={handleSubmit} className='mb-2 flex flex-col gap-4 pt-4'>
           <Field
             label={'Name'}
             placeholder={'Eg. Bought White House'}

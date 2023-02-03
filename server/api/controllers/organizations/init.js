@@ -26,6 +26,7 @@ module.exports = {
 
     const transactionTags = await sails.helpers.transactionTags.getTransactionTagsByCriteria({ transactionId: transactionIds });
     
+
     return {
       user: this.req.currentUser,
       included: {

@@ -13,3 +13,11 @@ export const createTransactionRequestedAction = createAction('transactions/creat
 export const createTransactionSucceededAction = createAction('transactions/create/success');
 export const createTransactionRecievedAction = createAction('transactions/create/recieve');
 export const createTransactionErrorAction = createAction('transactions/create/error');
+
+
+// delete transactions
+export const deleteTransactionAction = createAction('transactions/delete');
+export const deleteTransactionRequestedAction = createAction('transactions/delete/request');
+export const deleteTransactionSucceededAction = createAction('transactions/delete/success');
+export const deleteTransactionRecievedAction = createAction('transactions/delete/recieve');
+export const deleteTransactionErrorAction = createAction('transactions/delete/error');

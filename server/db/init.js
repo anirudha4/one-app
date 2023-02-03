@@ -9,9 +9,9 @@ const knex = initKnex(knexfile);
     const isExists = await knex.schema.hasTable(knexfile.migrations.tableName);
 
     await knex.migrate.latest();
-    if (!isExists) {
-      await knex.seed.run();
-    }
+    // if (!isExists) {
+    //   await knex.seed.run();
+    // }
   } catch (error) {
     process.exitCode = 1;
 

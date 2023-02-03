@@ -1,12 +1,17 @@
 exports.defaultCategories = [
-    { name: 'Rent', type: 'expense' },
-    { name: 'Utilities', type: 'expense' },
-    { name: 'Groceries', type: 'expense' },
-    { name: 'Entertainment', type: 'expense' },
-    { name: 'Transportation', type: 'expense' },
-    { name: 'Salary', type: 'income' },
-    { name: 'Investment income', type: 'income' },
-    { name: 'Freelance work', type: 'income' },
+    { name: "Food", type: "expense" },
+    { name: "Bills", type: "expense" },
+    { name: "Travel", type: "expense" },
+    { name: "Transport", type: "expense" },
+    { name: "Groceries", type: "expense" },
+    { name: "Entertainment", type: "expense" },
+    { name: "Shopping", type: "expense" },
+    { name: "Gifts", type: "expense" },
+    { name: "Health", type: "expense" },
+    { name: "Investments", type: "investment" },
+    { name: "Loans", type: "expense" },
+    { name: "Salary", type: "income" },
+    { name: "Scholarship", type: "income" },
     { name: 'Stock market investments', type: 'investment' },
     { name: 'Real estate investments', type: 'investment' },
     { name: 'Bonds', type: 'investment' },
@@ -24,7 +29,7 @@ exports.defaultCategories = [
 exports.COLORS = [
     "#87CEEB", // Sky Blue
     "#87CEFA", // Baby Blue
-    "#00008B", // Navy Blue
+    "#00008B", // Dark Blue
     "#40E0D0", // Turquoise
     "#0047AB", // Cobalt Blue
     "#7DF9FF", // Electric Blue
@@ -41,13 +46,13 @@ exports.COLORS = [
     "#DDA0DD", // Plum
     "#FFF0F5", // Lavender Blush
     "#E0B0FF", // Mauve
-    "#00008B", // Dark Blue
-    "#008080", // Teal Green
-    "#FF4500", // Burnt Orange
-    "#9400D3", // Dark Violet
-    "#4B0082", // Deep Indigo
-    "#1E90FF", // Dodger Blue
+    "#008CBA", // Dark Pastel Blue
+    "#00B5A3", // Dark Pastel Green
+    "#FF69B0", // Dark Pastel Pink
+    "#9B4F98", // Dark Pastel Violet
+    "#4A0072", // Dark Pastel Indigo
+    "#00FFC3", // Dark Pastel Teal
     "#FF69B4", // Deep Pink
     "#FFFF00", // Mustard Yellow
-    "#228B22"  // Forest Green
+    "#228B22" // Forest Green
 ];

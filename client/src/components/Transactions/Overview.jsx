@@ -4,7 +4,7 @@ import OverviewSlot from './OverviewSlot';
 
 function TransactionOverview() {
     return (
-        <div className='transactions-overview p-5 bg-white rounded h-fit'>
+        <div className='transactions-overview p-5 card h-fit'>
             <div className="heading-text text-slate-700 text-lg font-medium mb-2">Overview</div>
             <Divider />
             <div className='flex gap-4 w-full'>

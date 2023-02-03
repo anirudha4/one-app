@@ -15,6 +15,10 @@ import Tasks from './pages/Dashboard/Tasks';
 
 import './styles/app.css';
 import "react-datepicker/dist/react-datepicker.css";
+import IntergrationLayout from './pages/Integrations/IntergrationLayout';
+import SplitwiseConnect from './pages/Integrations/Splitwise/SplitwiseConnect';
+import Splitwise from './pages/Integrations/Splitwise/Splitwise';
+import Integrations from './pages/Integrations';
 
 function App() {
   const { isLoggedIn } = useSelector(currentAuthStatusSelector);
@@ -35,6 +39,11 @@ function App() {
           <Route path='transactions' element={<Transactions />} />
           <Route path='invoices' element={<Invoices />} />
           <Route path='tasks' element={<Tasks />} />
+          <Route path='integrations' element={<IntergrationLayout />}>
+            <Route index element={<Integrations />} />
+            <Route path='splitwise/connect' element={<SplitwiseConnect />} />
+            <Route path='splitwise' element={<Splitwise />} />
+          </Route>
         </Route>
       </Route>
     )

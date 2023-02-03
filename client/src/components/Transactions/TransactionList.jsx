@@ -10,7 +10,7 @@ import Checkbox from '../../shared/components/Checkbox';
 function TransactionList() {
     const transactions = useSelector(allTransactionSelector);
     return (
-        <div className="p-4 transaction-list flex flex-col bg-white rounded h-full">
+        <div className="p-4 transaction-list flex flex-col card h-full">
             <div className='flex items-center justify-between mb-2'>
                 <div className="heading-text text-slate-700 text-lg font-medium">Transactions</div>
                 <Link to={'?add_transaction=true'}>

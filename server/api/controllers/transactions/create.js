@@ -69,6 +69,8 @@ module.exports = {
       }))
       transactionTags = await sails.helpers.transactionTags.createTransactionTags(transactionTagsValues, this.req);
     }
+
+
     return exits.success({
       transaction,
       transactionTags

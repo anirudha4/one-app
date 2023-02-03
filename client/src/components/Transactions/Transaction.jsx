@@ -1,12 +1,18 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 import { getTransactionTypeColor } from '../../utils/transactions';
 import Checkbox from '../../shared/components/Checkbox';
+import { deleteTransactionAction } from '../../shared/actions/entry/transactions';
 
 function Transaction({ id, name, amount, type, date, user, category, organization }) {
+    const dispatch = useDispatch();
+    const handleDelete = () => {
+        dispatch(deleteTransactionAction({ id }))
+    }
     return (
         <div className="transaction-column-grid w-full py-3 px-4 rounded-md transition-all duration-100 cursor-pointer group hover:bg-slate-100">
-            <Checkbox />
+            <Checkbox onClick={handleDelete} />
             <div className="text-xs text-left text-slate-600 font-medium flex-1 truncate">
                 {name}
             </div>

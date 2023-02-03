@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import { currentOrganizationSelector } from '../../selectors/current'
 
 // icons
-import { TbListCheck, TbSearch, TbSelector } from 'react-icons/tb';
+import { TbListCheck, TbSelector } from 'react-icons/tb';
+import { BsAppIndicator } from 'react-icons/bs';
 import { AiOutlineCreditCard } from 'react-icons/ai';
 import { RiHome5Line, RiNewspaperLine } from 'react-icons/ri';
 
@@ -18,6 +19,7 @@ function Sidebar() {
             { id: 2, label: 'Transactions', route: '/app/transactions', icon: <AiOutlineCreditCard size={18} /> },
             { id: 3, label: 'Invoices', route: '/app/invoices', icon: <RiNewspaperLine size={18} /> },
             { id: 4, label: 'Tasks', route: '/app/tasks', icon: <TbListCheck size={18} /> },
+            { id: 5, label: 'Integrations', route: '/app/integrations', icon: <BsAppIndicator size={18} /> },
         ]
     }, [])
     return (

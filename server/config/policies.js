@@ -21,6 +21,7 @@ module.exports.policies = {
   // users
   'users/*': ['is-authenticated'],
   'users/create': true,
-
   'access-tokens/create': true,
+
+  'transactions/*': ['is-authenticated']
 };
