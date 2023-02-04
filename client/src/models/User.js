@@ -1,6 +1,8 @@
 import { createAction } from "@reduxjs/toolkit";
 import Model, { attr, fk } from "redux-orm";
+import { createMemberSucceededAction } from "../shared/actions/entry/member";
 import { loginSuccess } from "../shared/slices/auth";
+import { appInit } from "../shared/slices/core";
 
 // actions
 export const createUser = createAction("models/users/create");
@@ -29,6 +31,11 @@ export class User extends Model {
 
     static reducer({ type, payload }, User) {
         switch (type) {
+            case appInit.type:
+                payload.members.forEach(member => {
+                    User.upsert(member);
+                })
+                break;
             case createUser.type:
             case loginSuccess.type:
                 User.upsert(payload);
@@ -38,6 +45,9 @@ export class User extends Model {
                 break;
             case udpateUser.type:
                 User.withId(payload.id).update(payload.data)
+                break;
+            case createMemberSucceededAction.type:
+                User.upsert(payload.member);
                 break;
             default:
                 break;

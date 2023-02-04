@@ -3,6 +3,7 @@ import socket from "../../api/socket";
 import { authorize, authWatcher } from "../../pages/Auth/saga";
 import { getAccessTokenFromLocalStore } from "../../utils/authentication";
 import { coreInitialized } from "../slices/core";
+import { memberWatcher } from "./entity/member";
 import { tagWatcher } from "./entity/tag";
 import { transactionWatcher } from "./entity/transaction";
 import { loadDataForOrganization } from "./init";
@@ -12,6 +13,7 @@ const watchers = [
     authWatcher,
     tagWatcher,
     transactionWatcher,
+    memberWatcher,
     socketWatchers
 ]
 export function* coreSaga() {

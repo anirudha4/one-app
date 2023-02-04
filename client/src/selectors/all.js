@@ -23,3 +23,13 @@ export const allTransactionSelector = createSelector(
         }
     })
 )
+
+export const allMembersSelector = createSelector(
+    orm, 
+    ({ User }) => User.all().toRefArray()
+)
+
+export const allOrganizationSelector = createSelector(
+    orm,
+    ({ Organization }) => Organization.all().toRefArray()
+)

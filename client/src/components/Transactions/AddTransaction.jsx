@@ -16,8 +16,6 @@ import DateField from '../Field/DateField';
 import TextField from '../Field/TextField';
 import SegmentedField from '../Field/SegmentedField';
 import { createTransactionAction } from '../../shared/actions/entry/transactions';
-import { useEffect } from 'react';
-import { closeOnEsc } from '../../utils';
 
 
 function AddTransaction() {
@@ -26,11 +24,10 @@ function AddTransaction() {
   const [persistModal, setPersistModal] = useState(false);
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
   // refs
   const formRef = useRef();
 
-  // dispatch
+  // dispatch 
   const dispatch = useDispatch();
 
   // selectors
@@ -59,7 +56,6 @@ function AddTransaction() {
   const handleCategoryChange = category => {
     formRef.current.type.value = category.type
   }
-  const handleClose = () => navigate('/app/transactions');
   const handleSubmit = async e => {
     e.preventDefault();
     try {
@@ -67,6 +63,7 @@ function AddTransaction() {
       await validateTransaction(formData, ['name', 'type', 'amount', 'date']);
       dispatch(createTransactionAction(formData));
       setError(null);
+      formRef.current.reset();
     } catch (error) {
       setError(error.message);
       const errorElement = formRef.current[error.key];

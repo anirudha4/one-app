@@ -13,7 +13,7 @@ module.exports = {
 
     email: {
       type: 'string',
-      isEmail: true,
+      // isEmail: true,
       required: true,
     },
     password: {
@@ -29,6 +29,11 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    isVerified: {
+      type: 'boolean',
+      defaultsTo: false,
+      columnName: 'is_verified'
+    },
     username: {
       type: 'string',
       isNotEmptyString: true,
@@ -36,6 +41,11 @@ module.exports = {
       maxLength: 16,
       regex: /^[a-zA-Z0-9]+((_|\.)?[a-zA-Z0-9])*$/,
       allowNull: true,
+    },
+    registrationType: {
+      type: 'string',
+      defaultsTo: 'standard',
+      columnName: 'registration_type'
     },
     phone: {
       type: 'string',
@@ -62,7 +72,7 @@ module.exports = {
       model: 'Organization',
       required: true,
       columnName: 'organization_id',
-    },
+    }
   },
 
   tableName: 'user_account',

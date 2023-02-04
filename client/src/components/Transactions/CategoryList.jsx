@@ -20,7 +20,7 @@ function CategoryList() {
                 'bg-green-500': category.type === 'investment',
                 'bg-slate-500': category.type === 'other',
               })}></span>
-              <form className='flex-1'>
+              <form className='flex-1 flex items-center'>
                 <input className='w-full outline-none border-none text-xs font-medium text-slate-600 whitespace-nowrap' defaultValue={category.name} />
               </form>
             </div>

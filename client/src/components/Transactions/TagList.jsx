@@ -13,7 +13,7 @@ function TagList() {
           <div key={tag.id} className='px-3 py-1 cursor-pointer border border-slate-100 rounded relative flex items-center justify-between focus-within:border-slate-300 group hover:border-slate-300'>
             <div className='flex items-center gap-2'>
               <span style={{ backgroundColor: tag.color }} className={classNames("min-h-[8px] min-w-[8px] h-[8px] w-[8px] rounded-full")}></span>
-              <form className='flex-1'>
+              <form className='flex-1 flex items-center'>
                 <input className='w-full outline-none border-none text-xs font-medium text-slate-600 whitespace-nowrap' defaultValue={tag.name} />
               </form>
             </div>

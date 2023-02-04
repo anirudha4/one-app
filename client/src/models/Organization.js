@@ -13,7 +13,7 @@ export class Organization extends Model {
     static reducer({ type, payload }, Organization) {
         switch (type) {
             case appInit.type:
-                Organization.upsert(payload.organization)
+                payload.organizations.forEach(organization => Organization.upsert(organization));
                 break;
             default:
                 break;

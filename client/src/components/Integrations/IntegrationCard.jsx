@@ -5,7 +5,7 @@ import Divider from '../../shared/components/Divider'
 
 function IntegrationCard({ path, name, connect, description }) {
     return (
-        <div className="p-4 rounded bg-white border border-slate-100 cursor-pointer">
+        <div className="p-4 rounded bg-white border border-slate-100">
             <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
                     <img src={path} width={25} height={25} alt="" />

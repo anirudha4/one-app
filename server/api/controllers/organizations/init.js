@@ -7,10 +7,18 @@ module.exports = {
 
   fn: async function () {
     // user
-    const { id, organizationId } = this.req.currentUser;
+    const { id, email, organizationId } = this.req.currentUser;
 
     // organization
     const organization = await sails.helpers.organizations.getOrganizationByCriteria({ id: organizationId });
+
+    // organization-members
+    const members = await sails.helpers.users.getOrganizationMembers(organizationId);
+
+    // user organizations
+    const usersByEmail = await sails.helpers.users.getUsersByEmail({ email })
+    const organizationIds = await sails.helpers.utils.mapRecords(usersByEmail, 'organizationId');
+    const organizations = await sails.helpers.organizations.getOrganizationsForUser(organizationIds);
 
     // categories
     const categories = await sails.helpers.categories.getCategoriesByCriteria({ organizationId });
@@ -20,13 +28,14 @@ module.exports = {
 
     // transactions
     const transactions = await sails.helpers.transactions.getTransactionsByCriteria({ organizationId, userId: id });
-
-    // transaction-tags
     const transactionIds = await sails.helpers.utils.mapRecords(transactions);
 
+    // transaction-tags
     const transactionTags = await sails.helpers.transactionTags.getTransactionTagsByCriteria({ transactionId: transactionIds });
-    
 
+    // transaction-members
+    const transactionMembers = await sails.helpers.transactionMembers.getTransactionMembersByCriteria({ transactionId: transactionIds });
+    
     return {
       user: this.req.currentUser,
       included: {
@@ -34,7 +43,10 @@ module.exports = {
         categories,
         tags,
         transactions,
-        transactionTags
+        transactionTags,
+        transactionMembers,
+        members,
+        organizations
       }
     };
   }

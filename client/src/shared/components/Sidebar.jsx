@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux'
 import { currentOrganizationSelector } from '../../selectors/current'
 
 // icons
-import { TbListCheck, TbSelector } from 'react-icons/tb';
 import { BsAppIndicator } from 'react-icons/bs';
 import { AiOutlineCreditCard } from 'react-icons/ai';
 import { RiHome5Line, RiNewspaperLine } from 'react-icons/ri';
+import WorkspaceSelector from './WorkspaceSelect';
 
 function Sidebar() {
     // selectors
@@ -18,23 +18,12 @@ function Sidebar() {
             { id: 1, label: 'Home', route: '/', icon: <RiHome5Line size={18} /> },
             { id: 2, label: 'Transactions', route: '/app/transactions', icon: <AiOutlineCreditCard size={18} /> },
             { id: 3, label: 'Invoices', route: '/app/invoices', icon: <RiNewspaperLine size={18} /> },
-            { id: 4, label: 'Tasks', route: '/app/tasks', icon: <TbListCheck size={18} /> },
-            { id: 5, label: 'Integrations', route: '/app/integrations', icon: <BsAppIndicator size={18} /> },
+            { id: 4, label: 'Integrations', route: '/app/integrations', icon: <BsAppIndicator size={18} /> },
         ]
     }, [])
     return (
         <div className="sidebar bg-white">
-            <div className="workspace p-2 h-[50px] items-center cursor-pointer border-b border-slate-200 transition-all hover:bg-slate-200">
-                <div className="flex items-center gap-2 truncate">
-                    <div className="avatar h-6 w-6 bg-black rounded flex items-center justify-center">
-                        <div className="avatar-initial text-xs font-medium text-gray-100">{organization.name.charAt(0).toUpperCase()}</div>
-                    </div>
-                    <div className="workspace-name text-xs font-medium truncate w-full flex-1 text-black">{organization.name}</div>
-                </div>
-                <div className="workspace-select-icon min-w-[20px] min-h-[20px]">
-                    <TbSelector size={18} className='text-slate-500' />
-                </div>
-            </div>
+            <WorkspaceSelector {...organization} />
             <div className='p-2 mt-2 relative'>
                 <input type="text" className="input shadow border-none w-full" placeholder='Search Transactions' />
             </div>

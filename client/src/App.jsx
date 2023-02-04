@@ -11,7 +11,6 @@ import { history } from './shared/slices/router';
 import { currentAuthStatusSelector } from './selectors/current';
 import AppLayout from './shared/components/AppLayout';
 import Invoices from './pages/Dashboard/Invoices';
-import Tasks from './pages/Dashboard/Tasks';
 
 import './styles/app.css';
 import "react-datepicker/dist/react-datepicker.css";
@@ -38,7 +37,6 @@ function App() {
         <Route path='app' element={<AppLayout />}>
           <Route path='transactions' element={<Transactions />} />
           <Route path='invoices' element={<Invoices />} />
-          <Route path='tasks' element={<Tasks />} />
           <Route path='integrations' element={<IntergrationLayout />}>
             <Route index element={<Integrations />} />
             <Route path='splitwise/connect' element={<SplitwiseConnect />} />

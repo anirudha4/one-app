@@ -12,8 +12,8 @@ import {
 
 function* createTransactionWorker({ payload }) {
     try {
-        const { transaction, transactionTags } = yield call(createTransaction, payload, generateAuthenticationHeaders());
-        yield put(createTransactionSucceededAction({ transaction, transactionTags }));
+        const { transaction, transactionTags, transactionMembers } = yield call(createTransaction, payload, generateAuthenticationHeaders());
+        yield put(createTransactionSucceededAction({ transaction, transactionTags, transactionMembers }));
     } catch (error) {
         yield put(createTransactionErrorAction(error));
     }

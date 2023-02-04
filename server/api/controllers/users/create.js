@@ -82,7 +82,6 @@ module.exports = {
       'name',
       'username',
       'phone',
-      'language',
       'organizationName'
     ]);
 

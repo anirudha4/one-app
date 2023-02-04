@@ -42,7 +42,7 @@ module.exports = {
   async fn(inputs) {
     const remoteAddress = getRemoteAddress(this.req);
 
-    const user = await sails.helpers.users.getOneByEmailOrUsername(inputs.emailOrUsername);
+    const [user] = await sails.helpers.users.getUsersByEmail({ email: inputs.emailOrUsername });
 
     if (!user) {
       sails.log.warn(

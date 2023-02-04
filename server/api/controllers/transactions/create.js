@@ -60,7 +60,8 @@ module.exports = {
     const transactionValues = _.pick(inputs, ['name', 'amount', 'type', 'date', 'categoryId', 'description']);
     const transaction = await sails.helpers.transactions.createTransaction(transactionValues, user.id, organizationId, this.req);
 
-    let transactionTags = [];
+    // relational data
+    let transactionTags = [], transactionMembers = [];
     // create transaction_tags if tag is assigned
     if (tags.length > 0) {
       const transactionTagsValues = tags.map(tag => ({
@@ -73,7 +74,8 @@ module.exports = {
 
     return exits.success({
       transaction,
-      transactionTags
+      transactionTags,
+      transactionMembers
     })
   }
 };

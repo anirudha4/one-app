@@ -17,6 +17,7 @@ export function* registerWorker({ payload }) {
     yield call(register, payload);
     window.location.href = '/auth'
   } catch (error) {
+    console.log(error.message);
     const { code } = error.message;
     const message = handleAuthenticationErrorCodes(code);
     alert(message);
@@ -41,6 +42,7 @@ export function* loginWorker({ payload }) {
     window.location.href = '/app'
   } catch (err) {
     console.log(err.message);
+    alert(err.message)
   }
 }
 
