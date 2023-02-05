@@ -2,6 +2,7 @@ import { eventChannel } from 'redux-saga';
 import { all, call, cancelled, put, take, takeEvery } from 'redux-saga/effects';
 import { createAction } from "@reduxjs/toolkit";
 import socket from '../../api/socket';
+import { updateUsersRecievedAction } from '../actions/entry/users';
 
 // actions
 const socketDisconnect = createAction('socket/disconnect')
@@ -24,11 +25,16 @@ const createSocketEventsChannel = () =>
             // emit(entryActions.handleUserCreate(item));
         };
 
+        const handleUserUpdate = ({ item }) => {
+            emit(updateUsersRecievedAction({ user: item }));
+        }
+
         socket.on('disconnect', handleDisconnect);
         socket.on('reconnect', handleReconnect);
 
         // users
         socket.on('userCreate', handleUserCreate);
+        socket.on('userUpdate', handleUserUpdate);
 
         return () => {
             socket.off('disconnect', handleDisconnect);
@@ -36,6 +42,7 @@ const createSocketEventsChannel = () =>
 
             // users
             socket.off('userCreate', handleUserCreate);
+            socket.off('userUpdate', handleUserUpdate);
         };
     });
 

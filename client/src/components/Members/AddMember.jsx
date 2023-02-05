@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { TbX } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createMemberAction } from '../../shared/actions/entry/member';
+import { createMemberAction } from '../../shared/actions/entry/members';
 import Divider from '../../shared/components/Divider';
 import { createObjectFromFormData, validateTransaction } from '../../utils/transactions';
 import Field from '../Field';

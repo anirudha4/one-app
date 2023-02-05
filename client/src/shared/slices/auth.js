@@ -1,5 +1,6 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
 import { getAccessTokenFromLocalStore } from '../../utils/authentication';
+import { updateUsersRecievedAction } from '../actions/entry/users';
 
 // logout actions
 export const requestLogout = createAction('/auth/logout');
@@ -31,6 +32,10 @@ const registerAction = (state) => {
     state.loading = false;
 }
 
+const updateUser = (state, action) => {
+    state.currentUser = action.payload.user;
+}
+
 const initialState = {
     currentUser: null,
     isLoggedIn: false,
@@ -48,6 +53,7 @@ export const authSlice = createSlice({
     extraReducers: {
         [requestRegister.type]: registerRequested,
         [requestLogin.type]: loginRequested,
+        [updateUsersRecievedAction.type]: updateUser
     }
 });
 

@@ -1,12 +1,18 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { currentAuthStatusSelector } from "../../selectors/current";
 
 const withGaurd = (WrappedComponent) => {
     return function Component(props) {
-        const { isLoggedIn } = useSelector(currentAuthStatusSelector);
+        const { isLoggedIn, currentUser } = useSelector(currentAuthStatusSelector);
+        const location = useLocation();
+        console.log({ isLoggedIn })
         if (!isLoggedIn) {
-            return <Navigate to={'/auth'} />
+            const navigation_url = `/auth${location.search}`;
+            return <Navigate to={navigation_url} />
+        }
+        if (!currentUser.isEmailVerified) {
+            return <Navigate to={'/verify_email'} />
         }
         return <WrappedComponent {...props} />;
     }

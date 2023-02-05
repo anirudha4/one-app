@@ -337,5 +337,12 @@ module.exports = {
   custom: {
     // baseUrl: 'https://example.com',
     // internalEmailAddress: 'support@example.com',
+    SEND_IN_BLUE: {
+      SEND_IN_BLUE_API_KEY: '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',
+      SEND_IN_BLUE_MASTER_PASSWORD: 'EG0mfXtDk3C5zOcW',
+      SEND_IN_BLUE_MASTER_EMAIL: 'anirudhag13@gmail.com',
+      SEND_IN_BLUE_SMTP_SERVER_URL: 'smtp-relay.sendinblue.com',
+      SEND_IN_BLUE_SMTP_SERVER_PORT: 587,
+    },
   },
 };

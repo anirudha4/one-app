@@ -8,7 +8,6 @@ module.exports.up = (knex) =>
       table.text('email').notNullable();
       table.text('password').notNullable();
       table.boolean('is_admin').notNullable();
-      table.boolean('is_verified').notNullable();
       table.text('name').notNullable();
       table.text('username');
       table.text('phone');

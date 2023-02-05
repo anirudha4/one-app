@@ -29,10 +29,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    isVerified: {
+    isEmailVerified: {
       type: 'boolean',
       defaultsTo: false,
-      columnName: 'is_verified'
+      columnName: 'is_email_verified'
     },
     username: {
       type: 'string',

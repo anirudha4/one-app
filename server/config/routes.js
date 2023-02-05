@@ -30,6 +30,9 @@ module.exports.routes = {
   'DELETE /api/users/:id': 'users/delete',
   'POST /api/users/members': 'users/members/create',
 
+  // verify token urls
+  'GET /api/verify/users' : 'verify/users/index',
+
   // organizations
   'GET /api/organizations/init': 'organizations/init',
 

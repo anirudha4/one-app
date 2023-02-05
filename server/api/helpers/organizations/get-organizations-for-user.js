@@ -9,7 +9,6 @@ module.exports = {
   },
   fn: async function (inputs) {
     const { organizationIds } = inputs;
-    console.log({ organizationIds });
     const organizationsForUser = await Organization.find({ id: organizationIds })
     return organizationsForUser;
   }

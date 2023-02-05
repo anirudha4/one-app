@@ -18,6 +18,7 @@ import IntergrationLayout from './pages/Integrations/IntergrationLayout';
 import SplitwiseConnect from './pages/Integrations/Splitwise/SplitwiseConnect';
 import Splitwise from './pages/Integrations/Splitwise/Splitwise';
 import Integrations from './pages/Integrations';
+import Verify from './pages/Verify';
 
 function App() {
   const { isLoggedIn } = useSelector(currentAuthStatusSelector);
@@ -43,6 +44,7 @@ function App() {
             <Route path='splitwise' element={<Splitwise />} />
           </Route>
         </Route>
+        <Route path='/verify_email' element={<Verify />} />
       </Route>
     )
   )

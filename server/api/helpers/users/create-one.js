@@ -85,6 +85,9 @@ module.exports = {
       ).fetch();
 
     await sails.helpers.organizations.createDefaultDataForOrganization(user.id, user.organizationId);
-    return exits.success(user);
+    return exits.success({
+      user,
+      organization
+    });
   },
 };

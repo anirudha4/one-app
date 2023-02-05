@@ -85,7 +85,7 @@ module.exports = {
       'organizationName'
     ]);
 
-    const user = await sails.helpers.users.createOne
+    const { user, organization } = await sails.helpers.users.createOne
       .with({
         values,
         request: this.req,
@@ -94,6 +94,8 @@ module.exports = {
       .intercept('usernameAlreadyInUse', () => Errors.USERNAME_ALREADY_IN_USE)
       .intercept('organizationNameAlreadyInUse', () => Errors.ORGANIZATION_NAME_ALREADY_IN_USE);
 
+    const { token } = await sails.helpers.tokens.createRegisterToken(user.id);
+    sails.helpers.emails.sendWelcomeEmail(user, organization, token).then(() => { }).catch(() => { })
     return {
       item: user,
     };

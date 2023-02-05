@@ -27,14 +27,19 @@ function Sidebar() {
             <div className='p-2 mt-2 relative'>
                 <input type="text" className="input shadow border-none w-full" placeholder='Search Transactions' />
             </div>
-            <div className="links flex flex-col mt-2 gap-2 p-3">
+            <div className="links flex flex-col mt-2 gap-2">
                 {NAVBAR_LINKS.map(NAV_LINK => {
                     return (
-                        <NavLink key={NAV_LINK.id} to={NAV_LINK.route} className={({ isActive }) => isActive ? 'p-2 font-medium text-sm rounded flex items-center gap-2 bg-black text-white' : 'p-2 rounded flex items-center gap-2 hover:bg-slate-200 transition-all duration-75'}>
+                        <NavLink key={NAV_LINK.id} to={NAV_LINK.route} className={({ isActive }) => `
+                            p-2 border-r-2 border-transparent flex items-center gap-2
+                            font-medium text-slate-700
+                            hover:bg-slate-100
+                            ${isActive && 'border-slate-500 text-black bg-slate-50'}
+                        `}>
                             <div className="nav-icon min-w-[18px] min-h-[18px] flex items-center justify-center">
                                 {NAV_LINK.icon}
                             </div>
-                            <div className="nav-label font-medium text-xs">
+                            <div className="nav-label text-xs">
                                 {NAV_LINK.label}
                             </div>
                         </NavLink>

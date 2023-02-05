@@ -128,18 +128,9 @@ lib-cov
 *.out
 *.pid
 
-public/*
-!public/user-avatars
-public/user-avatars/*
-!public/user-avatars/.gitkeep
-!public/project-background-images
-public/project-background-images/*
-!public/project-background-images/.gitkeep
+!public/*
 
-private/*
-!private/attachments
-private/attachments/*
-!private/attachments/.gitkeep
+!private/*
 
 views/*
 !views/.gitkeep

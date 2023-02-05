@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import Field from '../../components/Field'
+import useQueryParams from '../../hooks/useQueryParams';
 import { requestLogin } from '../../shared/slices/auth';
 
 function Login() {
   const dispatch = useDispatch();
+  const { verified } = useQueryParams(['verified']);
+  console.log({ verified })
   const [form, setForm] = useState({
     email: '',
     password: ''
@@ -18,6 +21,9 @@ function Login() {
   }
   return (
     <form onSubmit={handleSubmit} className="flex flex-col max-w-[500px] w-full gap-5">
+      {verified && (
+        <div className="text-xs p-2 bg-blue-50 font-medium text-blue-500 rounded">Email Verified Successfully.</div>
+      )}
       <Field
         name={'email'}
         id={'email'}

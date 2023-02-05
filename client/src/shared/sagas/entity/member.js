@@ -1,5 +1,5 @@
 import { call, put, select, takeLatest } from "redux-saga/effects";
-import { createMemberAction, createMemberSucceededAction } from "../../actions/entry/member";
+import { createMemberAction, createMemberSucceededAction } from "../../actions/entry/members";
 import { currentUserSelector } from '../../../selectors/current';
 import { createMember } from "../../../api/member";
 import { generateAuthenticationHeaders } from "../../../utils/authentication";

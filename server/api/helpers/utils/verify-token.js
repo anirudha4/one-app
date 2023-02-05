@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
   sync: true,
-
   inputs: {
     token: {
       type: 'string',

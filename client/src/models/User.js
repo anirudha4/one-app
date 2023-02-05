@@ -1,6 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
 import Model, { attr, fk } from "redux-orm";
-import { createMemberSucceededAction } from "../shared/actions/entry/member";
+import { createMemberSucceededAction } from "../shared/actions/entry/members";
+import { updateUsersRecievedAction } from "../shared/actions/entry/users";
 import { loginSuccess } from "../shared/slices/auth";
 import { appInit } from "../shared/slices/core";
 
@@ -21,6 +22,7 @@ export class User extends Model {
             username: attr(),
             phone: attr(),
             registrationType: attr(),
+            isEmailVerfied: attr(),
             organizationId: fk({
                 to: 'Organization',
                 as: 'organization',
@@ -48,6 +50,9 @@ export class User extends Model {
                 break;
             case createMemberSucceededAction.type:
                 User.upsert(payload.member);
+                break;
+            case updateUsersRecievedAction.type:
+                User.upsert(payload.user);
                 break;
             default:
                 break;
