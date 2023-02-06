@@ -28,7 +28,7 @@ export const transactionsSummarySelector = createSelector(
             expense,
             income,
             investment,
-            total: (income + investment) - expense
+            total: (income) - (expense + investment)
         }
     }
 )

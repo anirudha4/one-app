@@ -19,7 +19,7 @@ function TransactionTags({ id }) {
         <div className='flex items-center gap-2 flex-wrap'>
             {trimmedTransactionTags.map(transactionTag => {
                 return (
-                    <div style={{ backgroundColor: transactionTag.color, color: 'white' }} className="text-[9px] rounded-full bg-slate-800 text-white py-1 px-3">{transactionTag.name}</div>
+                    <div style={{ backgroundColor: transactionTag.color, color: 'white' }} className="text-[9px] rounded-full bg-slate-800 text-white py-1 px-3 font-bold">{transactionTag.name}</div>
                 )
             })}
         </div>
