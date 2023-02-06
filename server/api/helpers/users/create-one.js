@@ -63,10 +63,14 @@ module.exports = {
       values.username = values.username.toLowerCase();
     }
 
+    // generate random color for user
+    const color = await sails.helpers.utils.generateRandomColor();
+
     const user = await User.create({
       ...values,
       email: values.email.toLowerCase(),
       password: bcrypt.hashSync(values.password, 10),
+      color,
       organizationId: organization.id
     })
       .intercept(

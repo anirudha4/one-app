@@ -26,11 +26,8 @@ module.exports = {
      * will require organizationId to emit socket event to other members of organization
      */
     const { memberValues } = inputs;
-
-
-
     const member = await User.create(memberValues).fetch();
-
+    
     return {
       member
     };

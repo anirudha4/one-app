@@ -26,8 +26,10 @@ module.exports = {
       columnName: 'is_admin',
     },
     name: {
-      type: 'string',
-      required: true,
+      type: 'string'
+    },
+    color: {
+      type: 'string'
     },
     isEmailVerified: {
       type: 'boolean',

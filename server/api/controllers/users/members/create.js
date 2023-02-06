@@ -41,19 +41,26 @@ module.exports = {
     // set password to old password if user already exists
     const memberExists = await sails.helpers.users.getOne({ email });
     let password = sails.helpers.utils.generateRandomPassword();
-    if(memberExists) {
-      password = memberExists.password;
-    }
+
+    // generate random color for user
+    const color = await sails.helpers.utils.generateRandomColor();
     // create member user for organization
     const memberValues = {
       name,
       email,
       organizationId: memberOrganizationId,
       registrationType: 'invite',
-      password
+      password,
+      color
+    }
+    if (memberExists) {
+      memberValues.password = memberExists.password;
+      memberValues.isEmailVerified = memberExists.isEmailVerified
     }
     const { member } = await sails.helpers.users.createMemberOnInvite(memberValues, user.id, organizationId);
 
+    const { token } = await sails.helpers.tokens.createRegisterToken(member.id);
+    sails.helpers.emails.sendOrganizationInvite(member, organization, token).then(() => { }).catch(() => { })
     return exits.success({
       member
     });

@@ -16,7 +16,8 @@ export const currentAuthStatusSelector = createReselectSelector(
 
 export const currentOrganizationSelector = createSelector(
     orm,
-    ({ Organization }) => {
-        return Organization.first().ref;
+    (state => state.auth),
+    ({ Organization }, auth) => {
+        return Organization.withId(auth.currentUser.organizationId).ref;
     }
 )

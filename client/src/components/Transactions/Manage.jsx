@@ -7,12 +7,13 @@ import CategoryList from './CategoryList';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { TbPlus } from 'react-icons/tb';
+import classNames from 'classnames';
 const TAB_OPTIONS = [
-    {
-        id: 1,
-        label: 'Members',
-        component: <FriendList />
-    },
+    // {
+    //     id: 1,
+    //     label: 'Members',
+    //     component: <FriendList />
+    // },
     {
         id: 2,
         label: 'Categories',
@@ -38,7 +39,7 @@ const FLOATING_BUTTON_CONFIG = {
         query: '?add_tags=true'
     },
 }
-function Manage() {
+function Manage({ expanded }) {
     const [activeTab, setActiveTab] = useState(TAB_OPTIONS[0].id);
     const { tab, label, query } = useMemo(() => {
         return { tab: TAB_OPTIONS.find(tab => tab.id === activeTab), ...FLOATING_BUTTON_CONFIG[activeTab] }
@@ -47,18 +48,24 @@ function Manage() {
         setActiveTab(tab);
     }
     return (
-        <div className="manage flex flex-col  p-4 card h-full overflow-hidden relative">
+        <div className={classNames("manage flex flex-col  p-4 card h-full overflow-hidden relative transition-all duration-150", {
+            'orientation-slant': expanded
+        })}>
             <div className="heading-text text-slate-700 text-lg font-medium mb-2">Manage {tab.label}</div>
-            <Divider />
-            <Tabs tabs={TAB_OPTIONS} onChange={handleTabChange} activeTab={activeTab} />
-            <Link to={query}>
-                <button className="btn-floating transition-all group hover:gap-2 hover:w-32">
-                    <TbPlus />
-                    <span className="text-xs text-white whitespace-nowrap w-0 overflow-hidden transition-all group-hover:block  group-hover:w-fit">
-                        {label}
-                    </span>
-                </button>
-            </Link>
+            {!expanded && (
+                <>
+                    <Divider />
+                    <Tabs tabs={TAB_OPTIONS} onChange={handleTabChange} activeTab={activeTab} />
+                    <Link to={query}>
+                        <button className="btn-floating transition-all group hover:gap-2 hover:w-32">
+                            <TbPlus />
+                            <span className="text-xs text-white whitespace-nowrap w-0 overflow-hidden transition-all group-hover:block  group-hover:w-fit">
+                                {label}
+                            </span>
+                        </button>
+                    </Link>
+                </>
+            )}
         </div>
     )
 }

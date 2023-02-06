@@ -9,6 +9,7 @@ module.exports.up = (knex) =>
       table.text('password').notNullable();
       table.boolean('is_admin').notNullable();
       table.text('name').notNullable();
+      table.text('color').notNullable();
       table.text('username');
       table.text('phone');
       table.text('registration_type').notNullable().defaultTo('standard');

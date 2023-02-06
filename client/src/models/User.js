@@ -23,6 +23,7 @@ export class User extends Model {
             phone: attr(),
             registrationType: attr(),
             isEmailVerfied: attr(),
+            color: attr(),
             organizationId: fk({
                 to: 'Organization',
                 as: 'organization',

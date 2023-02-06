@@ -17,7 +17,7 @@ export class TransactionTag extends Model {
             tagId: fk({
                 to: 'Tag',
                 as: 'tags',
-                relatedName: 'transactions'
+                relatedName: 'tag'
             })
         };
     }

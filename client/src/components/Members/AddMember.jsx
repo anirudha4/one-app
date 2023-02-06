@@ -49,13 +49,6 @@ function AddMember() {
                 {error && <div className="p-2 text-xs capitalize bg-red-100 text-red-500 mb-1 rounded">{error}</div>}
                 <form ref={formRef} onSubmit={handleSubmit} className='mb-2 flex flex-col gap-4 pt-4'>
                     <Field
-                        label={'Name'}
-                        placeholder={'Eg. John Doe'}
-                        name={'name'}
-                        autoFocus
-                        autoComplete="off"
-                    />
-                    <Field
                         label={'Email'}
                         placeholder={'Eg. john@email.com'}
                         name={'email'}

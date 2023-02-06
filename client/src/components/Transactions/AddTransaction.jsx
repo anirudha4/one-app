@@ -47,7 +47,7 @@ function AddTransaction() {
       { id: tag.id, label: tag.name, value: tag.id }
     )), [tags]);
 
-  const isTagSelectDisabled = useMemo(() => selectedTags.length >= 3 ? true : false, [selectedTags]);
+  // const isTagSelectDisabled = useMemo(() => selectedTags.length >= 3 ? true : false, [selectedTags]);
 
   // handlers
   const handleCreateTag = async tag => {

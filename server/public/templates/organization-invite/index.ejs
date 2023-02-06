@@ -56,11 +56,12 @@
                                                                     <td>
                                                                         <strong
                                                                             style="font-family:Helvetica,Arial,sans-serif;color:#234567">Hi
-                                                                            <%= name %>, </strong>
+                                                                            <%= name %>,
+                                                                        </strong>
 
                                                                         <h1
                                                                             style="font-size:26px;line-height:30px;color:#054752;word-break:normal">
-                                                                            Welcome to One App! Please confirm your email.
+                                                                            Welcome to One App! You have being invited to <%= organization.name  %> 
                                                                         </h1>
                                                                     </td>
                                                                 </tr>
@@ -80,7 +81,7 @@
                                                                         <td
                                                                             style="background-color:#00aff5;color:#fff;text-align:center;border-radius:48px;padding:16px 24px;border-color:transparent;font-weight:bold;font-size:16px;line-height:1">
                                                                             <a style="color: white; text-decoration: none;"
-                                                                                href=<%=confirmLink %>> Confirm Email
+                                                                                href=<%= confirmLink %>> Accept Invite
                                                                             </a>
                                                                         </td>
                                                                     </tr>

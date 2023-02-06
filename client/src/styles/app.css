@@ -13,16 +13,17 @@
     align-items: flex-start;
     /* grid-template-rows: repeat(auto-fill, minmax(290px, auto)); */
     grid-template-rows: auto 1fr;
-    grid-template-areas: 
-    "overview transaction-list"
-    "manage transaction-list"
+    grid-template-areas:
+        "overview transaction-list"
+        "manage transaction-list"
 }
+
 .transaction-column-grid {
     display: grid;
-    grid-template-columns: 14px 1fr 130px 130px 50px;
     align-items: center;
     gap: 10px;
 }
+
 .list-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -40,4 +41,11 @@
 .manage {
     grid-area: manage;
     height: 100%;
+}
+
+.orientation-slant {
+    writing-mode: vertical-lr;
+    text-orientation: sideways-right;
+    display: flex;
+    align-items: center;
 }

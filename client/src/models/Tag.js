@@ -1,4 +1,4 @@
-import Model, { attr, fk } from "redux-orm";
+import Model, { attr, fk, many } from "redux-orm";
 import { createTagSucceededAction } from "../shared/actions/entry/tags";
 import { appInit } from "../shared/slices/core";
 
