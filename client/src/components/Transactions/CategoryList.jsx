@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react'
-import { TbX } from 'react-icons/tb';
+import { TbPlus, TbX } from 'react-icons/tb';
 import { useSelector } from 'react-redux'
 import { allCategoriesSelector } from '../../selectors/all';
 import { getColorByTransactionType } from '../../utils/transactions';
@@ -9,10 +9,13 @@ function CategoryList() {
   const categories = useSelector(allCategoriesSelector);
   return (
     <div className='overflow-y-auto list-grid gap-2 py-2'>
+      <div className='px-3 py-1 cursor-pointer border bg-slate-50 gap-1 border-slate-100 rounded relative flex items-center justify-center group hover:border-slate-300'>
+        <TbPlus className='text-slate-500' />
+      </div>
       {categories.map(category => {
         const color = getColorByTransactionType(category.type);
         return (
-          <div key={category.id} className='px-3 py-1 cursor-pointer border border-slate-100 rounded relative flex items-center justify-between group hover:border-slate-300'>
+          <div key={category.id} className='px-2 py-1 cursor-pointer border border-slate-100 rounded relative flex items-center justify-between group hover:border-slate-300'>
             <div className='flex items-center gap-2'>
               <span className={classNames("min-h-[8px] min-w-[8px] h-[8px] w-[8px] rounded-full", {
                 'bg-red-500': category.type === 'expense',

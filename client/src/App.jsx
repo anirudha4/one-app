@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider, useSelector } from 'react-redux'
-import { createBrowserRouter, createRoutesFromElements, redirect, Route, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Navigate, redirect, Route, RouterProvider } from 'react-router-dom';
 import { AuthLayout, Login, Register } from './pages/Auth';
 import { Transactions } from './pages/Dashboard';
 
@@ -19,6 +19,11 @@ import SplitwiseConnect from './pages/Integrations/Splitwise/SplitwiseConnect';
 import Splitwise from './pages/Integrations/Splitwise/Splitwise';
 import Integrations from './pages/Integrations';
 import Verify from './pages/Verify';
+import { Insights } from './pages/Insights';
+import AccountLayout from './pages/Account/AccountLayout';
+import Profile from './pages/Account/Profile';
+import ManageCategories from './pages/Account/ManageCategories';
+import ManageWallets from './pages/Account/ManageWallets';
 
 function App() {
   const { isLoggedIn } = useSelector(currentAuthStatusSelector);
@@ -38,10 +43,17 @@ function App() {
         <Route path='app' element={<AppLayout />}>
           <Route path='transactions' element={<Transactions />} />
           <Route path='invoices' element={<Invoices />} />
+          <Route path='insights' element={<Insights />} />
           <Route path='integrations' element={<IntergrationLayout />}>
             <Route index element={<Integrations />} />
             <Route path='splitwise/connect' element={<SplitwiseConnect />} />
             <Route path='splitwise' element={<Splitwise />} />
+          </Route>
+          <Route path='accounts' element={<AccountLayout />}>
+            <Route index element={<Navigate to={'/app/accounts/profile'} />} />
+            <Route path='profile' element={<Profile />} />
+            <Route path='categories' element={<ManageCategories />} />
+            <Route path='wallets' element={<ManageWallets />} />
           </Route>
         </Route>
         <Route path='/verify_email' element={<Verify />} />

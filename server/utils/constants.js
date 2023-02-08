@@ -11,18 +11,6 @@ exports.defaultCategories = [
     { name: "Investments", type: "investment" },
     { name: "Loans", type: "expense" },
     { name: "Salary", type: "income" },
-    { name: "Scholarship", type: "income" },
-    { name: 'Stock market investments', type: 'investment' },
-    { name: 'Real estate investments', type: 'investment' },
-    { name: 'Bonds', type: 'investment' },
-    { name: 'Mutual funds', type: 'investment' },
-    { name: 'Certificates of deposit', type: 'investment' },
-    { name: 'Retirement accounts', type: 'investment' },
-    { name: 'Hedge funds', type: 'investment' },
-    { name: 'Private equity', type: 'investment' },
-    { name: 'Venture capital', type: 'investment' },
-    { name: 'Commodities', type: 'investment' },
-    { name: 'Cryptocurrency', type: 'investment' },
     { name: 'Other', type: 'expense' },
 ];
 

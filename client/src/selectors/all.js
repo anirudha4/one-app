@@ -33,3 +33,8 @@ export const allOrganizationSelector = createSelector(
     orm,
     ({ Organization }) => Organization.all().toRefArray()
 )
+
+export const allWalletsSelector = createSelector(
+    orm,
+    ({ Wallet }) => Wallet.all().toRefArray()
+)

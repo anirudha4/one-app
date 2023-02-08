@@ -19,7 +19,10 @@ module.exports = {
     // categories
     const categories = await sails.helpers.categories.createMany(defaultCategories, userId, organizationId);
 
-    return { categories };
+    // wallet
+    const { wallet } = await sails.helpers.wallets.createWallet('Debit Card', -1, organizationId);
+
+    return { categories, wallet };
   }
 };
 

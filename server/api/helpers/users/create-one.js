@@ -71,7 +71,14 @@ module.exports = {
       email: values.email.toLowerCase(),
       password: bcrypt.hashSync(values.password, 10),
       color,
-      organizationId: organization.id
+      organizationId: organization.id,
+
+      /**
+       * for development purpose
+       * isEmailVerified: true
+       * 
+       */
+      isEmailVerified: true
     })
       .intercept(
         {

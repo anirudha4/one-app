@@ -1,5 +1,5 @@
 /**
- * Transaction.js
+ * Wallet.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -16,28 +16,15 @@ module.exports = {
       type: 'string',
       required: true
     },
-    type: {
+    color: {
       type: 'string',
-      defaultsTo: 'expense'
+      required: true
     },
     amount: {
       type: 'number',
       columnType: 'FLOAT',
       required: true
     },
-    date: {
-      type: 'ref',
-      required: true
-    },
-    description: {
-      type: 'string'
-    },
-    isRecurring: {
-      type: 'boolean',
-      defaultsTo: false,
-      columnName: 'is_recurring'
-    },
-
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -47,27 +34,12 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    categoryId: {
-      model: 'Category',
-      required: true,
-      columnName: 'category_id',
-    },
-    walletId: {
-      model: 'Wallet',
-      required: true,
-      columnName: 'wallet_id'
-    },
     organizationId: {
       model: 'Organization',
       required: true,
       columnName: 'organization_id',
-    },
-    userId: {
-      model: 'User',
-      required: true,
-      columnName: 'user_id',
     }
   },
-  tableName: 'transaction'
+
 };
 

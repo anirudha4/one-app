@@ -36,6 +36,7 @@ module.exports = {
     // transaction-members
     const transactionMembers = await sails.helpers.transactionMembers.getTransactionMembersByCriteria({ transactionId: transactionIds });
     
+    const wallets = await sails.helpers.wallets.getWalletsByCriteria({ organizationId });
     return {
       user: this.req.currentUser,
       included: {
@@ -46,7 +47,8 @@ module.exports = {
         transactionTags,
         transactionMembers,
         members,
-        organizations
+        organizations,
+        wallets
       }
     };
   }

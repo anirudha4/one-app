@@ -5,6 +5,7 @@ import { makeTransactionTagsByTransactionId } from '../../selectors/by-id'
 function TransactionTags({ id }) {
     const transactionTagsByTransactionId = useMemo(makeTransactionTagsByTransactionId)
     const transactionTags = useSelector(state => transactionTagsByTransactionId(state, id));
+    console.log({ transactionTags })
     const trimmedTransactionTags = useMemo(() => {
         const total = transactionTags.length;
         let updatedTransactionTags = [...transactionTags];
@@ -16,10 +17,10 @@ function TransactionTags({ id }) {
     }, [transactionTags]);
 
     return (
-        <div className='flex items-center gap-2 flex-wrap'>
+        <div className='flex items-center gap-2 flex-wrap' key={id}>
             {trimmedTransactionTags.map(transactionTag => {
                 return (
-                    <div style={{ backgroundColor: transactionTag.color, color: 'white' }} className="text-[9px] rounded-full bg-slate-800 text-white py-1 px-3 font-bold">{transactionTag.name}</div>
+                    <div key={transactionTag.key} style={{ backgroundColor: transactionTag.color, color: 'white' }} className="text-[9px] rounded-full bg-slate-800 text-white py-1 px-3 font-bold">{transactionTag.name}</div>
                 )
             })}
         </div>

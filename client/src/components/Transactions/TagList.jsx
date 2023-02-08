@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react'
-import { TbX } from 'react-icons/tb';
+import { TbPlus, TbX } from 'react-icons/tb';
 import { useSelector } from 'react-redux'
 import { allTagsSelector } from '../../selectors/all';
 
@@ -8,6 +8,9 @@ function TagList() {
   const tags = useSelector(allTagsSelector);
   return (
     <div className='grid grid-cols-2 gap-2 py-2 overflow-y-auto'>
+      <div className='px-3 py-1 cursor-pointer border bg-slate-50 gap-1 border-slate-100 rounded relative flex items-center justify-center group hover:border-slate-300'>
+        <TbPlus className='text-slate-500' />
+      </div>
       {tags.map(tag => {
         return (
           <div key={tag.id} className='px-3 py-1 cursor-pointer border border-slate-100 rounded relative flex items-center justify-between focus-within:border-slate-300 group hover:border-slate-300'>

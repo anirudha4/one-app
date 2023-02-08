@@ -7,7 +7,9 @@ export const makeTransactionTagsByTransactionId = () => createSelector(
     ({ Transaction }, id) => {
         const transaction = Transaction.withId(id);
         const transactionTags = transaction.transactionTags.toModelArray();
-        const tags = transactionTags.map(transactionTag => transactionTag.tags.ref);
+        const tags = transactionTags.map(transactionTag => {
+            return { ...transactionTag.tags.ref, key: transactionTag.id }
+        });
         return tags;
     }
 )

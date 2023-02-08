@@ -5,7 +5,7 @@ import { currentOrganizationSelector } from '../../selectors/current'
 
 // icons
 import { BsAppIndicator } from 'react-icons/bs';
-import { FaChartPie } from 'react-icons/fa';
+import { FiPieChart, FiSettings } from 'react-icons/fi';
 import { AiOutlineCreditCard } from 'react-icons/ai';
 import { RiHome5Line, RiNewspaperLine } from 'react-icons/ri';
 import WorkspaceSelector from './WorkspaceSelect';
@@ -18,9 +18,10 @@ function Sidebar() {
         return [
             { id: 1, label: 'Home', route: '/', icon: <RiHome5Line size={18} /> },
             { id: 2, label: 'Transactions', route: '/app/transactions', icon: <AiOutlineCreditCard size={18} /> },
-            { id: 3, label: 'Insights', route: '/app/insights', icon: <FaChartPie size={18} /> },
+            { id: 3, label: 'Insights', route: '/app/insights', icon: <FiPieChart size={18} />},
             { id: 4, label: 'Invoices', route: '/app/invoices', icon: <RiNewspaperLine size={18} /> },
             { id: 5, label: 'Integrations', route: '/app/integrations', icon: <BsAppIndicator size={18} /> },
+            { id: 6, label: 'Account', route: '/app/accounts', icon: <FiSettings size={18} /> },
         ]
     }, [])
     return (

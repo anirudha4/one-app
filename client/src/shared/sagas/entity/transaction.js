@@ -1,5 +1,6 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { createTransaction, deleteTransaction } from '../../../api/transaction';
+import { allWalletsSelector } from '../../../selectors/all';
 import { generateAuthenticationHeaders } from '../../../utils/authentication';
 import {
     createTransactionAction,
@@ -12,6 +13,8 @@ import {
 
 function* createTransactionWorker({ payload }) {
     try {
+        const [wallet] = yield select(allWalletsSelector);
+        payload.walletId = wallet.id;
         const { transaction, transactionTags, transactionMembers } = yield call(createTransaction, payload, generateAuthenticationHeaders());
         yield put(createTransactionSucceededAction({ transaction, transactionTags, transactionMembers }));
     } catch (error) {

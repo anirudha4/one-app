@@ -14,9 +14,9 @@ const WorkspaceSelector = ({ name }) => {
                 </div>
                 <div className="workspace-name text-xs font-medium truncate w-full flex-1 text-black">{name}</div>
             </div>
-            <div className="workspace-select-icon min-w-[20px] min-h-[20px]">
+            {/* <div className="workspace-select-icon min-w-[20px] min-h-[20px]">
                 <TbSelector size={18} className='text-slate-500' />
-            </div>
+            </div> */}
         </div>
     )
 }

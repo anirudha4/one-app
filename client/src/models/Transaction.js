@@ -24,6 +24,11 @@ export class Transaction extends Model {
                 as: 'category',
                 relatedName: 'transactions'
             }),
+            walletId: fk({
+                to: 'Wallet',
+                as: 'wallet',
+                relatedName: 'transactions'
+            }),
             organizationId: fk({
                 to: 'Organization',
                 as: 'organization',

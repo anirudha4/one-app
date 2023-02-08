@@ -21,3 +21,8 @@ export const currentOrganizationSelector = createSelector(
         return Organization.withId(auth.currentUser.organizationId).ref;
     }
 )
+
+export const currentWalletSelector = createSelector(
+    orm,
+    ({ Wallet }) => Wallet.all().first().ref
+)

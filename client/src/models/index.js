@@ -5,3 +5,4 @@ export { Tag } from "./Tag";
 export { Transaction } from "./Transaction";
 export { TransactionTag } from "./TransactionTag";
 export { TransactionMember } from "./TransactionMember";
+export { Wallet } from "./Wallet";

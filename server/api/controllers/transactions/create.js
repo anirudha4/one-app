@@ -27,6 +27,10 @@ module.exports = {
       type: 'string',
       required: true
     },
+    walletId: {
+      type: 'string',
+      required: true
+    },
     tags: {
       type: 'ref'
     }
@@ -57,7 +61,7 @@ module.exports = {
     }
 
     // create transaction
-    const transactionValues = _.pick(inputs, ['name', 'amount', 'type', 'date', 'categoryId', 'description']);
+    const transactionValues = _.pick(inputs, ['name', 'amount', 'type', 'date', 'categoryId', 'walletId', 'description']);
     const transaction = await sails.helpers.transactions.createTransaction(transactionValues, user.id, organizationId, this.req);
 
     // relational data
