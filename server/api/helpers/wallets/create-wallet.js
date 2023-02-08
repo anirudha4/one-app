@@ -22,6 +22,8 @@ module.exports = {
   },
   fn: async function (inputs) {
     const { name, amount, organizationId } = inputs;
+    
+    // get random color
     const color = await sails.helpers.utils.generateRandomColor();
     const values = {
       name,
