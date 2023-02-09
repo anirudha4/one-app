@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { allCategoriesSelector, allTagsSelector } from '../../selectors/all';
+import { currentWalletSelector } from '../../selectors/current';
 import Divider from '../../shared/components/Divider'
 import Field from '../Field';
 import NumberField from '../Field/NumberField';
@@ -35,6 +36,7 @@ function AddTransaction() {
   const { addingTransactionLoader } = useSelector(state => state.transaction);
   const categories = useSelector(allCategoriesSelector);
   const tags = useSelector(allTagsSelector);
+  const wallet = useSelector(currentWalletSelector);
 
   // memoize categories
   const CATEGORY_OPTIONS = useMemo(() =>
@@ -94,6 +96,7 @@ function AddTransaction() {
         <Divider />
         {error && <div className="p-2 text-xs capitalize bg-red-100 text-red-500 mb-3 rounded">{error}</div>}
         <form ref={formRef} onSubmit={handleSubmit} className='mb-2 flex flex-col gap-4 pt-4'>
+          <input type="hidden" name="walletId" value={wallet.id} />
           <Field
             label={'Name'}
             placeholder={'Eg. Bought White House'}

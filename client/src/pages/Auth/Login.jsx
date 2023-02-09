@@ -7,7 +7,6 @@ import { requestLogin } from '../../shared/slices/auth';
 function Login() {
   const dispatch = useDispatch();
   const { verified } = useQueryParams(['verified']);
-  console.log({ verified })
   const [form, setForm] = useState({
     email: '',
     password: ''

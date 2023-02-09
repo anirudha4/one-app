@@ -41,6 +41,9 @@ module.exports = {
     },
     categoryNotFound: {
       responseType: 'categoryNotFound'
+    },
+    walletNotFound: {
+      responseType: 'walletNotFound'
     }
   },
   fn: async function (inputs, exits) {
@@ -52,6 +55,11 @@ module.exports = {
 
     if (!organization) {
       return exits.organizationNotFound();
+    }
+
+    let wallet = await sails.helpers.wallets.getWalletByCriteria({ id: inputs.walletId });
+    if (!wallet) {
+      return exits.walletNotFound();
     }
 
     const [category] = await sails.helpers.categories.getCategoriesByCriteria({ id: categoryId });
@@ -75,11 +83,14 @@ module.exports = {
       transactionTags = await sails.helpers.transactionTags.createTransactionTags(transactionTagsValues, this.req);
     }
 
+    // update wallet balance
+    wallet = await sails.helpers.wallets.updateWalletBalance(transaction, wallet, this.req);
 
     return exits.success({
       transaction,
       transactionTags,
-      transactionMembers
+      transactionMembers,
+      wallet
     })
   }
 };

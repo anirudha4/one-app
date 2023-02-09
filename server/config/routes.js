@@ -46,6 +46,9 @@ module.exports.routes = {
   // transaction-tag
   'POST /api/transaction-tag': 'transaction-tag/create',
 
+  // wallets
+  'PUT /api/wallets/:id': 'wallets/update',
+
   // test route
   'GET /api/test': 'test/index',
 

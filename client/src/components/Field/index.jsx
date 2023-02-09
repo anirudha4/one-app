@@ -5,7 +5,7 @@ const Field = ({ id, name, placeholder, label, type, value, onChange, ...props }
     return (
         <div className="field group">
             <label className='label' htmlFor={id}>{label}</label>
-            <input className='input' name={name} type={type} placeholder={placeholder} value={value} onChange={onChange} {...props} />
+            <input className='input' name={name} placeholder={placeholder} {...props} />
         </div>
     )
 };

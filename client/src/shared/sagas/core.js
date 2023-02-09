@@ -6,6 +6,7 @@ import { coreInitialized } from "../slices/core";
 import { memberWatcher } from "./entity/member";
 import { tagWatcher } from "./entity/tag";
 import { transactionWatcher } from "./entity/transaction";
+import { walletWatcher } from "./entity/wallets";
 import { loadDataForOrganization } from "./init";
 import socketWatchers from "./socket-event-channel";
 
@@ -14,6 +15,7 @@ const watchers = [
     tagWatcher,
     transactionWatcher,
     memberWatcher,
+    walletWatcher,
     socketWatchers
 ]
 export function* coreSaga() {

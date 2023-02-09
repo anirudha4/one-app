@@ -5,7 +5,6 @@ import { makeTransactionTagsByTransactionId } from '../../selectors/by-id'
 function TransactionTags({ id }) {
     const transactionTagsByTransactionId = useMemo(makeTransactionTagsByTransactionId)
     const transactionTags = useSelector(state => transactionTagsByTransactionId(state, id));
-    console.log({ transactionTags })
     const trimmedTransactionTags = useMemo(() => {
         const total = transactionTags.length;
         let updatedTransactionTags = [...transactionTags];

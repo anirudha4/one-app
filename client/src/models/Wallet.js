@@ -1,4 +1,6 @@
 import Model, { attr, fk } from "redux-orm";
+import { createTransactionSucceededAction } from "../shared/actions/entry/transactions";
+import { updateWalletsSucceededAction } from "../shared/actions/entry/wallets";
 import { appInit } from "../shared/slices/core";
 
 export class Wallet extends Model {
@@ -23,6 +25,12 @@ export class Wallet extends Model {
                 payload.wallets.forEach(wallet => {
                     Wallet.upsert(wallet);
                 })
+                break;
+            case updateWalletsSucceededAction.type:
+                Wallet.withId(payload.id).update(payload);
+                break;
+            case createTransactionSucceededAction.type:
+                Wallet.withId(payload.wallet.id).update(payload.wallet);
                 break;
             default:
                 break;

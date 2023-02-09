@@ -6,7 +6,6 @@ const withGaurd = (WrappedComponent) => {
     return function Component(props) {
         const { isLoggedIn, currentUser } = useSelector(currentAuthStatusSelector);
         const location = useLocation();
-        console.log({ isLoggedIn })
         if (!isLoggedIn) {
             const navigation_url = `/auth${location.search}`;
             return <Navigate to={navigation_url} />
