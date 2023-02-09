@@ -1,10 +1,25 @@
-import React from 'react'
+import React from 'react';
+import classNames from 'classnames';
 import { TbCheck } from 'react-icons/tb';
 
-function Checkbox({ checked, onClick }) {
+function Checkbox({ checked = false, onChange }) {
+    const handleClick = (e) => onChange(!checked);
+    const handleKeyDown = e => {
+        if(e.key === ' ') {
+            onChange(!checked);
+        }
+    }
     return (
-        <div onClick={onClick} tabIndex={0} className="min-h-[14px] min-w-[14px] text-[10px] border border-slate-300 rounded flex items-center justify-center cursor-pointer transition-all duration-100 group-hover:border-slate-400 hover:border-slate-500">
-            {checked && <TbCheck />}
+        <div onKeyDown={handleKeyDown} onClick={handleClick} tabIndex={0} className={classNames(
+            "min-h-[16px] min-w-[16px] text-[10px] border border-slate-300 rounded ",
+            "flex items-center justify-center cursor-pointer",
+            "transition-all duration-100",
+            {
+                'bg-slate-700 text-white': checked
+            },
+
+        )}>
+            {checked && <TbCheck strokeWidth={3} />}
         </div>
     )
 }

@@ -8,9 +8,23 @@ import {
 const transactionSlice = createSlice({
     name: 'transaction',
     initialState: {
-        addingTransactionLoader: false
+        addingTransactionLoader: false,
+        transactionIdsChecked: []
     },
-    reducers: {},
+    reducers: {
+        transactionIdCheckedForActions: (state, { payload }) => {
+            state.transactionIdsChecked = [...state.transactionIdsChecked, payload.transactionId]
+        },
+        transactionIdUncheckedForActions: (state, { payload }) => {
+            state.transactionIdsChecked = state.transactionIdsChecked.filter(id => id !== payload.transactionId);
+        },
+        transactionIdsCheckedForActions: (state, { payload }) => {
+            state.transactionIdsChecked = payload.transactionIds;
+        },
+        transactionIdsUncheckedForActions: (state, { }) => {
+            state.transactionIdsChecked = [];
+        }
+    },
     extraReducers: {
         [createTransactionAction.type]: (state) => {
             state.addingTransactionLoader = true
@@ -26,4 +40,9 @@ const transactionSlice = createSlice({
 
 export default transactionSlice.reducer;
 
-export const { addingTransactionLoader } = transactionSlice.actions;
+export const {
+    transactionIdCheckedForActions,
+    transactionIdUncheckedForActions,
+    transactionIdsCheckedForActions,
+    transactionIdsUncheckedForActions
+} = transactionSlice.actions;

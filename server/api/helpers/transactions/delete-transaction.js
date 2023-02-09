@@ -10,7 +10,7 @@ module.exports = {
     },
   },
   fn: async function (inputs) {
-    const transaction = await Transaction.destroyOne(inputs.id).fetch();
+    const transaction = await Transaction.destroyOne(inputs.id);
     return transaction;
   }
 };

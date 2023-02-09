@@ -21,8 +21,8 @@ function* createTransactionWorker({ payload }) {
 
 function* deleteTransactionWorker({ payload }) {
     try {
-        const { transaction } = yield call(deleteTransaction, payload.id, generateAuthenticationHeaders())
-        yield put(deleteTransactionSucceededAction({ transaction }));
+        const { transaction, wallet } = yield call(deleteTransaction, payload.id, generateAuthenticationHeaders())
+        yield put(deleteTransactionSucceededAction({ transaction, wallet }));
     } catch (error) {
         yield put(deleteTransactionErrorAction(error));
     }

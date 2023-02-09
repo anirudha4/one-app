@@ -1,22 +1,43 @@
 import React, { useMemo } from 'react'
 import { TbLayoutSidebarLeftExpand, TbLayoutSidebarRightExpand, TbPlus } from 'react-icons/tb'
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Divider from '../../shared/components/Divider'
 import { allTransactionSelector } from '../../selectors/all';
 import Transaction from './Transaction';
 import Checkbox from '../../shared/components/Checkbox';
+import { transactionIdsCheckedForActions, transactionIdsUncheckedForActions } from '../../shared/slices/transaction';
+import { isAllTransactionCheckedForAction } from '../../selectors/boolean';
 
 function TransactionList({ expanded, setExpanded }) {
+    const dispatch = useDispatch();
+
+
+    // selectors
     const transactions = useSelector(allTransactionSelector);
+
+    const transactionIds = useMemo(() => {
+        return transactions.map(transaction => transaction.id);
+    }, [transactions])
+
+    const checked = useSelector(state => isAllTransactionCheckedForAction(state, transactionIds));
 
     const transactionsGrid = useMemo(() => {
         return expanded ? '14px 1fr 130px 130px 250px 50px' : '14px 1fr 130px 130px 50px';
     }, [expanded])
+
     // handlers
+    const handleAllTransactionChecked = (checked) => {
+        if (checked) {
+            dispatch(transactionIdsCheckedForActions({ transactionIds }));
+        } else {
+            dispatch(transactionIdsUncheckedForActions());
+        }
+
+    }
     const handleExpand = () => setExpanded(!expanded);
     return (
-        <div className="p-4 transaction-list flex flex-col card h-full">
+        <div className="p-4 transaction-list flex flex-col card h-full select-none">
             <div className='flex items-center justify-between mb-2'>
                 <div className="heading-text text-slate-700 text-lg font-medium">Transactions</div>
                 <div className="flex items-center gap-2">
@@ -38,7 +59,7 @@ function TransactionList({ expanded, setExpanded }) {
             {/* Header */}
             <div className="transaction-column-grid px-4 py-3 font-medium" style={{ gridTemplateColumns: transactionsGrid }}>
                 <div className="text-center text-xs text-slate-500 uppercase">
-                    <Checkbox />
+                    <Checkbox checked={checked} onChange={handleAllTransactionChecked} />
                 </div>
                 <div className="text-xs text-slate-500 uppercase">Name</div>
                 <div className="text-xs text-slate-500 uppercase">Amount</div>

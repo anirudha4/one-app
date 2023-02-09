@@ -1,19 +1,32 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 import { getTransactionTypeColor } from '../../utils/transactions';
 import Checkbox from '../../shared/components/Checkbox';
 import { deleteTransactionAction } from '../../shared/actions/entry/transactions';
 import TransactionTags from './TransactionTags';
+import { transactionIdCheckedForActions, transactionIdUncheckedForActions } from '../../shared/slices/transaction';
+import { isTransactionCheckedForAction } from '../../selectors/boolean';
 
 function Transaction({ id, name, amount, type, date, user, category, organization, transactionsGrid, expanded }) {
     const dispatch = useDispatch();
+    
+    // selectors
+    const checked = useSelector(state => isTransactionCheckedForAction(state, id));
     const handleDelete = () => {
         dispatch(deleteTransactionAction({ id }))
     }
+    const handleChecked = (isChecked) => {
+        console.log({ isChecked })
+        if(isChecked) {
+            dispatch(transactionIdCheckedForActions({ transactionId: id }));
+        } else {
+            dispatch(transactionIdUncheckedForActions({ transactionId: id }));
+        }
+    }
     return (
-        <div style={{ gridTemplateColumns: transactionsGrid }} className="transaction-column-grid w-full py-3 px-4 rounded-md transition-all duration-100 cursor-pointer group hover:bg-slate-100">
-            <Checkbox onClick={handleDelete} />
+        <div style={{ gridTemplateColumns: transactionsGrid }} className="transaction-column-grid select-none w-full py-3 px-4 rounded-md transition-all duration-100 cursor-pointer group hover:bg-slate-100">
+            <Checkbox checked={checked} onChange={handleChecked} />
             <div className="text-xs text-left text-slate-600 font-medium flex-1 truncate">
                 {name}
             </div>

@@ -1,5 +1,5 @@
 import Model, { attr, fk } from "redux-orm";
-import { createTransactionSucceededAction } from "../shared/actions/entry/transactions";
+import { createTransactionSucceededAction, deleteTransactionSucceededAction } from "../shared/actions/entry/transactions";
 import { updateWalletsSucceededAction } from "../shared/actions/entry/wallets";
 import { appInit } from "../shared/slices/core";
 
@@ -30,6 +30,9 @@ export class Wallet extends Model {
                 Wallet.withId(payload.id).update(payload);
                 break;
             case createTransactionSucceededAction.type:
+                Wallet.withId(payload.wallet.id).update(payload.wallet);
+                break;
+            case deleteTransactionSucceededAction.type:
                 Wallet.withId(payload.wallet.id).update(payload.wallet);
                 break;
             default:

@@ -23,7 +23,7 @@ export default AccountHeader
 
 const HorizontalTabs = () => {
     return (
-        <div className="flex items-center border-b">
+        <div className="flex items-center border-b justify-center">
             {TAB_OPTIONS.map(tabOption => {
                 return (
                     <NavLink className={({ isActive }) => `

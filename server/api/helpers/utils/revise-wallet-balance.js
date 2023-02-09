@@ -8,19 +8,30 @@ module.exports = {
     },
     transactionType: {
       type: 'string'
+    },
+    action: {
+      type: 'string',
+      defaultsTo: 'create'
     }
   },
   exits: {
   },
   fn: async function (inputs) {
-    const { walletBalance, transactionAmount, transactionType } = inputs;
+    const { walletBalance, transactionAmount, transactionType, action } = inputs;
     let balance = 0;
-    if (transactionType === 'expense' || transactionType === 'investment') {
-      balance = walletBalance - transactionAmount;
-    } else {
-      balance = walletBalance + transactionAmount;
+    if (action === 'create') {
+      if (transactionType === 'expense' || transactionType === 'investment') {
+        balance = walletBalance - transactionAmount;
+      } else {
+        balance = walletBalance + transactionAmount;
+      }
+    } else if (action === 'delete') {
+      if (transactionType === 'expense' || transactionType === 'investment') {
+        balance = walletBalance + transactionAmount;
+      } else {
+        balance = walletBalance - transactionAmount;
+      }
     }
-
     return balance;
   }
 };
