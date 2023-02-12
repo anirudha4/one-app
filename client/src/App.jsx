@@ -41,7 +41,9 @@ function App() {
           <Route path='register' element={<Register />} />
         </Route>
         <Route path='app' element={<AppLayout />}>
-          <Route path='transactions' element={<Transactions />} />
+          <Route path='transactions' element={<Transactions />}>
+            <Route path=':id' element={<Transactions />} />
+          </Route>
           <Route path='invoices' element={<Invoices />} />
           <Route path='insights' element={<Insights />} />
           <Route path='integrations' element={<IntergrationLayout />}>

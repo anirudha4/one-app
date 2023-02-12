@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import Manage from '../../components/Transactions/Manage';
 import TransactionOverview from '../../components/Transactions/Overview';
+import TransactionDetails from '../../components/Transactions/TransactionDetails';
 import TransactionList from '../../components/Transactions/TransactionList';
 import withGaurd from '../../shared/hoc/withGaurd';
 
 function Transactions() {
   const [expanded, setExpanded] = useState(false);
+  const { id } = useParams();
   const grid = useMemo(() => {
     return expanded ? '50px 1fr' : '450px 1fr';
   }, [expanded]);
@@ -15,6 +18,8 @@ function Transactions() {
       <TransactionOverview expanded={expanded} />
       <TransactionList expanded={expanded} setExpanded={setExpanded} />
       <Manage expanded={expanded} />
+
+      {id && <TransactionDetails id={id} />}
     </div >
   )
 }

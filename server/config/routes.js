@@ -42,6 +42,7 @@ module.exports.routes = {
   // transactions
   'POST /api/transactions': 'transactions/create',
   'DELETE /api/transactions/:id': 'transactions/delete',
+  'DELETE /api/transactions/bulk/delete': 'transactions/bulk/delete',
 
   // transaction-tag
   'POST /api/transaction-tag': 'transaction-tag/create',

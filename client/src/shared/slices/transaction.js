@@ -2,15 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
     createTransactionAction,
     createTransactionSucceededAction,
-    createTransactionErrorAction
+    createTransactionErrorAction,
+    bulkDeleteTransactionSucceededAction,
+    bulkDeleteTransactionAction
 } from '../actions/entry/transactions';
 
+const initialState = {
+    addingTransactionLoader: false,
+    deletingTransactionLoader: false,
+    transactionIdsChecked: [],
+}
 const transactionSlice = createSlice({
     name: 'transaction',
-    initialState: {
-        addingTransactionLoader: false,
-        transactionIdsChecked: []
-    },
+    initialState,
     reducers: {
         transactionIdCheckedForActions: (state, { payload }) => {
             state.transactionIdsChecked = [...state.transactionIdsChecked, payload.transactionId]
@@ -34,6 +38,13 @@ const transactionSlice = createSlice({
         },
         [createTransactionErrorAction.type]: (state) => {
             state.addingTransactionLoader = false
+        },
+        [bulkDeleteTransactionAction.type]: (state) => {
+            state.deletingTransactionLoader = true
+        },
+        [bulkDeleteTransactionSucceededAction.type]: (state) => {
+            state.transactionIdsChecked = [];
+            state.deletingTransactionLoader = false;
         },
     }
 })

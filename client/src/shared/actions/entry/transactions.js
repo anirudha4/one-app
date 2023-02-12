@@ -21,3 +21,10 @@ export const deleteTransactionRequestedAction = createAction('transactions/delet
 export const deleteTransactionSucceededAction = createAction('transactions/delete/success');
 export const deleteTransactionRecievedAction = createAction('transactions/delete/recieve');
 export const deleteTransactionErrorAction = createAction('transactions/delete/error');
+
+// bulk delete transactions
+export const bulkDeleteTransactionAction = createAction('transactions/delete/bulk');
+export const bulkDeleteTransactionRequestedAction = createAction('transactions/delete/bulk/request');
+export const bulkDeleteTransactionSucceededAction = createAction('transactions/delete/bulk/success');
+export const bulkDeleteTransactionRecievedAction = createAction('transactions/delete/bulk/recieve');
+export const bulkDeleteTransactionErrorAction = createAction('transactions/delete/bulk/error');

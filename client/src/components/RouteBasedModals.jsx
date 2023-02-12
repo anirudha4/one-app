@@ -9,18 +9,21 @@ function RouteBasedModals() {
     const {
         addTransaction,
         addMember,
-        switchWorkspace
+        switchWorkspace,
+        showTransaction
     } = useMemo(() => {
         const addTransaction = searchParams.get('add_transaction');
         const addMember = searchParams.get('add_member');
         const switchWorkspace = searchParams.get('switch_workspace');
-        return { addTransaction, addMember, switchWorkspace }
+        const showTransaction = searchParams.get('show_transaction');
+        return { addTransaction, addMember, switchWorkspace, showTransaction };
     }, [searchParams]);
     return (
         <>
             {addTransaction && <AddTransaction />}
             {addMember && <AddMember />}
             {switchWorkspace && <SwitchWorkspace />}
+            {showTransaction && <></>}
         </>
     )
 }

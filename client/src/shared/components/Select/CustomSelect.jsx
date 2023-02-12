@@ -13,6 +13,7 @@ function CustomSelect({ options, name, value, onChange, label, id, ...props }) {
                 value={value}
                 options={options}
                 name={name}
+                menuPlacement={'auto'}
                 onChange={onChange}
                 classNamePrefix="react-select"
                 className='react-select-container'

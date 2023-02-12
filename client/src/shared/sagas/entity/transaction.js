@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { createTransaction, deleteTransaction } from '../../../api/transaction';
+import { bulkDeleteTransaction, createTransaction, deleteTransaction } from '../../../api/transaction';
 import { generateAuthenticationHeaders } from '../../../utils/authentication';
 import {
     createTransactionAction,
@@ -7,7 +7,11 @@ import {
     createTransactionErrorAction,
     deleteTransactionAction,
     deleteTransactionErrorAction,
-    deleteTransactionSucceededAction
+    deleteTransactionSucceededAction,
+    bulkDeleteTransactionAction,
+    bulkDeleteTransactionSucceededAction,
+    bulkDeleteTransactionErrorAction,
+    bulkDeleteTransactionRequestedAction
 } from '../../actions/entry/transactions';
 
 function* createTransactionWorker({ payload }) {
@@ -28,7 +32,17 @@ function* deleteTransactionWorker({ payload }) {
     }
 }
 
+function* bulkDeleteTransactionWorker({ payload }) {
+    try {
+        const { transactions, wallet } = yield call(bulkDeleteTransaction, payload, generateAuthenticationHeaders())
+        yield put(bulkDeleteTransactionSucceededAction({ transactions, wallet }));
+    } catch (error) {
+        yield put(bulkDeleteTransactionErrorAction(error));
+    }
+}
+
 export function* transactionWatcher() {
     yield takeLatest(createTransactionAction.type, createTransactionWorker);
     yield takeLatest(deleteTransactionAction.type, deleteTransactionWorker);
+    yield takeLatest(bulkDeleteTransactionAction.type, bulkDeleteTransactionWorker);
 }

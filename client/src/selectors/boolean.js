@@ -16,6 +16,7 @@ export const isAllTransactionCheckedForAction = createSelector(
         (_, ids) => ids,
     ],
     (transaction, transactionIds) => {
+        if(transactionIds.length === 0) return false; 
         const checkedIds = transaction.transactionIdsChecked;
         return transactionIds.every(id => checkedIds.includes(id));
     }

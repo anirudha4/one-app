@@ -1,5 +1,5 @@
-import Model, { attr, fk, many } from "redux-orm";
-import { createTransactionSucceededAction, deleteTransactionSucceededAction } from "../shared/actions/entry/transactions";
+import Model, { attr, fk } from "redux-orm";
+import { bulkDeleteTransactionSucceededAction, createTransactionSucceededAction, deleteTransactionSucceededAction } from "../shared/actions/entry/transactions";
 import { appInit } from "../shared/slices/core";
 
 export class Transaction extends Model {
@@ -49,6 +49,11 @@ export class Transaction extends Model {
                 break;
             case deleteTransactionSucceededAction.type:
                 Transaction.withId(payload.transaction.id).delete()
+                break;
+            case bulkDeleteTransactionSucceededAction.type:
+                payload.transactions.forEach(transaction => {
+                    Transaction.withId(transaction.id).delete();
+                });
                 break;
             default:
                 break;

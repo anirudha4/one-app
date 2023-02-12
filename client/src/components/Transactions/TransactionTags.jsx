@@ -17,6 +17,11 @@ function TransactionTags({ id }) {
 
     return (
         <div className='flex items-center gap-2 flex-wrap' key={id}>
+            {trimmedTransactionTags.length === 0 && (
+                <div className="text-xs text-slate-400">
+                    NA
+                </div>
+            )}
             {trimmedTransactionTags.map(transactionTag => {
                 return (
                     <div key={transactionTag.key} style={{ backgroundColor: transactionTag.color, color: 'white' }} className="text-[9px] rounded-full bg-slate-800 text-white py-1 px-3 font-bold">{transactionTag.name}</div>

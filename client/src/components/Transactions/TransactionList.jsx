@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { TbLayoutSidebarLeftExpand, TbLayoutSidebarRightExpand, TbPlus } from 'react-icons/tb'
+import { ImDrawer2 } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Divider from '../../shared/components/Divider'
@@ -8,10 +9,10 @@ import Transaction from './Transaction';
 import Checkbox from '../../shared/components/Checkbox';
 import { transactionIdsCheckedForActions, transactionIdsUncheckedForActions } from '../../shared/slices/transaction';
 import { isAllTransactionCheckedForAction } from '../../selectors/boolean';
+import BulkAction from './BulkAction';
 
 function TransactionList({ expanded, setExpanded }) {
     const dispatch = useDispatch();
-
 
     // selectors
     const transactions = useSelector(allTransactionSelector);
@@ -20,6 +21,7 @@ function TransactionList({ expanded, setExpanded }) {
         return transactions.map(transaction => transaction.id);
     }, [transactions])
 
+    const checkedTransactionIds = useSelector(state => state.transaction.transactionIdsChecked);
     const checked = useSelector(state => isAllTransactionCheckedForAction(state, transactionIds));
 
     const transactionsGrid = useMemo(() => {
@@ -47,6 +49,9 @@ function TransactionList({ expanded, setExpanded }) {
                             {expanded ? 'Collapse' : 'Expand'}
                         </span>
                     </button>
+                    {checkedTransactionIds.length > 0 && (
+                        <BulkAction checkedTransactionIds={checkedTransactionIds} />
+                    )}
                     <Link to={'?add_transaction=true'}>
                         <button className='btn-primary'>
                             <TbPlus size={16} />
@@ -70,6 +75,15 @@ function TransactionList({ expanded, setExpanded }) {
             <Divider />
             {/* List */}
             <div className="h-full overflow-scroll">
+                {transactions.length === 0 && (
+                    <div className="mx-auto h-full w-fit text-center flex flex-col gap-4 justify-center mt-[-30px]">
+                        <ImDrawer2 size={200} className='text-gray-300' />
+                        <div className="text-sm text-slate-500">
+                            No transactions.
+                            {/* <Link className='underline transition-all duration-100 hover:text-black' to={'/app/transactions?add_transaction=true'}>Add Transaction</Link> */}
+                        </div>
+                    </div>
+                )}
                 {transactions.map(transaction => {
                     return (
                         <Transaction expanded={expanded} transactionsGrid={transactionsGrid} key={transaction.id} {...transaction} />

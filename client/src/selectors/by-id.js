@@ -13,3 +13,17 @@ export const makeTransactionTagsByTransactionId = () => createSelector(
         return tags;
     }
 )
+
+export const transactionByIdSelector = createSelector(
+    orm,
+    (_, id) => id,
+    makeTransactionTagsByTransactionId(),
+    ({ Transaction }, id, transactionTags) => {
+        console.log({ id, transactionTags });
+        const transaction = Transaction.withId(id).ref;
+        return {
+            ...transaction,
+            transactionTags
+        }
+    }
+)

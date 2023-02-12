@@ -3,9 +3,12 @@ import classNames from 'classnames';
 import { TbCheck } from 'react-icons/tb';
 
 function Checkbox({ checked = false, onChange }) {
-    const handleClick = (e) => onChange(!checked);
+    const handleClick = (e) => {
+        e.stopPropagation();
+        onChange(!checked);
+    }
     const handleKeyDown = e => {
-        if(e.key === ' ') {
+        if (e.key === ' ') {
             onChange(!checked);
         }
     }
