@@ -27,3 +27,12 @@ export const transactionByIdSelector = createSelector(
         }
     }
 )
+
+
+export const splitwiseIntegrationById = createSelector(
+    orm,
+    (_, id) => id,
+    ({ SplitwiseIntegration }, id) => {
+        return SplitwiseIntegration.withId(id).ref;
+    }
+)

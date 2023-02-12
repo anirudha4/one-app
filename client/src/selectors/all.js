@@ -38,3 +38,8 @@ export const allWalletsSelector = createSelector(
     orm,
     ({ Wallet }) => Wallet.all().toRefArray()
 )
+
+export const allActiveIntegrationSelector = createSelector(
+    orm,
+    ({ SplitwiseIntegration }) => SplitwiseIntegration.all().toRefArray()
+)

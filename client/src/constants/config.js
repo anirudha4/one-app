@@ -16,6 +16,10 @@ const ACCESS_TOKEN_VERSION = '1';
 const POSITION_GAP = 65535;
 const ACTIVITIES_LIMIT = 50;
 
+export const INTEGRATION_ICONS = {
+    'splitwise-integration': '/integrations/splitwise.png'
+}
+
 export const INTEGRATIONS = [
     {
         id: 1,

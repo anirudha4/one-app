@@ -57,7 +57,7 @@
 
 /* buttons */
 .btn {
-    @apply p-3 bg-black text-white border rounded-md text-xs font-medium outline-none transition-all cursor-pointer;
+    @apply p-2 px-3 bg-black text-white border rounded-md text-xs font-medium outline-none transition-all cursor-pointer flex items-center gap-2;
 }
 .btn-danger {
     @apply bg-rose-50 text-rose-500 border-none hover:bg-rose-100;

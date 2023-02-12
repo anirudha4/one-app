@@ -31,7 +31,7 @@ module.exports.routes = {
   'POST /api/users/members': 'users/members/create',
 
   // verify token urls
-  'GET /api/verify/users' : 'verify/users/index',
+  'GET /api/verify/users': 'verify/users/index',
 
   // organizations
   'GET /api/organizations/init': 'organizations/init',
@@ -49,6 +49,9 @@ module.exports.routes = {
 
   // wallets
   'PUT /api/wallets/:id': 'wallets/update',
+
+  // splitwise integrations
+  'POST /api/integrations/splitwise': 'integrations/splitwise/create',
 
   // test route
   'GET /api/test': 'test/index',

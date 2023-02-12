@@ -49,7 +49,7 @@ function App() {
           <Route path='integrations' element={<IntergrationLayout />}>
             <Route index element={<Integrations />} />
             <Route path='splitwise/connect' element={<SplitwiseConnect />} />
-            <Route path='splitwise' element={<Splitwise />} />
+            <Route path='splitwise/:id' element={<Splitwise />} />
           </Route>
           <Route path='accounts' element={<AccountLayout />}>
             <Route index element={<Navigate to={'/app/accounts/profile'} />} />

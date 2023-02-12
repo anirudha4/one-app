@@ -12,10 +12,10 @@ function IntegrationCard({ path, name, connect, description }) {
                     <span className='font-medium text-slate-700'>{name}</span>
                 </div>
                 <Link to={connect} className='btn-sm'>
-                    <TbPlus />
                     <span>
                         Connect
                     </span>
+                    <TbPlus />
                 </Link>
             </div>
             <Divider />

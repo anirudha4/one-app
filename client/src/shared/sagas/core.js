@@ -4,6 +4,7 @@ import { authorize, authWatcher } from "../../pages/Auth/saga";
 import { getAccessTokenFromLocalStore } from "../../utils/authentication";
 import { coreInitialized } from "../slices/core";
 import { memberWatcher } from "./entity/member";
+import { splitwiseIntegrationWatcher } from "./entity/splitwise-integration";
 import { tagWatcher } from "./entity/tag";
 import { transactionWatcher } from "./entity/transaction";
 import { walletWatcher } from "./entity/wallets";
@@ -16,6 +17,7 @@ const watchers = [
     transactionWatcher,
     memberWatcher,
     walletWatcher,
+    splitwiseIntegrationWatcher,
     socketWatchers
 ]
 export function* coreSaga() {

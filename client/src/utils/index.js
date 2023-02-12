@@ -5,5 +5,5 @@ export const closeOnEsc = (e, onClose) => {
 }
 
 export const getServerAssetUrl = (path) => {
-    return `${import.meta.env.VITE_SERVER_BASE_URL}/assets${path}`
+    return `${import.meta.env.VITE_SERVER_BASE_URL}/assets/${path}`
 }
