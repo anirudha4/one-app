@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction } from "../actions/entry/splitwise-integrations";
+import { checkSplitwiseTransaction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction, unCheckSplitwiseTransaction } from "../actions/entry/splitwise-integrations";
 
 const splitwiseSlice = createSlice({
     name: 'splitwise',
     initialState: {
         fetchingSplitwiseTransactions: false,
-        fetchedTransactions: []
+        fetchedTransactions: [],
+        transactionsToImport: []
     },
     reducers: {},
     extraReducers: {
@@ -18,7 +19,13 @@ const splitwiseSlice = createSlice({
         },
         [fetchSplitwiseTransactionsErrorAction.type]: (state) => {
             state.fetchingSplitwiseTransactions = false
-        }
+        },
+        [checkSplitwiseTransaction.type]: (state, { payload }) => {
+            state.transactionsToImport = [...state.transactionsToImport, payload.transaction]
+        },
+        [unCheckSplitwiseTransaction.type]: (state, { payload }) => {
+            state.transactionsToImport = state.transactionsToImport.filter(transaction => transaction.id !== payload.transactionId);
+        },
     }
 })
 

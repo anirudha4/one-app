@@ -100,7 +100,6 @@ function AddTransaction() {
             label={'Date'}
             placeholder={'Transaction Date'}
             name={'date'}
-            autoFocus
             autoComplete={false}
           />
         </div>

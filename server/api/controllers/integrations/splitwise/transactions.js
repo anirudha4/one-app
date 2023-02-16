@@ -35,10 +35,12 @@ module.exports = {
     const splitwise = await sails.helpers.splitwiseIntegrations.initializeSplitwiseSdk(integrationId);
 
     try {
-      const expenses = await splitwise.getExpenses({
+      const expensesFilter = {
         group_id,
+        dated_after: new Date(dated_after).toString(),
         limit: 10000
-      });
+      }
+      const expenses = await splitwise.getExpenses(expensesFilter);
       return exits.success({
         expenses
       });

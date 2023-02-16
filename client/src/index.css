@@ -63,7 +63,7 @@
     @apply bg-rose-50 text-rose-500 border-none hover:bg-rose-100;
 }
 .btn-primary {
-    @apply py-2 px-3 h-[34px] font-medium bg-black outline-none rounded text-slate-200 text-xs flex items-center gap-2 transition-all hover:text-white;
+    @apply py-2 px-3 h-[34px] font-medium bg-black outline-none rounded text-slate-200 text-xs flex items-center gap-2 transition-all hover:text-white disabled:bg-slate-200 disabled:text-slate-600 disabled:cursor-not-allowed;
 }
 .btn-primary-outline {
     @apply py-2 px-3 font-medium bg-white border border-gray-300  outline-none rounded text-black text-xs flex items-center gap-2 transition-all duration-100 hover:border-black;

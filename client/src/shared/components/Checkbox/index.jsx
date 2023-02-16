@@ -18,7 +18,7 @@ function Checkbox({ checked = false, onChange }) {
             "flex items-center justify-center cursor-pointer",
             "transition-all duration-100",
             {
-                'bg-slate-700 text-white': checked
+                'bg-slate-900 text-white': checked
             },
 
         )}>

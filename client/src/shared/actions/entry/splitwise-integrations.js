@@ -16,3 +16,6 @@ export const fetchSplitwiseTransactionsRecievedAction = createAction('splitwise-
 export const fetchSplitwiseTransactionsErrorAction = createAction('splitwise-integrations/fetch-transactions/error');
 
 
+// check splitwise transactions
+export const checkSplitwiseTransaction = createAction('splitwise-integration/check-transaction')
+export const unCheckSplitwiseTransaction = createAction('splitwise-integration/uncheck-transaction')
