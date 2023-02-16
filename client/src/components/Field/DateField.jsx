@@ -8,7 +8,7 @@ import { useState } from 'react';
 const DateField = ({ id, name, placeholder, label, type, value, onChange, ...props }) => {
     const [selected, setSelected] = useState(new Date());
     return (
-        <div className="">
+        <div className="w-full">
             {label && <label className='label mb-2 block' htmlFor={id}>{label}</label>}
             <DatePicker
                 autoComplete='off'

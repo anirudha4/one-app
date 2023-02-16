@@ -63,7 +63,7 @@ function Register() {
         value={form.organizationName}
         onChange={onChange}
       />
-      <button disabled={loading} className="btn">{loading ? 'Please wait...' : 'Register'}</button>
+      <button disabled={loading} className="btn-primary justify-center">{loading ? 'Please wait...' : 'Register'}</button>
     </form >
   )
 }

@@ -10,11 +10,11 @@ function ActiveIntegrationCard({ id, name }) {
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <img src={getServerAssetUrl(INTEGRATION_ICONS[name])} width={25} height={25} alt="" />
-                    <span className='font-medium text-slate-700'>Splitwise Integration</span>
+                    <span className='font-medium text-slate-700'>Splitwise</span>
                 </div>
                 <Link to={`/app/integrations/splitwise/${id}`} className='btn-sm'>
                     <span>
-                        View
+                        Configure
                     </span>
                     <TbArrowRight />
                 </Link>

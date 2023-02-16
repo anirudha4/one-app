@@ -8,6 +8,7 @@ import router from './shared/slices/router';
 import core from './shared/slices/core';
 import tag from './shared/slices/tag';
 import transaction from './shared/slices/transaction';
+import splitwise from './shared/slices/splitwise';
 
 // create saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -25,6 +26,7 @@ export const store = configureStore({
         auth,
         tag,
         transaction,
+        splitwise,
         orm: ormReducer,
         router,
     },

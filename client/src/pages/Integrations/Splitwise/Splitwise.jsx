@@ -1,16 +1,14 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { splitwiseIntegrationById } from '../../../selectors/by-id';
 import { TbArrowLeft, TbTrash } from 'react-icons/tb';
 import Divider from '../../../shared/components/Divider';
+import ConfigureSplitwise from '../../../components/Integrations/Splitwise/ConfigureSplitwise';
 
 function Splitwise() {
   const { id } = useParams();
-  const splitwiseIntegration = useSelector(state => splitwiseIntegrationById(state, id));
   return (
-    <div className='p-3 max-w-[1200px] w-full mx-auto'>
-      <div className="p-6 border bg-white border-slate-100 rounded">
+    <div className='integration-container p-3 max-w-[1200px] w-full mx-auto max-h-full'>
+      <div className="flex flex-col pt-6 pb-3 px-6 border bg-white border-slate-100 rounded h-full"> 
         <div className="mb-2 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to={'/app/integrations'}>
@@ -26,6 +24,7 @@ function Splitwise() {
           </button>
         </div>
         <Divider />
+        <ConfigureSplitwise id={id} />
       </div>
     </div>
   )

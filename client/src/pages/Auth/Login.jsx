@@ -41,7 +41,7 @@ function Login() {
         value={form.password}
         onChange={onChange}
       />
-      <button className="btn">Login</button>
+      <button className="btn-primary justify-center">Login</button>
     </form>
   )
 }

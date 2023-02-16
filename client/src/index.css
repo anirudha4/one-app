@@ -23,7 +23,7 @@
 
 /* form */
 .field {
-    @apply flex flex-col gap-2 relative;
+    @apply flex flex-col gap-2 relative w-full;
 }
 
 .input {
@@ -104,3 +104,22 @@
 .show-select {
     display: none;
 }
+
+
+/* loader */
+
+.loader {
+    border-top-color: black;
+    -webkit-animation: spinner 1.5s linear infinite;
+    animation: spinner 1.5s linear infinite;
+  }
+  
+  @-webkit-keyframes spinner {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

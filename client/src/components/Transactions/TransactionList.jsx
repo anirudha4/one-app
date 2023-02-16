@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Divider from '../../shared/components/Divider'
 import { allTransactionSelector } from '../../selectors/all';
 import Transaction from './Transaction';
-import Checkbox from '../../shared/components/Checkbox';
 import { transactionIdsCheckedForActions, transactionIdsUncheckedForActions } from '../../shared/slices/transaction';
 import { isAllTransactionCheckedForAction } from '../../selectors/boolean';
 import BulkAction from './BulkAction';
+import TransactionListHeader from './TransactionListHeader';
 
 function TransactionList({ expanded, setExpanded }) {
     const dispatch = useDispatch();
@@ -62,16 +62,13 @@ function TransactionList({ expanded, setExpanded }) {
             </div>
             <Divider />
             {/* Header */}
-            <div className="transaction-column-grid px-4 py-3 font-medium" style={{ gridTemplateColumns: transactionsGrid }}>
-                <div className="text-center text-xs text-slate-500 uppercase">
-                    <Checkbox checked={checked} onChange={handleAllTransactionChecked} />
-                </div>
-                <div className="text-xs text-slate-500 uppercase">Name</div>
-                <div className="text-xs text-slate-500 uppercase">Amount</div>
-                <div className="text-xs text-slate-500 uppercase">Category</div>
-                {expanded && <div className="text-xs text-slate-500 uppercase">Tags</div>}
-                <div className="text-xs text-slate-500 uppercase">Date</div>
-            </div>
+            <TransactionListHeader
+                transactionsGrid={transactionsGrid}
+                checked={checked}
+                handleAllTransactionChecked={handleAllTransactionChecked}
+                expanded={expanded}
+            />
+
             <Divider />
             {/* List */}
             <div className="h-full overflow-scroll">
@@ -80,7 +77,6 @@ function TransactionList({ expanded, setExpanded }) {
                         <ImDrawer2 size={200} className='text-gray-300' />
                         <div className="text-sm text-slate-500">
                             No transactions.
-                            {/* <Link className='underline transition-all duration-100 hover:text-black' to={'/app/transactions?add_transaction=true'}>Add Transaction</Link> */}
                         </div>
                     </div>
                 )}

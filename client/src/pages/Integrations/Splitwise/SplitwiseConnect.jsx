@@ -26,7 +26,6 @@ function SplitwiseConnect() {
       await validateTransaction(formData, ['clientId', 'clientSecret']);
       dispatch(createSplitwiseIntegrationAction(formData));
       setError(null);
-      formRef.current.reset();
     } catch (error) {
       setError(error.message);
       const errorElement = formRef.current[error.key];

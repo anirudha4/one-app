@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { createSplitwiseIntegration } from "../../../api/splitwise-integration";
+import { createSplitwiseIntegration, fetchSplitwiseTransactions } from "../../../api/splitwise-integration";
 import { generateAuthenticationHeaders } from "../../../utils/authentication";
-import { createSplitwiseIntegrationAction, createSplitwiseIntegrationSucceededAction } from '../../actions/entry/splitwise-integrations';
+import { createSplitwiseIntegrationAction, createSplitwiseIntegrationSucceededAction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction } from '../../actions/entry/splitwise-integrations';
 
 function* createSplitwiseIntegrationWorker({ payload }) {
     try {
@@ -15,7 +15,16 @@ function* createSplitwiseIntegrationWorker({ payload }) {
     }
 
 }
-
+function* fetchSplitwiseTransactionsWorker({ payload }) {
+    try {
+        const { expenses } = yield call(fetchSplitwiseTransactions, payload.id, generateAuthenticationHeaders());
+        yield put(fetchSplitwiseTransactionsSucceededAction({ expenses }));
+    } catch (error) {
+        console.log(err);
+        yield put(fetchSplitwiseTransactionsErrorAction(err))
+    }
+}
 export function* splitwiseIntegrationWatcher() {
     yield takeLatest(createSplitwiseIntegrationAction.type, createSplitwiseIntegrationWorker);
+    yield takeLatest(fetchSplitwiseTransactionsAction.type, fetchSplitwiseTransactionsWorker);
 }

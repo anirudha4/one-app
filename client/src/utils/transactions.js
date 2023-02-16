@@ -1,4 +1,5 @@
 import { COLOR_BY_TRANSACTION_TYPE } from "../constants/transactions";
+import startCase from 'lodash.startcase';
 
 export const getColorByTransactionType = (type) => {
     return COLOR_BY_TRANSACTION_TYPE[type];
@@ -28,7 +29,7 @@ export const validateTransaction = (values, checkAgainst) => {
         if (checkAgainst.includes(key)) {
             if (values[key] === '') {
                 throw {
-                    message: `${key} cannot be empty`,
+                    message: `${startCase(key)} cannot be empty`,
                     key
                 }
             }
