@@ -20,7 +20,7 @@ function OverviewSlot() {
         <OverviewChart expense={expense} income={income} investment={investment} />
         <div className="text-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
           <span className="text-xs text-gray-500">Total Balance</span>
-          <div className="text-md text-slate-600 font-bold">Rs. {parseFloat(total).toFixed(2)}</div>
+          <div className="text-md text-slate-600 font-bold whitespace-nowrap">Rs. {parseFloat(total).toFixed(2)}</div>
         </div>
       </div>
     </div>
