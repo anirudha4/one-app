@@ -20,7 +20,7 @@ function OverviewSlot() {
         <OverviewChart expense={expense} income={income} investment={investment} />
         <div className="text-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
           <span className="text-xs text-gray-500">Total Balance</span>
-          <div className="text-md text-slate-600 font-bold">Rs. {total}</div>
+          <div className="text-md text-slate-600 font-bold">Rs. {parseFloat(total).toFixed(2)}</div>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@ export const Stat = ({ labelColor, label, amount }) => {
       <div className={classNames("text-xs font-medium", labelColor)}>{label}</div>
       <div className={classNames("heading-text text-lg text-slate-700 font-bold", {
         'text-rose-500': amount < 0
-      })}>Rs.{amount}</div>
+      })}>Rs.{parseFloat(amount).toFixed(2)}</div>
     </div>
   )
 }
