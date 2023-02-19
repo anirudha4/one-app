@@ -4,6 +4,7 @@ import { TbPlus } from 'react-icons/tb';
 import Divider from '../../shared/components/Divider'
 
 function IntegrationCard({ path, name, connect, description }) {
+    console.log(name);
     return (
         <div className="p-4 rounded bg-white border border-slate-100">
             <div className="flex items-center justify-between mb-2">

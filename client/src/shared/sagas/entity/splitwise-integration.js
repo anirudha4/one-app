@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { toast } from 'react-toastify';
 import { createSplitwiseIntegration, fetchSplitwiseTransactions, importSplitwiseTransactions } from "../../../api/splitwise-integration";
 import { generateAuthenticationHeaders } from "../../../utils/authentication";
-import { createSplitwiseIntegrationAction, createSplitwiseIntegrationSucceededAction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction, importSplitwiseTransactionsAction, importSplitwiseTransactionsErrorAction, importSplitwiseTransactionsSucceededAction } from '../../actions/entry/splitwise-integrations';
+import { createSplitwiseIntegrationAction, createSplitwiseIntegrationErrorAction, createSplitwiseIntegrationSucceededAction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction, importSplitwiseTransactionsAction, importSplitwiseTransactionsErrorAction, importSplitwiseTransactionsSucceededAction } from '../../actions/entry/splitwise-integrations';
 
 function* createSplitwiseIntegrationWorker({ payload }) {
     try {
@@ -10,9 +10,9 @@ function* createSplitwiseIntegrationWorker({ payload }) {
         yield put(createSplitwiseIntegrationSucceededAction({ splitwiseIntegration }));
 
         // navigate to splitwise integration page
-        window.location.href = `http://localhost:5173/app/integrations/splitwise/${splitwiseIntegration.id}`;
+        window.location.href = `${import.meta.env.VITE_CLIENT_BASE_URL}/app/integrations/splitwise/${splitwiseIntegration.id}`;
     } catch (err) {
-        console.log(err);
+        yield put(createSplitwiseIntegrationErrorAction(err));
     }
 
 }

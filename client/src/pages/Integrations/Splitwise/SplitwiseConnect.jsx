@@ -3,10 +3,11 @@ import { TbArrowLeft } from 'react-icons/tb'
 import { MdLogin } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import Divider from '../../../shared/components/Divider'
+import Loader from '../../../shared/components/Loader';
 import Field from '../../../components/Field';
 import { createObjectFromFormData, validateTransaction } from '../../../utils/transactions'
 import { createSplitwiseIntegrationAction } from '../../../shared/actions/entry/splitwise-integrations'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Alert from '../../../components/Alert'
 
 function SplitwiseConnect() {
@@ -15,6 +16,9 @@ function SplitwiseConnect() {
   // refs
   const formRef = useRef();
 
+  // selectors
+  const { creatingSplitwiseIntegration } = useSelector(state => state.splitwise)
+ 
   // dispatch 
   const dispatch = useDispatch();
 
@@ -58,6 +62,7 @@ function SplitwiseConnect() {
               style={{ flex: 1 }}
               name='clientId'
               id='clientId'
+              autoComplete='off'
             />
             <Field
               label='Client Secret'
@@ -66,12 +71,13 @@ function SplitwiseConnect() {
               style={{ flex: 1 }}
               name='clientSecret'
               id='clientSecret'
+              autoComplete='off'
             />
           </div>
 
-          <button className="btn-primary mt-3">
-            <MdLogin />
-            Save and Authorize
+          <button className="btn-primary mt-3" disabled={creatingSplitwiseIntegration}>
+            {creatingSplitwiseIntegration ? <Loader /> : <MdLogin /> } 
+            {creatingSplitwiseIntegration ? 'Please Wait' : 'Save and Authorize' } 
           </button>
         </form>
       </div>

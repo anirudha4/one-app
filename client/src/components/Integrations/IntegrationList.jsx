@@ -14,6 +14,7 @@ function IntegrationList() {
             {INTEGRATION_LIST.map(integration => {
                 return (
                     <IntegrationCard
+                        key={integration.id}
                         {...integration}
                     />
                 )

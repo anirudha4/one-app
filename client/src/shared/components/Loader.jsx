@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Loader() {
+function Loader({ size, stroke = 1 }) {
     return (
-        <div className="loader ease-linear rounded-full border border-t border-gray-200 h-[18px] w-[18px]"></div>
+        <div className={`loader ease-linear rounded-full border border-t border-gray-200 h-[${size}px] w-[${size}px]`}></div>
     )
 }
 

@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { importSplitwiseTransactions } from "../../api/splitwise-integration";
-import { checkAllSplitwiseTransaction, checkSplitwiseTransaction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction, importSplitwiseTransactionsAction, importSplitwiseTransactionsErrorAction, importSplitwiseTransactionsSucceededAction, unCheckAllSplitwiseTransaction, unCheckSplitwiseTransaction } from "../actions/entry/splitwise-integrations";
+import { checkAllSplitwiseTransaction, checkSplitwiseTransaction, createSplitwiseIntegrationAction, createSplitwiseIntegrationErrorAction, createSplitwiseIntegrationSucceededAction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction, importSplitwiseTransactionsAction, importSplitwiseTransactionsErrorAction, importSplitwiseTransactionsSucceededAction, unCheckAllSplitwiseTransaction, unCheckSplitwiseTransaction } from "../actions/entry/splitwise-integrations";
 
 const splitwiseSlice = createSlice({
     name: 'splitwise',
@@ -9,7 +8,8 @@ const splitwiseSlice = createSlice({
         fetchedTransactions: [],
         transactionsToImport: [],
         transactionsImporting: false,
-        transactionsImported: false
+        transactionsImported: false,
+        creatingSplitwiseIntegration: false
     },
     reducers: {},
     extraReducers: {
@@ -45,6 +45,15 @@ const splitwiseSlice = createSlice({
         [importSplitwiseTransactionsErrorAction.type]: (state) => {
             state.transactionsImporting = false;
         },
+        [createSplitwiseIntegrationAction.type]: (state) => {
+            state.creatingSplitwiseIntegration = true;
+        },
+        [createSplitwiseIntegrationErrorAction.type]: (state) => {
+            state.creatingSplitwiseIntegration = false;
+        },
+        [createSplitwiseIntegrationSucceededAction.type]: (state) => {
+            state.creatingSplitwiseIntegration = false;
+        }
     }
 })
 
