@@ -24,7 +24,7 @@ function Header() {
                         <NavLink to={'/app/accounts/wallets'}>
                             <Alert className='cursor-pointer' type='info' message={'Add Initial Balance to Wallet'} />
                         </NavLink>)}
-                    <ChooseWallet />
+                    {/* <ChooseWallet /> */}
                     <div
                         className='[ text-sm h-8 w-8 rounded cursor-pointer flex items-center justify-center ]
                     [ bg-slate-200 text-black font-medium transition-all hover:bg-slate-300 ]'

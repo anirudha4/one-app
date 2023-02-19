@@ -95,7 +95,7 @@ module.exports = {
       .intercept('organizationNameAlreadyInUse', () => Errors.ORGANIZATION_NAME_ALREADY_IN_USE);
 
     const { token } = await sails.helpers.tokens.createRegisterToken(user.id);
-    sails.helpers.emails.sendWelcomeEmail(user, organization, token).then(() => { }).catch(() => { })
+    // sails.helpers.emails.sendWelcomeEmail(user, organization, token).then(() => { }).catch(() => { })
     return {
       item: user,
     };

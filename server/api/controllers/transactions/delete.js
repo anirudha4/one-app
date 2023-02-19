@@ -44,8 +44,10 @@ module.exports = {
     if(!wallet) {
       return exits.walletNotFound();
     }
-    const updatedWalletBalance = await sails.helpers.utils.reviseWalletBalance(wallet.amount, transaction.amount, transaction.type, 'delete');
-    wallet = await sails.helpers.wallets.updateWallet(wallet.id, { amount: updatedWalletBalance }, this.req);
+
+    // :WALLET
+    // const updatedWalletBalance = await sails.helpers.utils.reviseWalletBalance(wallet.amount, transaction.amount, transaction.type, 'delete');
+    // wallet = await sails.helpers.wallets.updateWallet(wallet.id, { amount: updatedWalletBalance }, this.req);
 
     return exits.success({
       transaction,

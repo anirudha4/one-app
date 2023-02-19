@@ -4,7 +4,7 @@ import AccountHeader from './AccountHeader'
 
 function AccountLayout() {
   return (
-    <div className='py-3'>
+    <div className='p-3'>
       <AccountHeader />
       <br />
       <Outlet />

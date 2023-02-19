@@ -1,14 +1,12 @@
-import classNames from 'classnames';
 import React from 'react'
 import { HiOutlineUser } from 'react-icons/hi';
 import { BiCategoryAlt } from 'react-icons/bi';
-import { IoWalletOutline } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
 const TAB_OPTIONS = [
     { id: 1, label: 'Profile', route: '/app/accounts/profile', icon: <HiOutlineUser size={16} /> },
     { id: 2, label: 'Manage Categories', route: '/app/accounts/categories', icon: <BiCategoryAlt size={16} /> },
-    { id: 3, label: 'Manage Wallets', route: '/app/accounts/wallets', icon: <IoWalletOutline size={16} /> },
+    // { id: 3, label: 'Manage Wallets', route: '/app/accounts/wallets', icon: <IoWalletOutline size={16} /> },
 ];
 
 function AccountHeader() {

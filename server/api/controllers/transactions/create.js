@@ -83,8 +83,8 @@ module.exports = {
       transactionTags = await sails.helpers.transactionTags.createTransactionTags(transactionTagsValues, this.req);
     }
 
-    // update wallet balance
-    wallet = await sails.helpers.wallets.updateWalletBalance(transaction, wallet, this.req);
+    // update wallet balance :WALLET
+    // wallet = await sails.helpers.wallets.updateWalletBalance(transaction, wallet, this.req);
 
     return exits.success({
       transaction,

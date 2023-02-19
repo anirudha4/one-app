@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Field from '../../components/Field';
 import NumberField from '../../components/Field/NumberField';
@@ -62,7 +62,7 @@ function ManageWallets() {
             name={'amount'}
             notation="Rs."
             autoComplete="off"
-            defaultValue={wallet.amount > 0 ? wallet.amount : 0}
+            defaultValue={wallet.amount}
           />
           <button className="btn-primary justify-center mt-2">
             <IoWalletOutline size={16} />

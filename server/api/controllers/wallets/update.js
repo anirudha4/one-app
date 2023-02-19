@@ -34,10 +34,13 @@ module.exports = {
     if (_.isEmpty(wallet)) {
       return exits.walletNotFound();
     }
-    // update wallet
-    const walletValues = _.pick(inputs, ['name', 'amount']);
 
-    wallet = await sails.helpers.wallets.updateWallet(id, walletValues, this.req);
+    // :WALLET
+    // // update wallet
+    // const walletValues = _.pick(inputs, ['name', 'amount']);
+
+    // wallet = await sails.helpers.wallets.updateWallet(id, walletValues, this.req);
+    
     return exits.success({
       item: wallet
     });

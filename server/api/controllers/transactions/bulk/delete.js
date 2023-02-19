@@ -34,9 +34,10 @@ module.exports = {
       return exits.walletNotFound();
     }
 
-    const transactions = await Promise.all(transactionIds.map(id => sails.helpers.transactions.deleteTransaction(id)));
-    const balance = await sails.helpers.wallets.reviseWalletBalanceAfterBulkDelete(transactions, wallet.amount, this.req);
-    wallet = await sails.helpers.wallets.updateWallet(wallet.id, { amount: balance }, this.req);
+    // :WALLET
+    // const transactions = await Promise.all(transactionIds.map(id => sails.helpers.transactions.deleteTransaction(id)));
+    // const balance = await sails.helpers.wallets.reviseWalletBalanceAfterBulkDelete(transactions, wallet.amount, this.req);
+    // wallet = await sails.helpers.wallets.updateWallet(wallet.id, { amount: balance }, this.req);
 
     return exits.success({
       transactions,

@@ -78,10 +78,10 @@ module.exports = {
       }
 
 
-      // adjust wallet balance
-      const balance = await sails.helpers.wallets.reviseWalletBalanceAfterBulkAdd(transactions, wallet.amount, this.req);
+      // adjust wallet balance :WALLET
+      // const balance = await sails.helpers.wallets.reviseWalletBalanceAfterBulkAdd(transactions, wallet.amount, this.req);
 
-      wallet = await sails.helpers.wallets.updateWallet(wallet.id, { amount: balance }, this.req);
+      // wallet = await sails.helpers.wallets.updateWallet(wallet.id, { amount: balance }, this.req);
       return exits.success({
         transactions,
         wallet,

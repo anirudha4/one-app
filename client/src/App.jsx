@@ -59,7 +59,7 @@ function App() {
             <Route index element={<Navigate to={'/app/accounts/profile'} />} />
             <Route path='profile' element={<Profile />} />
             <Route path='categories' element={<ManageCategories />} />
-            <Route path='wallets' element={<ManageWallets />} />
+            {/* <Route path='wallets' element={<ManageWallets />} /> */}
           </Route>
         </Route>
         <Route path='/verify_email' element={<Verify />} />
