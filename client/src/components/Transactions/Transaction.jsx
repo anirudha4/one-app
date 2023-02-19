@@ -35,7 +35,7 @@ function Transaction({ id, name, amount, type, date, user, category, organizatio
                 {name}
             </div>
             <div className={classNames("text-xs text-slate-600 capitalize font-medium", `text-${getTransactionTypeColor(type)}-500`)}>
-                Rs. {amount}
+                Rs. {parseFloat(amount).toFixed(2)}
             </div>
             <div className={classNames("text-xs text-slate-600 capitalize font-medium truncate")} title={category.name}>
                 {category.name}

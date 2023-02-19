@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import Loader from './Loader';
-import Navbar from './Navbar';
 
 function Layout() {
     const { isCoreInitializing } = useSelector(state => state.core);
@@ -18,7 +17,6 @@ function Layout() {
     }
     return (
         <div className='h-screen'>
-            {/* <Navbar /> */}
             <main>
                 <Outlet />
             </main>
