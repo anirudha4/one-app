@@ -1,4 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import Field from '../../Field';
+import { splitwiseIntegrationById } from '../../../selectors/by-id';
 import { fetchSplitwiseGroups, fetchSplitwiseTransactions } from '../../../api/splitwise-integration';
 import { generateAuthenticationHeaders } from '../../../utils/authentication'
 import CustomSelect from '../../../shared/components/Select/CustomSelect';
@@ -7,14 +10,20 @@ import DateField from '../../Field/DateField';
 import { createObjectFromFormData, validateTransaction } from '../../../utils/transactions';
 import Divider from '../../../shared/components/Divider';
 import SplitwiseExpenseList from './SplitwiseExpenseList';
-import { useSelector } from 'react-redux';
+import Checkbox from '../../../shared/components/Checkbox';
+import { checkAllSplitwiseTransaction, importSplitwiseTransactionsAction, unCheckAllSplitwiseTransaction } from '../../../shared/actions/entry/splitwise-integrations';
+import { areAllSplitwiseTransactionsSelectedForActionSelector } from '../../../selectors/boolean';
+import Loader from '../../../shared/components/Loader';
 
 function ConfigureSplitwise({ id }) {
+  const dispatch = useDispatch();
 
   // refs
   const formRef = useRef();
 
   const [error, setError] = useState('');
+
+  const [showUserExpenses, setShowUserExpenses] = useState(false);
 
   const [groupConfig, setGroupConfig] = useState({
     groups: [],
@@ -28,13 +37,33 @@ function ConfigureSplitwise({ id }) {
   });
 
   // selectors
-  const { transactionsToImport } = useSelector(state => state.splitwise)
+  const { splitwiseUser } = useSelector(state => splitwiseIntegrationById(state, id));
+  const { transactionsToImport, transactionsImported, transactionsImporting } = useSelector(state => state.splitwise);
 
-  const { filteredExpenses, total } = useMemo(() => {
+  const { filteredExpenses } = useMemo(() => {
     if (!expensesConfig.expenses) return { filteredExpenses: [], total: 0 };
-    return { filteredExpenses: expensesConfig.expenses.filter(expense => !(['payment', 'debt_consolidation'].includes(expense.creation_method))), total: expensesConfig.expenses.reduce((a, b) => parseInt(a) + parseInt(b.cost), 0) }
-  }, [expensesConfig.expenses])
+    return {
+      filteredExpenses:
+        expensesConfig.expenses.filter(expense =>
+          !(['payment', 'debt_consolidation'].includes(expense.creation_method)) && (showUserExpenses ? expense.created_by.id === splitwiseUser.id : true)),
+    }
+  }, [expensesConfig.expenses, showUserExpenses])
 
+  const filteredExpensesTotal = useMemo(() => {
+    return filteredExpenses.reduce((a, b) => parseInt(a) + parseInt(b.cost), 0)
+  }, [filteredExpenses])
+
+  const areAllSplitwiseTransactionsSelectedForAction = useSelector(state => areAllSplitwiseTransactionsSelectedForActionSelector(state, filteredExpenses));
+
+  const handleCheckAllTransactions = checked => {
+    if (checked) {
+      dispatch(checkAllSplitwiseTransaction({ transactions: filteredExpenses }));
+    } else {
+      dispatch(unCheckAllSplitwiseTransaction());
+    }
+  }
+
+  // handlers
   const handleFetchTransactionClick = async (e) => {
     e.preventDefault();
     try {
@@ -44,6 +73,7 @@ function ConfigureSplitwise({ id }) {
       setError('');
       const { expenses } = await fetchSplitwiseTransactions(id, formData, generateAuthenticationHeaders());
       setExpensesConfig({ ...expensesConfig, expensesLoading: false, expenses, fetched: true });
+      console.log(expenses);
       setGroupConfig({ ...groupConfig, selectedGroup: GROUP_OPTIONS.find(g => g.id == formData.group_id) })
     } catch (error) {
       setError(error.message);
@@ -52,6 +82,13 @@ function ConfigureSplitwise({ id }) {
         errorElement.focus();
       }
     }
+  }
+  const toggleShowUserExpense = checked => {
+    setShowUserExpenses(checked);
+  }
+
+  const handleImportSplitwiseTransactions = () => {
+    dispatch(importSplitwiseTransactionsAction({ transactionsToImport, integrationId: id }));
   }
 
   // custom select options
@@ -65,11 +102,22 @@ function ConfigureSplitwise({ id }) {
       setGroupConfig({ ...groupConfig, groupsLoading: false, groups: response.groups });
     })
   }, []);
+
+  useEffect(() => {
+    dispatch(unCheckAllSplitwiseTransaction());
+  }, [showUserExpenses])
+
   return (
     <div className='pt-3 pb-2 h-full overflow-hidden flex flex-col'>
 
       <form onSubmit={handleFetchTransactionClick} ref={formRef} className="flex flex-col w-full gap-4 my-2 p-2">
         <div className="flex items-center gap-4 w-full">
+          <Field
+            label={'Splitwise User'}
+            disabled={true}
+            readOnly={true}
+            value={`${splitwiseUser.first_name} ${splitwiseUser?.lastName ? splitwiseUser.lastName : ''} (${splitwiseUser.email ? splitwiseUser.email : ''})`}
+          />
           <CustomSelect
             isLoading={groupConfig.groupsLoading}
             options={GROUP_OPTIONS}
@@ -86,31 +134,48 @@ function ConfigureSplitwise({ id }) {
           />
         </div>
         <button disabled={expensesConfig.expensesLoading} className="btn-primary w-fit">
-          {expensesConfig.expensesLoading && <div className="loader ease-linear rounded-full border border-t border-gray-200 h-[18px] w-[18px]"></div>}
+          {expensesConfig.expensesLoading && <Loader />}
           Search Expenses
         </button>
       </form>
       <br />
       {error && <Alert type='danger' message={error} />}
-      {(expensesConfig.fetched && filteredExpenses.length === 0) && <Alert message={'No transactions found. Try another filter'} />}
-      {(filteredExpenses.length > 0) && (
+      {(expensesConfig.expenses?.length > 0) && (
         <>
           <div className="flex items-center justify-between p-2">
             <div className="text-xs text-gray-700 font-medium mt-2 pb-2">
               {filteredExpenses.length} {filteredExpenses.length > 1 ? 'Expenses' : 'Expense'} associated with <span className="font-bold text-black">{groupConfig.selectedGroup?.label}</span>.
             </div>
-            <div className="text-xs py-1 px-3 bg-green-50 rounded font-semibold text-green-600">
-              Rs. {parseFloat(total).toFixed(2)}
+            <div className="flex items-center gap-2">
+              <div className="text-xs py-1 px-3 bg-green-50 rounded font-semibold text-green-600">
+                Rs. {parseFloat(filteredExpensesTotal).toFixed(2)}
+              </div>
+              <div className="flex items-center gap-2">
+                <Checkbox checked={showUserExpenses} onChange={toggleShowUserExpense} />
+                <label className='text-xs font-medium text-slate-700'>Show transactions created by you</label>
+              </div>
             </div>
           </div>
           <Divider />
-          <div className='flex flex-col overflow-hidden gap-3 p-2'>
-            <div className="overflow-scroll flex flex-col gap-2">
-              <SplitwiseExpenseList filteredExpenses={filteredExpenses} />
+          {filteredExpenses.length > 0 && <>
+            <div className="flex items-center gap-2 mb-2 px-4">
+              <Checkbox checked={areAllSplitwiseTransactionsSelectedForAction} onChange={handleCheckAllTransactions} />
             </div>
-
-            <button className="btn-primary w-fit" disabled={transactionsToImport.length === 0}>Import Expenses</button>
-          </div>
+            <div className='flex flex-col overflow-hidden gap-3 p-2'>
+              <div className="overflow-scroll flex flex-col gap-2">
+                <SplitwiseExpenseList filteredExpenses={filteredExpenses} showUserExpenses={showUserExpenses} />
+              </div>
+              <button
+                className="btn-primary w-fit"
+                onClick={handleImportSplitwiseTransactions}
+                disabled={transactionsToImport.length === 0 || transactionsImporting}
+              >
+                {transactionsImporting && <Loader />}
+                {transactionsImporting ? 'Importing Expenses' : 'Import Expenses'}
+              </button>
+            </div>
+          </>}
+          {(expensesConfig.fetched && filteredExpenses.length === 0) && <Alert message={'No transactions found. Try another filter'} />}
         </>
       )}
 

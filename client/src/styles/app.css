@@ -1,3 +1,18 @@
+
+/* toastify overrides */
+
+.Toastify__toast {
+    min-height: 30px;
+}
+.Toastify__toast-body {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.Toastify__progress-bar-theme--dark {
+    background-color: #666;
+}
+
 .app-layout {
     display: grid;
     grid-template-columns: 230px 1fr;

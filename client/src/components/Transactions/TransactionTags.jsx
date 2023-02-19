@@ -24,7 +24,7 @@ function TransactionTags({ id }) {
             )}
             {trimmedTransactionTags.map(transactionTag => {
                 return (
-                    <div key={transactionTag.key} style={{ backgroundColor: transactionTag.color, color: 'white' }} className="text-[9px] rounded-full bg-slate-800 text-white py-1 px-3 font-bold">{transactionTag.name}</div>
+                    <div key={transactionTag.key} style={{ backgroundColor: transactionTag.color, color: 'white' }} className="text-[9px] rounded-full bg-slate-800 text-white py-1 px-3 font-medium">{transactionTag.name}</div>
                 )
             })}
         </div>

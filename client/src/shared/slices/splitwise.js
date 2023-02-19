@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { checkSplitwiseTransaction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction, unCheckSplitwiseTransaction } from "../actions/entry/splitwise-integrations";
+import { importSplitwiseTransactions } from "../../api/splitwise-integration";
+import { checkAllSplitwiseTransaction, checkSplitwiseTransaction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction, importSplitwiseTransactionsAction, importSplitwiseTransactionsErrorAction, importSplitwiseTransactionsSucceededAction, unCheckAllSplitwiseTransaction, unCheckSplitwiseTransaction } from "../actions/entry/splitwise-integrations";
 
 const splitwiseSlice = createSlice({
     name: 'splitwise',
     initialState: {
         fetchingSplitwiseTransactions: false,
         fetchedTransactions: [],
-        transactionsToImport: []
+        transactionsToImport: [],
+        transactionsImporting: false,
+        transactionsImported: false
     },
     reducers: {},
     extraReducers: {
@@ -23,8 +26,24 @@ const splitwiseSlice = createSlice({
         [checkSplitwiseTransaction.type]: (state, { payload }) => {
             state.transactionsToImport = [...state.transactionsToImport, payload.transaction]
         },
+        [unCheckAllSplitwiseTransaction.type]: (state, { }) => {
+            state.transactionsToImport = []
+        },
+        [checkAllSplitwiseTransaction.type]: (state, { payload }) => {
+            state.transactionsToImport = payload.transactions;
+        },
         [unCheckSplitwiseTransaction.type]: (state, { payload }) => {
             state.transactionsToImport = state.transactionsToImport.filter(transaction => transaction.id !== payload.transactionId);
+        },
+        [importSplitwiseTransactionsAction.type]: (state) => {
+            state.transactionsImporting = true
+        },
+        [importSplitwiseTransactionsSucceededAction.type]: (state) => {
+            state.transactionsImporting = false;
+            state.transactionsToImport = []
+        },
+        [importSplitwiseTransactionsErrorAction.type]: (state) => {
+            state.transactionsImporting = false;
         },
     }
 })

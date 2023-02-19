@@ -19,3 +19,13 @@ export const fetchSplitwiseTransactionsErrorAction = createAction('splitwise-int
 // check splitwise transactions
 export const checkSplitwiseTransaction = createAction('splitwise-integration/check-transaction')
 export const unCheckSplitwiseTransaction = createAction('splitwise-integration/uncheck-transaction')
+export const unCheckAllSplitwiseTransaction = createAction('splitwise-integration/uncheck-all-transaction')
+export const checkAllSplitwiseTransaction = createAction('splitwise-integration/check-all-transaction')
+
+
+// import splitwise transactions
+export const importSplitwiseTransactionsAction = createAction('splitwise-integrations/import-splitwise-transactions');
+export const importSplitwiseTransactionsRequestedAction = createAction('splitwise-integrations/import-splitwise-transactions/request');
+export const importSplitwiseTransactionsSucceededAction = createAction('splitwise-integrations/import-splitwise-transactions/success');
+export const importSplitwiseTransactionsRecievedAction = createAction('splitwise-integrations/import-splitwise-transactions/recieve');
+export const importSplitwiseTransactionsErrorAction = createAction('splitwise-integrations/import-splitwise-transactions/error');

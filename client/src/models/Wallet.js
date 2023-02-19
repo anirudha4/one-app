@@ -1,4 +1,5 @@
 import Model, { attr, fk } from "redux-orm";
+import { importSplitwiseTransactionsSucceededAction } from "../shared/actions/entry/splitwise-integrations";
 import { bulkDeleteTransactionSucceededAction, createTransactionSucceededAction, deleteTransactionSucceededAction } from "../shared/actions/entry/transactions";
 import { updateWalletsSucceededAction } from "../shared/actions/entry/wallets";
 import { appInit } from "../shared/slices/core";
@@ -36,6 +37,7 @@ export class Wallet extends Model {
                 Wallet.withId(payload.wallet.id).update(payload.wallet);
                 break;
             case bulkDeleteTransactionSucceededAction.type:
+            case importSplitwiseTransactionsSucceededAction.type:
                 Wallet.withId(payload.wallet.id).update(payload.wallet);
                 break;
             default:

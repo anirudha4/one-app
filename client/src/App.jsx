@@ -1,7 +1,11 @@
 import React from 'react'
 import { Provider, useSelector } from 'react-redux'
-import { createBrowserRouter, createRoutesFromElements, Navigate, redirect, Route, RouterProvider } from 'react-router-dom';
+// toastify
+import { ToastContainer, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { AuthLayout, Login, Register } from './pages/Auth';
+import { createBrowserRouter, createRoutesFromElements, Navigate, redirect, Route, RouterProvider } from 'react-router-dom';
 import { Transactions } from './pages/Dashboard';
 
 // import store
@@ -72,6 +76,22 @@ function AppWrapper() {
   return (
     <Provider store={store}>
       <App />
+      <ToastContainer
+        className={'toast-container'}
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        progressClassName={'toast-progress'}
+        newestOnTop={false}
+        closeOnClick
+        style={{ padding: 5 }}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Bounce}
+        theme="dark"
+      />
     </Provider>
   )
 }

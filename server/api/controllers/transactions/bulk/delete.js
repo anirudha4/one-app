@@ -19,7 +19,7 @@ module.exports = {
   },
   fn: async function (inputs, exits) {
     const { transactionIds, walletId } = inputs;
-    console.log({ inputs });
+
     const { organizationId } = this.req.currentUser;
 
     // fetch organization
@@ -35,9 +35,9 @@ module.exports = {
     }
 
     const transactions = await Promise.all(transactionIds.map(id => sails.helpers.transactions.deleteTransaction(id)));
-
-    balance = await sails.helpers.wallets.reviseWalletBalanceAfterBulkDelete(transactions, wallet.amount, this.req);
+    const balance = await sails.helpers.wallets.reviseWalletBalanceAfterBulkDelete(transactions, wallet.amount, this.req);
     wallet = await sails.helpers.wallets.updateWallet(wallet.id, { amount: balance }, this.req);
+
     return exits.success({
       transactions,
       wallet

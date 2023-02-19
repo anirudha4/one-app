@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { isSplitwiseExpenseCheckedForAction } from '../../../selectors/boolean'
-import { checkSplitwiseTransaction, unCheckSplitwiseTransaction } from '../../../shared/actions/entry/splitwise-integrations'
+import { areAllSplitwiseTransactionsSelectedForActionSelector, isSplitwiseExpenseCheckedForAction } from '../../../selectors/boolean'
+import { checkAllSplitwiseTransaction, checkSplitwiseTransaction, unCheckAllSplitwiseTransaction, unCheckSplitwiseTransaction } from '../../../shared/actions/entry/splitwise-integrations'
 import Checkbox from '../../../shared/components/Checkbox'
+import Divider from '../../../shared/components/Divider'
 
 function SplitwiseExpenseList({ filteredExpenses }) {
     return (
@@ -22,7 +23,7 @@ export const SplitwiseExpense = ({ expense }) => {
     const dispatch = useDispatch();
     const isExpenseChecked = useSelector(state => isSplitwiseExpenseCheckedForAction(state, expense.id));
     const handleCheck = checked => {
-        if(checked) {
+        if (checked) {
             dispatch(checkSplitwiseTransaction({ transaction: expense }))
         } else {
             dispatch(unCheckSplitwiseTransaction({ transactionId: expense.id }))

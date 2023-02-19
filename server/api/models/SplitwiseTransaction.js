@@ -1,5 +1,5 @@
 /**
- * SplitwiseIntegration.js
+ * SplitwiseTransaction.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,25 +12,31 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    name: {
-      type: 'string',
-      required: true
-    },
-    clientId: {
+    referenceId: {
       type: 'string',
       required: true,
-      columnName: 'client_id'
+      columnName: 'reference_id'
     },
-    clientSecret: {
+    groupName: {
       type: 'string',
-      required: true,
-      columnName: 'client_secret'
+      allowNull: true,
+      columnName: 'group_name'
     },
-    splitwiseUser: {
+    creationMethod: {
+      type: 'string',
+      allowNull: true,
+      columnName: 'creation_method'
+    },
+    friends: {
       type: 'json',
-      columnName: 'splitwise_user',
-      defaultsTo: {}
+      defaultsTo: {},
     },
+    createdBy: {
+      type: 'json',
+      defaultsTo: {},
+      columnName: 'created_by'
+    },
+
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -40,22 +46,22 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+    splitwiseIntegrationId: {
+      model: 'SplitwiseIntegration',
+      required: true,
+      columnName: 'splitwise_integration_id',
+    },
     organizationId: {
       model: 'Organization',
       required: true,
       columnName: 'organization_id',
     },
-    userId: {
-      model: 'User',
+    transactionId: {
+      model: 'Transaction',
       required: true,
-      columnName: 'user_id',
-    },
+      columnName: 'transaction_id',
+    }
   },
-  tableName: 'splitwise_integration',
-  customToJSON() {
-    return {
-      ..._.omit(this, ['clientId', 'clientSecret']),
-    };
-  },
+  tableName: 'splitwise_transaction'
 };
 

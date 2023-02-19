@@ -1,7 +1,8 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { createSplitwiseIntegration, fetchSplitwiseTransactions } from "../../../api/splitwise-integration";
+import { toast } from 'react-toastify';
+import { createSplitwiseIntegration, fetchSplitwiseTransactions, importSplitwiseTransactions } from "../../../api/splitwise-integration";
 import { generateAuthenticationHeaders } from "../../../utils/authentication";
-import { createSplitwiseIntegrationAction, createSplitwiseIntegrationSucceededAction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction } from '../../actions/entry/splitwise-integrations';
+import { createSplitwiseIntegrationAction, createSplitwiseIntegrationSucceededAction, fetchSplitwiseTransactionsAction, fetchSplitwiseTransactionsErrorAction, fetchSplitwiseTransactionsSucceededAction, importSplitwiseTransactionsAction, importSplitwiseTransactionsErrorAction, importSplitwiseTransactionsSucceededAction } from '../../actions/entry/splitwise-integrations';
 
 function* createSplitwiseIntegrationWorker({ payload }) {
     try {
@@ -24,7 +25,22 @@ function* fetchSplitwiseTransactionsWorker({ payload }) {
         yield put(fetchSplitwiseTransactionsErrorAction(err))
     }
 }
+
+function * importSplitwiseTransactionsWorker({ payload }) {
+    try {
+        const { integrationId, transactionsToImport } = payload;
+        const { transactions, wallet, tags, transactionTags, splitwiseTransactions } = yield call(importSplitwiseTransactions, integrationId, { transactionsToImport }, generateAuthenticationHeaders());
+
+        yield put(importSplitwiseTransactionsSucceededAction({ transactions, wallet, tags, transactionTags, splitwiseTransactions }));
+
+        toast(`${transactions.length} transactions imported.`);
+    } catch (error) {
+        yield put(importSplitwiseTransactionsErrorAction());
+    }
+}
+
 export function* splitwiseIntegrationWatcher() {
     yield takeLatest(createSplitwiseIntegrationAction.type, createSplitwiseIntegrationWorker);
     yield takeLatest(fetchSplitwiseTransactionsAction.type, fetchSplitwiseTransactionsWorker);
+    yield takeLatest(importSplitwiseTransactionsAction.type, importSplitwiseTransactionsWorker);
 }

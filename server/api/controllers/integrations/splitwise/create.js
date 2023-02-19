@@ -29,13 +29,13 @@ module.exports = {
     if (!organization) {
       return exits.organizationNotFound();
     }
-
+    let splitwiseUser = {};
     try {
       // create access token using client id and client secret
-      await splitwise({
+      splitwiseUser = await splitwise({
         consumerKey: clientId,
         consumerSecret: clientSecret
-      }).getAccessToken()
+      }).getCurrentUser();
     }
     catch (err) {
       return exits.clientIdOrSecretIncorrect();
@@ -43,7 +43,8 @@ module.exports = {
     const splitwiseIntegrationValues = {
       name: `splitwise-integration`,
       clientId,
-      clientSecret
+      clientSecret,
+      splitwiseUser
     }
     const splitwiseIntegration = await sails.helpers.splitwiseIntegrations.createSplitwiseIntegration(splitwiseIntegrationValues, organizationId, userId, this.req);
 

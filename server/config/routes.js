@@ -55,6 +55,9 @@ module.exports.routes = {
   'POST /api/integrations/splitwise/:integrationId/transactions': 'integrations/splitwise/transactions',
   'GET /api/integrations/splitwise/:integrationId/groups': 'integrations/splitwise/groups',
 
+  'POST /api/integrations/splitwise/:integrationId/import-transactions': 'integrations/splitwise/import-transactions',
+
+
   // test route
   'GET /api/test': 'test/index',
 

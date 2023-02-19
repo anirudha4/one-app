@@ -27,7 +27,8 @@
 }
 
 .input {
-    @apply p-2 text-xs outline-none border border-gray-300 rounded hover:border-gray-700 focus:border-gray-900 transition-all;
+    @apply p-2 text-xs outline-none border border-gray-300 rounded hover:border-gray-700 focus:border-gray-900 transition-all
+    disabled:cursor-not-allowed disabled:hover:border-gray-300 disabled:text-gray-600
 }
 
 .label {

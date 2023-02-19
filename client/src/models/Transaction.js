@@ -1,4 +1,5 @@
 import Model, { attr, fk } from "redux-orm";
+import { importSplitwiseTransactionsSucceededAction } from "../shared/actions/entry/splitwise-integrations";
 import { bulkDeleteTransactionSucceededAction, createTransactionSucceededAction, deleteTransactionSucceededAction } from "../shared/actions/entry/transactions";
 import { appInit } from "../shared/slices/core";
 
@@ -53,6 +54,11 @@ export class Transaction extends Model {
             case bulkDeleteTransactionSucceededAction.type:
                 payload.transactions.forEach(transaction => {
                     Transaction.withId(transaction.id).delete();
+                });
+                break;
+            case importSplitwiseTransactionsSucceededAction.type:
+                payload.transactions.forEach(transaction => {
+                    Transaction.upsert(transaction);
                 });
                 break;
             default:

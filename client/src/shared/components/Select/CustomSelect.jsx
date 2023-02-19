@@ -43,6 +43,7 @@ export const CreatableSelect = ({ options, name, value, onChange, label, id, ...
                 options={options}
                 name={name}
                 onChange={onChange}
+                tabSelectsValue={false}
                 classNamePrefix="react-select"
                 className='react-select-container'
                 theme={(theme) => ({

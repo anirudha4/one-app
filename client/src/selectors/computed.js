@@ -1,7 +1,6 @@
 import { createSelector } from "redux-orm";
 import orm from "../models/orm";
 import { allTransactionSelector } from "./all";
-import { currentWalletSelector } from "./current";
 
 export const transactionsSummarySelector = createSelector(
     orm,

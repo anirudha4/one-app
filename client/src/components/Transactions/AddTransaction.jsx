@@ -71,12 +71,6 @@ function AddTransaction() {
     }
   }
 
-  // useEffect(() => {
-  //   document.addEventListener('keydown', e => closeOnEsc(e, handleClose));
-
-  //   return () => document.removeEventListener('keydown', closeOnEsc);
-  // }, []);
-
   return (
     <SidepanelWrapper back={'/app/transactions'} title="New Transaction">
       {error && <div className="p-2 text-xs capitalize bg-red-100 text-red-500 mb-3 rounded">{error}</div>}

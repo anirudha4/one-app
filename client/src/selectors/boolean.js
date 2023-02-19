@@ -32,3 +32,14 @@ export const isSplitwiseExpenseCheckedForAction = createSelector(
         return splitwise.transactionsToImport.find(transaction => transaction.id === id);
     }
 )
+export const areAllSplitwiseTransactionsSelectedForActionSelector = createSelector(
+    [
+        (state) => state.splitwise,
+        (_, transactions) => transactions,
+    ],
+    (splitwise, transactions) => {
+        if (transactions.length === 0) return false;
+        const checkedIds = splitwise.transactionsToImport;
+        return transactions.every(id => checkedIds.includes(id));
+    }
+)

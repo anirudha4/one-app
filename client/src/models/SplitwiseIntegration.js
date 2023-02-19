@@ -7,7 +7,8 @@ export class SplitwiseIntegration extends Model {
     static get fields() {
         return {
             id: attr(),
-            name: attr()
+            name: attr(),
+            splitwiseUser: attr()
         };
     }
 
