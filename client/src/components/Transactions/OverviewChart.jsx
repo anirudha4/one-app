@@ -21,12 +21,12 @@ export const createDataForOverviewChart = (income, expense, investment) => ({
             backgroundColor: [
                 'rgba(75, 192, 192, 1)',
                 'rgba(255, 99, 132, 1)',
-                'rgba(255, 199, 132, 1)',
+                'rgba(59, 130, 246, .9)',
             ],
             borderColor: [
                 'rgba(75, 192, 192, 1)',
                 'rgba(255, 99, 132, 1)',
-                'rgba(255, 199, 132, 1)',
+                'rgba(59, 130, 246, .7)',
             ],
             radius: 90,
             cutout: 90,

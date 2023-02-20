@@ -18,7 +18,7 @@ export class SplitwiseTransaction extends Model {
             splitwiseIntegrationId: fk({
                 to: 'SplitwiseIntegration',
                 as: 'splitwiseIntegration',
-                relatedName: 'splitwiseTransactions'
+                relatedName: 'splitwiseTransaction'
             }),
             organizationId: fk({
                 to: 'Organization',

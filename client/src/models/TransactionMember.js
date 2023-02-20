@@ -13,12 +13,12 @@ export class TransactionMember extends Model {
             transactionId: fk({
                 to: 'Transaction',
                 as: 'transactions',
-                relatedName: 'TransactionMembers'
+                relatedName: 'transactionMembers'
             }),
             memberId: fk({
-                to: 'User',
-                as: 'user',
-                relatedName: 'members'
+                to: 'Friend',
+                as: 'friends',
+                relatedName: 'friends'
             })
         };
     }

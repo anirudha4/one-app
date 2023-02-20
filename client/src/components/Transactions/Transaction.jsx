@@ -8,6 +8,7 @@ import TransactionTags from './TransactionTags';
 import { transactionIdCheckedForActions, transactionIdUncheckedForActions } from '../../shared/slices/transaction';
 import { isTransactionCheckedForAction } from '../../selectors/boolean';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from '../../utils';
 
 function Transaction({ id, name, amount, type, date, user, category, organization, transactionsGrid, expanded }) {
     const dispatch = useDispatch();
@@ -40,10 +41,7 @@ function Transaction({ id, name, amount, type, date, user, category, organizatio
                 {category.name}
             </div>
             {expanded && <TransactionTags id={id} />}
-            <div className="text-xs text-slate-600">{new Date(date).toLocaleString('en-us', {
-                month: 'short',
-                day: '2-digit',
-            })}</div>
+            <div className="text-xs text-slate-600">{formatDate(date)}</div>
         </div>
     )
 }

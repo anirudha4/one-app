@@ -6,6 +6,7 @@ export const makeTransactionTagsByTransactionId = () => createSelector(
     (_, id) => id,
     ({ Transaction }, id) => {
         const transaction = Transaction.withId(id);
+        if(!transaction) return null;
         const transactionTags = transaction.transactionTags.toModelArray();
         const tags = transactionTags.map(transactionTag => {
             return { ...transactionTag.tags.ref, key: transactionTag.id }
@@ -13,16 +14,37 @@ export const makeTransactionTagsByTransactionId = () => createSelector(
         return tags;
     }
 )
+export const makeTransactionMembersByTransactionId = () => createSelector(
+    orm,
+    (_, id) => id,
+    ({ Transaction }, id) => {
+        const transaction = Transaction.withId(id);
+        if(!transaction) return null;
+
+        const transactionMembers = transaction.transactionMembers.toModelArray();
+        const friends = transactionMembers.map(transactionMember => {
+            return { ...transactionMember.friends.ref, key: transactionMember.id }
+        });
+        return friends;
+    }
+)
 
 export const transactionByIdSelector = createSelector(
     orm,
     (_, id) => id,
     makeTransactionTagsByTransactionId(),
-    ({ Transaction }, id, transactionTags) => {
-        const transaction = Transaction.withId(id).ref;
+    makeTransactionMembersByTransactionId(),
+    ({ Transaction }, id, transactionTags, transactionFriends) => {
+        const transaction = Transaction.withId(id);
+        if(!transaction) return {};
         return {
-            ...transaction,
-            transactionTags
+            ...transaction.ref,
+            organization: transaction.organization.ref,
+            category: transaction.category.ref,
+            user: transaction.user.ref,
+            transactionTags,
+            splitwiseTransaction: transaction.splitwiseTransaction?.ref,
+            transactionFriends
         }
     }
 )

@@ -56,14 +56,14 @@ function Manage({ expanded }) {
                 <>
                     <Divider />
                     <Tabs tabs={TAB_OPTIONS} onChange={handleTabChange} activeTab={activeTab} />
-                    <Link to={query}>
+                    {/* <Link to={query}>
                         <button className="btn-floating transition-all group hover:gap-2 hover:w-32">
                             <TbPlus />
                             <span className="text-xs text-white whitespace-nowrap w-0 overflow-hidden transition-all group-hover:block  group-hover:w-fit">
                                 {label}
                             </span>
                         </button>
-                    </Link>
+                    </Link> */}
                 </>
             )}
         </div>

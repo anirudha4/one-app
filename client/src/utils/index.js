@@ -11,3 +11,10 @@ export const getServerAssetUrl = (path) => {
 export const generateSource = (source, integrationId = null) => {
     return { from: source, integrationId };
 }
+
+export const formatDate = (date) => {
+    return new Date(date).toLocaleString('en-us', {
+        month: 'short',
+        day: '2-digit'
+    })
+}
