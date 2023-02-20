@@ -66,7 +66,7 @@ function TransactionDetails({ id }) {
                 <button className="btn-floating transition-all group hover:gap-2 hover:w-32" onClick={handleDelete}>
                     <TbTrash />
                     <span className="text-xs text-white whitespace-nowrap w-0 overflow-hidden transition-all group-hover:block  group-hover:w-fit">
-                        {'Delete'}
+                        {'Delete Transaction'}
                     </span>
                 </button>
             </div>
