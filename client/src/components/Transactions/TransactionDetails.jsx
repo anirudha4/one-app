@@ -9,7 +9,7 @@ import { TbTrash } from 'react-icons/tb';
 import { deleteTransactionAction } from '../../shared/actions/entry/transactions';
 
 function TransactionDetails({ id }) {
-    const { name, description, type, amount, date, category, splitwiseTransaction, transactionTags, transactionFriends } = useSelector(state => transactionByIdSelector(state, id));
+    const { name, description, type, amount, date, isRecurring, category, splitwiseTransaction, transactionTags, transactionFriends } = useSelector(state => transactionByIdSelector(state, id));
 
     // dispatch
     const dispatch = useDispatch();
@@ -53,8 +53,8 @@ function TransactionDetails({ id }) {
                     <TransactionInfoContainer title={'Created from'}>
                         {splitwiseTransaction ? 'Splitwise' : 'Application'}
                     </TransactionInfoContainer>
-                    <TransactionInfoContainer title={'Tags'}>
-                        {category.name}
+                    <TransactionInfoContainer title={'Recurring'}>
+                        {isRecurring ? 'Yes' : 'No'}
                     </TransactionInfoContainer>
                 </div>
 
@@ -66,7 +66,7 @@ function TransactionDetails({ id }) {
                 <button className="btn-floating transition-all group hover:gap-2 hover:w-32" onClick={handleDelete}>
                     <TbTrash />
                     <span className="text-xs text-white whitespace-nowrap w-0 overflow-hidden transition-all group-hover:block  group-hover:w-fit">
-                        {'Delete Transaction'}
+                        {'Delete'}
                     </span>
                 </button>
             </div>
