@@ -15,15 +15,13 @@ function RouteBasedModals() {
         const addTransaction = searchParams.get('add_transaction');
         const addMember = searchParams.get('add_member');
         const switchWorkspace = searchParams.get('switch_workspace');
-        const showTransaction = searchParams.get('show_transaction');
-        return { addTransaction, addMember, switchWorkspace, showTransaction };
+        return { addTransaction, addMember, switchWorkspace };
     }, [searchParams]);
     return (
         <>
             {addTransaction && <AddTransaction />}
             {addMember && <AddMember />}
             {switchWorkspace && <SwitchWorkspace />}
-            {showTransaction && <></>}
         </>
     )
 }

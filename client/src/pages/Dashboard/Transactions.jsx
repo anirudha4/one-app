@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useMemo } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import Manage from '../../components/Transactions/Manage';
 import TransactionOverview from '../../components/Transactions/Overview';
@@ -15,6 +16,9 @@ function Transactions() {
   }, [expanded]);
   return (
     <div style={{ gridTemplateColumns: grid }} className="transaction-grid px-4 py-2 gap-4 h-[calc(100vh-50px)] overflow-hidden w-full transition-all duration-150" >
+      <Helmet>
+        <title>Transactions</title>
+      </Helmet>
       <TransactionOverview expanded={expanded} />
       <TransactionList expanded={expanded} setExpanded={setExpanded} />
       <Manage expanded={expanded} />

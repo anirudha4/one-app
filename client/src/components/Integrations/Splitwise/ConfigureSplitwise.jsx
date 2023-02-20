@@ -164,6 +164,7 @@ function ConfigureSplitwise({ id }) {
           {mergedExpenses.length > 0 && <>
             <div className="flex items-center gap-2 mb-2 px-4">
               <Checkbox disabled={isSelectAllCheckboxDisabled} checked={areAllSplitwiseTransactionsSelectedForAction} onChange={handleCheckAllTransactions} />
+              <div className="text-xs font-medium select-none text-slate-800">Select All</div>
             </div>
             <div className='flex flex-col overflow-hidden gap-3 p-2'>
               <div className="overflow-scroll flex flex-col gap-2">
