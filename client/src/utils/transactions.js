@@ -40,10 +40,10 @@ export const validateTransaction = (values, checkAgainst) => {
 export const getTransactionTypeColor = (type) => {
     switch(type) {
         case 'expense':
-            return 'red';
+            return 'text-red-500';
         case 'income':
-            return 'teal';
+            return 'text-teal-500';
         case 'investment':
-            return 'blue';
+            return 'text-blue-500';
     }
 }
