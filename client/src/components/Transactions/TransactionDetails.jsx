@@ -14,7 +14,7 @@ function TransactionDetails({ id }) {
     return (
         <SidepanelWrapper title={name} back={'/app/transactions'}>
             <Helmet>
-                <title>{name}</title>
+                <title>One App | {name}</title>
             </Helmet>
             <div className="flex flex-col gap-3 mt-3">
                 <div className="p-2 text-xs bg-slate-50 rounded text-slate-700 font-medium transition-all hover:bg-slate-100">

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet';
 import ActiveIntegrationList from '../../components/Integrations/ActiveIntegrationList';
 import IntegrationList from '../../components/Integrations/IntegrationList';
 import Divider from '../../shared/components/Divider';
@@ -6,6 +7,9 @@ import Divider from '../../shared/components/Divider';
 function Integrations() {
   return (
     <div className='p-3'>
+      <Helmet>
+        <title>One App | Integrations</title>
+      </Helmet>
       <div className="p-4 border border-slate-100 rounded">
         <ActiveIntegrationList />
         <div className="mb-2 flex items-center">

@@ -17,7 +17,7 @@ function Transactions() {
   return (
     <div style={{ gridTemplateColumns: grid }} className="transaction-grid px-4 py-2 gap-4 h-[calc(100vh-50px)] overflow-hidden w-full transition-all duration-150" >
       <Helmet>
-        <title>Transactions</title>
+        <title>One App | Transactions</title>
       </Helmet>
       <TransactionOverview expanded={expanded} />
       <TransactionList expanded={expanded} setExpanded={setExpanded} />

@@ -9,6 +9,7 @@ import { createObjectFromFormData, validateTransaction } from '../../../utils/tr
 import { createSplitwiseIntegrationAction } from '../../../shared/actions/entry/splitwise-integrations'
 import { useDispatch, useSelector } from 'react-redux'
 import Alert from '../../../components/Alert'
+import { Helmet } from 'react-helmet'
 
 function SplitwiseConnect() {
   // local states
@@ -40,6 +41,9 @@ function SplitwiseConnect() {
   }
   return (
     <div className='p-3 max-w-[1200px] w-full mx-auto'>
+      <Helmet>
+        <title>One App | Splitwise Connect</title>
+      </Helmet>
       <div className="p-6 border bg-white border-slate-100 rounded">
         <div className="mb-2 flex items-center">
           <div className="flex items-center gap-3">
