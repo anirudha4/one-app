@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { areAllSplitwiseTransactionsSelectedForActionSelector, isSplitwiseExpenseCheckedForAction } from '../../../selectors/boolean'
-import { checkAllSplitwiseTransaction, checkSplitwiseTransaction, unCheckAllSplitwiseTransaction, unCheckSplitwiseTransaction } from '../../../shared/actions/entry/splitwise-integrations'
+import { isSplitwiseExpenseCheckedForAction, makeIsSplitwiseTransactionImported } from '../../../selectors/boolean'
+import { checkSplitwiseTransaction, unCheckSplitwiseTransaction } from '../../../shared/actions/entry/splitwise-integrations'
 import Checkbox from '../../../shared/components/Checkbox'
-import Divider from '../../../shared/components/Divider'
 
 function SplitwiseExpenseList({ filteredExpenses }) {
     return (
@@ -22,6 +21,9 @@ export default SplitwiseExpenseList
 export const SplitwiseExpense = ({ expense }) => {
     const dispatch = useDispatch();
     const isExpenseChecked = useSelector(state => isSplitwiseExpenseCheckedForAction(state, expense.id));
+
+    const isSplitwiseTransactionImported = useMemo(makeIsSplitwiseTransactionImported, [expense.id]);
+    const isDisabled = useSelector(state => isSplitwiseTransactionImported(state, expense.id));
     const handleCheck = checked => {
         if (checked) {
             dispatch(checkSplitwiseTransaction({ transaction: expense }))
@@ -32,7 +34,7 @@ export const SplitwiseExpense = ({ expense }) => {
     return (
         <div className="p-2 border rounded splitwise-expense-grid">
             <div className="flex gap-2 items-center">
-                <Checkbox checked={isExpenseChecked} onChange={handleCheck} />
+                <Checkbox checked={isDisabled ? true : isExpenseChecked} disabled={isDisabled} onChange={handleCheck} />
                 <div className="text-xs font-semibold truncate">
                     {expense.description}
                 </div>

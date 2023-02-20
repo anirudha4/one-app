@@ -25,7 +25,7 @@ module.exports = {
 
     // tags
     const tags = await sails.helpers.tags.getTagsByCriteria({ organizationId });
-    
+
     // friends
     const friends = await sails.helpers.friends.getFriendsByCriteria({ organizationId });
 
@@ -42,6 +42,9 @@ module.exports = {
     const wallets = await sails.helpers.wallets.getWalletsByCriteria({ organizationId });
 
     const splitwiseIntegrations = await sails.helpers.splitwiseIntegrations.getSplitwiseIntegrationsByCriteria({ organizationId });
+
+    const splitwiseIntegrationIds = sails.helpers.utils.mapRecords(splitwiseIntegrations);
+    const splitwiseTransactions = await sails.helpers.splitwiseTransactions.getSplitwiseTransactionsByCriteria({ splitwiseIntegrationId: splitwiseIntegrationIds, transactionId: transactionIds });
     return {
       user: this.req.currentUser,
       included: {
@@ -55,7 +58,8 @@ module.exports = {
         organizations,
         wallets,
         splitwiseIntegrations,
-        friends
+        friends,
+        splitwiseTransactions
       }
     };
   }

@@ -12,8 +12,9 @@ import Divider from '../../../shared/components/Divider';
 import SplitwiseExpenseList from './SplitwiseExpenseList';
 import Checkbox from '../../../shared/components/Checkbox';
 import { checkAllSplitwiseTransaction, importSplitwiseTransactionsAction, unCheckAllSplitwiseTransaction } from '../../../shared/actions/entry/splitwise-integrations';
-import { areAllSplitwiseTransactionsSelectedForActionSelector } from '../../../selectors/boolean';
+import { areAllSplitwiseTransactionsSelectedForActionSelector, isSelectAllCheckboxDisabledSelector } from '../../../selectors/boolean';
 import Loader from '../../../shared/components/Loader';
+import { splitwiseExpensesThatCanBeImported } from '../../../selectors/computed';
 
 function ConfigureSplitwise({ id }) {
   const dispatch = useDispatch();
@@ -40,20 +41,25 @@ function ConfigureSplitwise({ id }) {
   const { splitwiseUser } = useSelector(state => splitwiseIntegrationById(state, id));
   const { transactionsToImport, transactionsImported, transactionsImporting } = useSelector(state => state.splitwise);
 
-  const { filteredExpenses } = useMemo(() => {
-    if (!expensesConfig.expenses) return { filteredExpenses: [], total: 0 };
-    return {
-      filteredExpenses:
-        expensesConfig.expenses.filter(expense =>
-          !(['payment', 'debt_consolidation'].includes(expense.creation_method)) && (showUserExpenses ? expense.created_by.id === splitwiseUser.id : true)),
-    }
-  }, [expensesConfig.expenses, showUserExpenses])
+  // const { filteredExpenses } = useMemo(() => {
+  //   if (!expensesConfig.expenses) return { filteredExpenses: [], total: 0 };
+  //   return {
+  //     filteredExpenses:
+  //       expensesConfig.expenses.filter(expense =>
+  //         !(['payment', 'debt_consolidation'].includes(expense.creation_method)) && (showUserExpenses ? expense.created_by.id === splitwiseUser.id : true)),
+  //   }
+  // }, [expensesConfig.expenses, showUserExpenses])
+  const { filteredExpenses, alreadyImported } = useSelector(state => splitwiseExpensesThatCanBeImported(state, expensesConfig, showUserExpenses, splitwiseUser));
 
+  const mergedExpenses = useMemo(() => [...filteredExpenses, ...alreadyImported], [filteredExpenses, alreadyImported])
   const filteredExpensesTotal = useMemo(() => {
-    return filteredExpenses.reduce((a, b) => parseInt(a) + parseInt(b.cost), 0)
-  }, [filteredExpenses])
+    return mergedExpenses.reduce((a, b) => parseInt(a) + parseInt(b.cost), 0)
+  }, [mergedExpenses])
 
   const areAllSplitwiseTransactionsSelectedForAction = useSelector(state => areAllSplitwiseTransactionsSelectedForActionSelector(state, filteredExpenses));
+
+  const isSelectAllCheckboxDisabled = useSelector(state => isSelectAllCheckboxDisabledSelector(state, filteredExpenses));
+  console.log({ isSelectAllCheckboxDisabled });
 
   const handleCheckAllTransactions = checked => {
     if (checked) {
@@ -144,7 +150,7 @@ function ConfigureSplitwise({ id }) {
         <>
           <div className="flex items-center justify-between p-2">
             <div className="text-xs text-gray-700 font-medium mt-2 pb-2">
-              {filteredExpenses.length} {filteredExpenses.length > 1 ? 'Expenses' : 'Expense'} associated with <span className="font-bold text-black">{groupConfig.selectedGroup?.label}</span>.
+              {mergedExpenses.length} {mergedExpenses.length > 1 ? 'Expenses' : 'Expense'} ({alreadyImported.length} imported) associated with <span className="font-bold text-black">{groupConfig.selectedGroup?.label}</span>.
             </div>
             <div className="flex items-center gap-2">
               <div className="text-xs py-1 px-3 bg-green-50 rounded font-semibold text-green-600">
@@ -157,13 +163,13 @@ function ConfigureSplitwise({ id }) {
             </div>
           </div>
           <Divider />
-          {filteredExpenses.length > 0 && <>
+          {mergedExpenses.length > 0 && <>
             <div className="flex items-center gap-2 mb-2 px-4">
-              <Checkbox checked={areAllSplitwiseTransactionsSelectedForAction} onChange={handleCheckAllTransactions} />
+              <Checkbox disabled={isSelectAllCheckboxDisabled} checked={areAllSplitwiseTransactionsSelectedForAction} onChange={handleCheckAllTransactions} />
             </div>
             <div className='flex flex-col overflow-hidden gap-3 p-2'>
               <div className="overflow-scroll flex flex-col gap-2">
-                <SplitwiseExpenseList filteredExpenses={filteredExpenses} showUserExpenses={showUserExpenses} />
+                <SplitwiseExpenseList filteredExpenses={mergedExpenses} showUserExpenses={showUserExpenses} />
               </div>
               <button
                 className="btn-primary w-fit"
@@ -175,7 +181,7 @@ function ConfigureSplitwise({ id }) {
               </button>
             </div>
           </>}
-          {(expensesConfig.fetched && filteredExpenses.length === 0) && <Alert message={'No transactions found. Try another filter'} />}
+          {(expensesConfig.fetched && mergedExpenses.length === 0) && <Alert message={'No transactions found. Try another filter'} />}
         </>
       )}
 

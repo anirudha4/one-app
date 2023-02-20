@@ -19,7 +19,7 @@ export const allFriendsSelector = createSelector(
 
 export const allTransactionSelector = createSelector(
     orm,
-    ({ Transaction }) => Transaction.all().orderBy('createdAt', 'desc').toModelArray().map(transaction => {
+    ({ Transaction }) => Transaction.all().orderBy('date', 'desc').toModelArray().map(transaction => {
         return {
             ...transaction.ref,
             organization: transaction.organization.ref,

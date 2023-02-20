@@ -57,7 +57,7 @@ module.exports = {
           groupName: splitwiseTransactionToImport.group_id,
           creationMethod: splitwiseTransactionToImport.creation_method,
           friends: splitwiseTransactionToImport.users,
-          createdBy: splitwiseTransactionToImport.createdBy,
+          createdBy: splitwiseTransactionToImport.created_by,
           splitwiseIntegrationId: integrationId,
           transactionId: transaction.id
         };

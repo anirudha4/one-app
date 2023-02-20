@@ -7,4 +7,5 @@ export { TransactionTag } from "./TransactionTag";
 export { TransactionMember } from "./TransactionMember";
 export { Wallet } from "./Wallet";
 export { SplitwiseIntegration } from "./SplitwiseIntegration";
+export { SplitwiseTransaction } from "./SplitwiseTransaction";
 export { Friend } from "./Friend";

@@ -31,6 +31,7 @@ module.exports = {
       type: 'json',
       defaultsTo: {},
     },
+    // splitwise user
     createdBy: {
       type: 'json',
       defaultsTo: {},

@@ -18,7 +18,7 @@ module.exports = {
   },
   fn: async function (inputs) {
     const { values, organizationId, request } = inputs;
-    const splitwiseTransaction = await SplitwiseTransaction.create({ ...values, organizationId }).fetch();
+    const splitwiseTransaction = await SplitwiseTransaction.findOrCreate({ referenceId: values.referenceId, splitwiseIntegrationId: values.splitwiseIntegrationId }, { ...values, organizationId }).fetch();
 
     return splitwiseTransaction;
   }
