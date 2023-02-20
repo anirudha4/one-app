@@ -21,7 +21,6 @@ function Transaction({ id, name, amount, type, date, user, category, organizatio
         navigate(`/app/transactions/${id}`);
     }
     const handleChecked = (isChecked) => {
-        console.log({ isChecked })
         if(isChecked) {
             dispatch(transactionIdCheckedForActions({ transactionId: id }));
         } else {

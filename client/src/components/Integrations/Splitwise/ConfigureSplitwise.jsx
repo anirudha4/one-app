@@ -59,7 +59,6 @@ function ConfigureSplitwise({ id }) {
   const areAllSplitwiseTransactionsSelectedForAction = useSelector(state => areAllSplitwiseTransactionsSelectedForActionSelector(state, filteredExpenses));
 
   const isSelectAllCheckboxDisabled = useSelector(state => isSelectAllCheckboxDisabledSelector(state, filteredExpenses));
-  console.log({ isSelectAllCheckboxDisabled });
 
   const handleCheckAllTransactions = checked => {
     if (checked) {
@@ -79,7 +78,6 @@ function ConfigureSplitwise({ id }) {
       setError('');
       const { expenses } = await fetchSplitwiseTransactions(id, formData, generateAuthenticationHeaders());
       setExpensesConfig({ ...expensesConfig, expensesLoading: false, expenses, fetched: true });
-      console.log(expenses);
       setGroupConfig({ ...groupConfig, selectedGroup: GROUP_OPTIONS.find(g => g.id == formData.group_id) })
     } catch (error) {
       setError(error.message);

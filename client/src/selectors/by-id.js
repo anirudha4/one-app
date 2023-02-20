@@ -19,7 +19,6 @@ export const transactionByIdSelector = createSelector(
     (_, id) => id,
     makeTransactionTagsByTransactionId(),
     ({ Transaction }, id, transactionTags) => {
-        console.log({ id, transactionTags });
         const transaction = Transaction.withId(id).ref;
         return {
             ...transaction,

@@ -14,7 +14,6 @@ function BulkAction({ checkedTransactionIds }) {
         dispatch(bulkDeleteTransactionAction({ transactionIds: checkedTransactionIds, walletId: wallet.id }));
     }
     const handleChangeType = (type) => {
-        console.log({ type, checkedTransactionIds });
     }
     return (
         <div className='flex items-center gap-2 transition-all duration-100'>
