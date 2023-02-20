@@ -33,6 +33,9 @@ module.exports = {
     },
     tags: {
       type: 'ref'
+    },
+    friends: {
+      type: 'ref'
     }
   },
   exits: {
@@ -47,7 +50,7 @@ module.exports = {
     }
   },
   fn: async function (inputs, exits) {
-    const { categoryId, tags } = inputs;
+    const { categoryId, tags, friends } = inputs;
     const { organizationId, ...user } = this.req.currentUser;
 
     // fetch organization
@@ -81,6 +84,13 @@ module.exports = {
         transactionId: transaction.id
       }))
       transactionTags = await sails.helpers.transactionTags.createTransactionTags(transactionTagsValues, this.req);
+    }
+    if (friends.length > 0) {
+      const transactionMembersValues = friends.map(friend => ({
+        memberId: friend,
+        transactionId: transaction.id
+      }))
+      transactionMembers = await sails.helpers.transactionMembers.createTransactionMembers(transactionMembersValues, this.req);
     }
 
     // update wallet balance :WALLET

@@ -3,6 +3,7 @@ import socket from "../../api/socket";
 import { authorize, authWatcher } from "../../pages/Auth/saga";
 import { getAccessTokenFromLocalStore } from "../../utils/authentication";
 import { coreInitialized } from "../slices/core";
+import { friendWatcher } from "./entity/friend";
 import { memberWatcher } from "./entity/member";
 import { splitwiseIntegrationWatcher } from "./entity/splitwise-integration";
 import { tagWatcher } from "./entity/tag";
@@ -17,6 +18,7 @@ const watchers = [
     transactionWatcher,
     memberWatcher,
     walletWatcher,
+    friendWatcher,
     splitwiseIntegrationWatcher,
     socketWatchers
 ]

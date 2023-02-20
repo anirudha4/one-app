@@ -28,11 +28,6 @@ export class Tag extends Model {
             case createTagSucceededAction.type:
                 Tag.upsert(payload.tag);
                 break;
-            case importSplitwiseTransactionsSucceededAction.type:
-                payload.tags.forEach(tag => {
-                    Tag.upsert(tag);
-                });
-                break;
             default:
                 break;
         }

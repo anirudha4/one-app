@@ -23,6 +23,8 @@ module.exports = {
       return exits.organizationNotFound();
     }
 
+    const splitwiseIntegration = await sails.helpers.splitwiseIntegrations.getSplitwiseIntegrationByCriteria({ organizationId });
+
     // for now get category_id of others
     const category = await sails.helpers.categories.getCategoryByCriteria({ organizationId: organization.id, name: 'Other' });
 
@@ -31,14 +33,18 @@ module.exports = {
 
     const { transactionsToImport, integrationId } = inputs;
 
-    let transactions = [], transactionTags = [], tags = [], splitwiseTransactions = [];
+    let transactions = [], transactionMembers = [], friends = [], splitwiseTransactions = [];
     try {
       for (let index = 0; index < transactionsToImport.length; index++) {
         const splitwiseTransactionToImport = transactionsToImport[index];
+
+        // get cost
+        const cost = await sails.helpers.splitwiseIntegrations.getCostFromSplitwiseTransaction(splitwiseTransactionToImport, splitwiseIntegration.splitwiseUser);
+
         const transactionValues = {
           name: splitwiseTransactionToImport.description,
           type: 'expense',
-          amount: splitwiseTransactionToImport.cost,
+          amount: cost,
           date: splitwiseTransactionToImport.date,
           categoryId: category.id,
           walletId: wallet.id
@@ -58,23 +64,35 @@ module.exports = {
         const splitwiseTransaction = await sails.helpers.splitwiseIntegrations.createSplitwiseTransaction(splitwiseTransactionToImportValues, organizationId, this.req);
         splitwiseTransactions.push(splitwiseTransaction);
 
-        const tagsForThisTransaction = [];
+        const friendsForThisTransaction = [];
         for (let friendIndex = 0; friendIndex < splitwiseTransactionToImport.users.length; friendIndex++) {
           const element = splitwiseTransactionToImport.users[friendIndex].user;
           const name = element.first_name;
           const color = await sails.helpers.utils.generateRandomColor();
-          const tag = await Tag.findOrCreate({ name, organizationId }, { color, name, createdBy: userId, organizationId });
-          tagsForThisTransaction.push(tag);
+          const friend = await Friend.findOrCreate(
+            { referenceId: element.id, organizationId }, // find criteria
+
+            // if not found, create with following payload
+            {
+              name,
+              color,
+              referenceId: element.id,
+              source: {
+                from: 'SPLITWISE', integrationId, sourceValue: element
+              },
+              organizationId
+            });
+          friendsForThisTransaction.push(friend);
         }
-        const transactionTagsValues = tagsForThisTransaction.map(tag => ({
-          tagId: tag.id,
+        const transactionMembersValues = friendsForThisTransaction.map(friend => ({
+          memberId: friend.id,
           transactionId: transaction.id
         }));
-        const transactionTagsForThisTransaction = await sails.helpers.transactionTags.createTransactionTags(transactionTagsValues, this.req);
+        const transactionMembersForThisTransaction = await sails.helpers.transactionMembers.createTransactionMembers(transactionMembersValues, this.req);
 
         transactions.push(transaction);
-        transactionTags = [...transactionTags, ...transactionTagsForThisTransaction];
-        tags = _.uniqBy([...tags, ...tagsForThisTransaction], 'name');
+        transactionMembers = [...transactionMembers, ...transactionMembersForThisTransaction];
+        friends = friendsForThisTransaction;
       }
 
 
@@ -85,8 +103,8 @@ module.exports = {
       return exits.success({
         transactions,
         wallet,
-        tags,
-        transactionTags,
+        friends,
+        transactionMembers,
         splitwiseTransactions
       })
 

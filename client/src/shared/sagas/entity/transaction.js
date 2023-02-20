@@ -12,13 +12,12 @@ import {
     bulkDeleteTransactionAction,
     bulkDeleteTransactionSucceededAction,
     bulkDeleteTransactionErrorAction,
-    bulkDeleteTransactionRequestedAction
 } from '../../actions/entry/transactions';
 
 function* createTransactionWorker({ payload }) {
     try {
-        const { transaction, transactionTags, transactionMembers, wallet } = yield call(createTransaction, payload, generateAuthenticationHeaders());
-        yield put(createTransactionSucceededAction({ transaction, transactionTags, transactionMembers, wallet }));
+        const { transaction, transactionTags, transactionMembers, wallet, friends } = yield call(createTransaction, payload, generateAuthenticationHeaders());
+        yield put(createTransactionSucceededAction({ transaction, transactionTags, transactionMembers, wallet, friends }));
 
         toast('Transaction Created');
     } catch (error) {

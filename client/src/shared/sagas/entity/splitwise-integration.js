@@ -29,9 +29,9 @@ function* fetchSplitwiseTransactionsWorker({ payload }) {
 function * importSplitwiseTransactionsWorker({ payload }) {
     try {
         const { integrationId, transactionsToImport } = payload;
-        const { transactions, wallet, tags, transactionTags, splitwiseTransactions } = yield call(importSplitwiseTransactions, integrationId, { transactionsToImport }, generateAuthenticationHeaders());
+        const { transactions, wallet, friends, transactionMembers, splitwiseTransactions } = yield call(importSplitwiseTransactions, integrationId, { transactionsToImport }, generateAuthenticationHeaders());
 
-        yield put(importSplitwiseTransactionsSucceededAction({ transactions, wallet, tags, transactionTags, splitwiseTransactions }));
+        yield put(importSplitwiseTransactionsSucceededAction({ transactions, wallet, friends, transactionMembers, splitwiseTransactions }));
 
         toast(`${transactions.length} transactions imported.`);
     } catch (error) {

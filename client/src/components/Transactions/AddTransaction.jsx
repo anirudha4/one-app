@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { allCategoriesSelector, allTagsSelector } from '../../selectors/all';
+import { allCategoriesSelector, allFriendsSelector, allTagsSelector } from '../../selectors/all';
 import { currentWalletSelector } from '../../selectors/current';
 import NumberField from '../Field/NumberField';
 import Field from '../Field';
@@ -13,6 +13,9 @@ import TextField from '../Field/TextField';
 import SegmentedField from '../Field/SegmentedField';
 import { createTransactionAction } from '../../shared/actions/entry/transactions';
 import SidepanelWrapper from '../../shared/components/SidepanelWrapper';
+import { createFriendAction } from '../../shared/actions/entry/friends';
+import { SOURCE_TYPES } from '../../constants/config';
+import { generateSource } from '../../utils';
 
 
 function AddTransaction() {
@@ -20,6 +23,7 @@ function AddTransaction() {
   const [persistModal, setPersistModal] = useState(false);
   const [error, setError] = useState(null);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedFriends, setSelectedFriends] = useState([]);
 
   // refs
   const formRef = useRef();
@@ -32,6 +36,7 @@ function AddTransaction() {
   const { addingTransactionLoader } = useSelector(state => state.transaction);
   const categories = useSelector(allCategoriesSelector);
   const tags = useSelector(allTagsSelector);
+  const friends = useSelector(allFriendsSelector);
   const wallet = useSelector(currentWalletSelector);
 
   // memoize categories
@@ -45,11 +50,19 @@ function AddTransaction() {
       { id: tag.id, label: tag.name, value: tag.id }
     )), [tags]);
 
-  const isTagSelectDisabled = useMemo(() => selectedTags.length >= 3 ? true : false, [selectedTags]);
+  const FRIEND_OPTIONS = useMemo(() =>
+    friends.map(friend => (
+      { id: friend.id, label: friend.name, value: friend.id }
+    )), [friends]);
+
 
   // handlers
   const handleCreateTag = async tag => {
     dispatch(createTagAction({ name: tag }));
+  }
+
+  const handleCreateFriend = async friend => {
+    dispatch(createFriendAction({ name: friend, source: generateSource(SOURCE_TYPES.APPLICATION) }));
   }
   const handleCategoryChange = category => {
     formRef.current.type.value = category.type
@@ -94,7 +107,7 @@ function AddTransaction() {
             label={'Date'}
             placeholder={'Transaction Date'}
             name={'date'}
-            autoComplete={false}
+            autoComplete={'off'}
           />
         </div>
         <CustomSelect
@@ -124,6 +137,18 @@ function AddTransaction() {
           isMulti
           onChange={tags => setSelectedTags(tags)}
           onCreateOption={handleCreateTag}
+        />
+
+        <CreatableSelect
+          options={FRIEND_OPTIONS}
+          closeMenuOnSelect={false}
+          name="friends"
+          label="Shared With"
+          isLoading={addingTagLoader}
+          id="friends"
+          isMulti
+          onChange={friends => setSelectedFriends(friends)}
+          onCreateOption={handleCreateFriend}
         />
         <TextField
           rows={5}

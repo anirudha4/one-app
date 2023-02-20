@@ -5,7 +5,8 @@ export const createTransactionAction = createAction('transactions/create', funct
     return {
         payload: {
             ...payload,
-            tags: Array.isArray(payload.tags) ? payload.tags : payload.tags ? [payload.tags] : []
+            tags: Array.isArray(payload.tags) ? payload.tags : payload.tags ? [payload.tags] : [],
+            friends: Array.isArray(payload.friends) ? payload.friends : payload.friends ? [payload.friends] : []
         }
     }
 });

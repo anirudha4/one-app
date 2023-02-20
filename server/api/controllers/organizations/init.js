@@ -25,6 +25,9 @@ module.exports = {
 
     // tags
     const tags = await sails.helpers.tags.getTagsByCriteria({ organizationId });
+    
+    // friends
+    const friends = await sails.helpers.friends.getFriendsByCriteria({ organizationId });
 
     // transactions
     const transactions = await sails.helpers.transactions.getTransactionsByCriteria({ organizationId, userId: id });
@@ -51,7 +54,8 @@ module.exports = {
         members,
         organizations,
         wallets,
-        splitwiseIntegrations
+        splitwiseIntegrations,
+        friends
       }
     };
   }

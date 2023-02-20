@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom';
 import { TbPlus } from 'react-icons/tb';
 import classNames from 'classnames';
 const TAB_OPTIONS = [
-    // {
-    //     id: 1,
-    //     label: 'Members',
-    //     component: <FriendList />
-    // },
+    {
+        id: 1,
+        label: 'Friends',
+        component: <FriendList />
+    },
     {
         id: 2,
         label: 'Categories',

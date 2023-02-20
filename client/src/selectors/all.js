@@ -12,6 +12,11 @@ export const allTagsSelector = createSelector(
     ({ Tag }) => Tag.all().toRefArray()
 );
 
+export const allFriendsSelector = createSelector(
+    orm,
+    ({ Friend }) => Friend.all().toRefArray()
+);
+
 export const allTransactionSelector = createSelector(
     orm,
     ({ Transaction }) => Transaction.all().orderBy('createdAt', 'desc').toModelArray().map(transaction => {

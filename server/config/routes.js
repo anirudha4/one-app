@@ -39,6 +39,9 @@ module.exports.routes = {
   // tags
   'POST /api/tags': 'tags/create',
 
+  // friends
+  'POST /api/friends': 'friends/create',
+
   // transactions
   'POST /api/transactions': 'transactions/create',
   'DELETE /api/transactions/:id': 'transactions/delete',

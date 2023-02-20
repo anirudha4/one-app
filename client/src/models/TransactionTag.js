@@ -1,5 +1,4 @@
 import Model, { attr, fk, many } from "redux-orm";
-import { importSplitwiseTransactionsSucceededAction } from "../shared/actions/entry/splitwise-integrations";
 import { createTransactionSucceededAction } from "../shared/actions/entry/transactions";
 import { appInit } from "../shared/slices/core";
 
@@ -31,7 +30,6 @@ export class TransactionTag extends Model {
                 })
                 break;
             case createTransactionSucceededAction.type:
-            case importSplitwiseTransactionsSucceededAction.type:
                 payload.transactionTags.forEach(transactionTag => {
                     TransactionTag.upsert(transactionTag);
                 })

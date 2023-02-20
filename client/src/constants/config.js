@@ -36,6 +36,11 @@ export const INTEGRATIONS = [
     },
 ]
 
+export const SOURCE_TYPES = {
+    APPLICATION: 'APPLICATION',
+    SPLITWISE: 'SPLITWISE'
+};
+
 export default {
     VERSION,
     BASE_PATH,
