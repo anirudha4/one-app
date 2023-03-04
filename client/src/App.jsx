@@ -27,7 +27,6 @@ import { Insights } from './pages/Insights';
 import AccountLayout from './pages/Account/AccountLayout';
 import Profile from './pages/Account/Profile';
 import ManageCategories from './pages/Account/ManageCategories';
-import ManageWallets from './pages/Account/ManageWallets';
 
 function App() {
   const { isLoggedIn } = useSelector(currentAuthStatusSelector);
@@ -59,7 +58,6 @@ function App() {
             <Route index element={<Navigate to={'/app/accounts/profile'} />} />
             <Route path='profile' element={<Profile />} />
             <Route path='categories' element={<ManageCategories />} />
-            {/* <Route path='wallets' element={<ManageWallets />} /> */}
           </Route>
         </Route>
         <Route path='/verify_email' element={<Verify />} />

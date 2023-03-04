@@ -1,5 +1,6 @@
 import { createSelector } from "redux-orm"
 import { orm } from "../models/orm";
+import moment from 'moment';
 
 
 export const allCategoriesSelector = createSelector(
@@ -19,18 +20,24 @@ export const allFriendsSelector = createSelector(
 
 export const allTransactionSelector = createSelector(
     orm,
-    ({ Transaction }) => Transaction.all().orderBy('date', 'desc').toModelArray().map(transaction => {
-        return {
-            ...transaction.ref,
-            organization: transaction.organization.ref,
-            category: transaction.category.ref,
-            user: transaction.user.ref
-        }
-    })
+    (_, date) => date,
+    ({ Transaction }, date) => {
+        return Transaction.all().orderBy('date', 'desc').toModelArray().filter(transaction => {
+            if(!date) return true;
+            return moment(transaction.date).isSame(date, 'dates');
+        }).map(transaction => {
+            return {
+                ...transaction.ref,
+                organization: transaction.organization.ref,
+                category: transaction.category.ref,
+                user: transaction.user.ref
+            }
+        })
+    }
 )
 
 export const allMembersSelector = createSelector(
-    orm, 
+    orm,
     ({ User }) => User.all().toRefArray()
 )
 

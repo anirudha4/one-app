@@ -9,6 +9,10 @@ import classNames from 'classnames';
 
 const DateField = ({ id, name, placeholder, label, labelInfo, type, value, onChange, defaultValue = null, ...props }) => {
     const [selected, setSelected] = useState(defaultValue || new Date());
+    const handleChange = date => {
+        setSelected(date);
+        onChange({ target: { value: date } });
+    }
     return (
         <div className="w-full">
             {label && <label className={classNames('label mb-2 block')} htmlFor={id}>{label}</label>}
@@ -19,7 +23,7 @@ const DateField = ({ id, name, placeholder, label, labelInfo, type, value, onCha
                 isClearable
                 clearButtonClassName='close-btn'
                 selected={selected}
-                onChange={date => setSelected(date)}
+                onChange={handleChange}
                 placeholderText={placeholder}
                 customInput={<input className='input w-full' />}
                 {...props}
@@ -27,13 +31,5 @@ const DateField = ({ id, name, placeholder, label, labelInfo, type, value, onCha
         </div>
     )
 };
-DateField.propTypes = {
-    id: PropTypes.string,
-    placeholder: PropTypes.string,
-    label: PropTypes.string,
-    type: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.func,
-    useInputMask: PropTypes.bool,
-}
+
 export default DateField

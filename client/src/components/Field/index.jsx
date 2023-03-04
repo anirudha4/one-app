@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Field = ({ id, name, placeholder, label, ...props }) => {
     return (
         <div className="field group w-full">
-            <label className='label' htmlFor={id}>{label}</label>
+            {label && <label className='label' htmlFor={id}>{label}</label>}
             <input className='input' name={name} placeholder={placeholder} {...props} />
         </div>
     )

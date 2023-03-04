@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function NumberField({ id, name, placeholder, label, defaultValue = '', type, useInputMask, mask, notation, ...props }) {
+export default function NumberField({ id, name, placeholder, label, defaultValue = '', type, useInputMask, onChange, mask, notation, ...props }) {
     const [localValue, setLocalValue] = useState(defaultValue);
     const regex = /^\d*$/; // regular expression for numbers only
 
@@ -8,6 +8,7 @@ export default function NumberField({ id, name, placeholder, label, defaultValue
         let input = e.target.value;
         if (regex.test(input) || input === '') {
             setLocalValue(input);
+            onChange(e);
         }
     };
 

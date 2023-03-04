@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { TbLayoutSidebarLeftExpand, TbLayoutSidebarRightExpand, TbPlus } from 'react-icons/tb'
 import { ImDrawer2 } from 'react-icons/im';
 import { Link } from 'react-router-dom';
@@ -10,12 +10,15 @@ import { transactionIdsCheckedForActions, transactionIdsUncheckedForActions } fr
 import { isAllTransactionCheckedForAction } from '../../selectors/boolean';
 import BulkAction from './BulkAction';
 import TransactionListHeader from './TransactionListHeader';
+import DateFilter from './DateFilter';
+import moment from 'moment';
 
 function TransactionList({ expanded, setExpanded }) {
     const dispatch = useDispatch();
+    const [date, setDate] = useState(moment());
 
     // selectors
-    const transactions = useSelector(allTransactionSelector);
+    const transactions = useSelector(state => allTransactionSelector(state, date));
 
     const transactionIds = useMemo(() => {
         return transactions.map(transaction => transaction.id);
@@ -29,6 +32,14 @@ function TransactionList({ expanded, setExpanded }) {
     }, [expanded])
 
     // handlers
+    const handleDateChange = date => {
+        if (date) {
+            setDate(moment(date))
+        } else {
+            setDate(date);
+        }
+    }
+
     const handleAllTransactionChecked = (checked) => {
         if (checked) {
             dispatch(transactionIdsCheckedForActions({ transactionIds }));
@@ -38,6 +49,7 @@ function TransactionList({ expanded, setExpanded }) {
 
     }
     const handleExpand = () => setExpanded(!expanded);
+
     return (
         <div className="p-4 transaction-list flex flex-col card h-full select-none">
             <div className='flex items-center justify-between mb-2'>
@@ -52,6 +64,10 @@ function TransactionList({ expanded, setExpanded }) {
                     {checkedTransactionIds.length > 0 && (
                         <BulkAction checkedTransactionIds={checkedTransactionIds} />
                     )}
+                    {/* <div onClick={handleOpenFilterSheet} className="h-[34px] w-[34px] bg-slate-100 rounded flex items-center justify-center gap-2 cursor-pointer hover:bg-slate-200">
+                        <HiOutlineFilter />
+                    </div> */}
+                    <DateFilter date={date} handleDateChange={handleDateChange} />
                     <Link to={'?add_transaction=true'}>
                         <button className='btn-primary'>
                             <TbPlus size={16} />
@@ -71,7 +87,7 @@ function TransactionList({ expanded, setExpanded }) {
 
             <Divider />
             {/* List */}
-            <div className="h-full overflow-scroll">
+            <div className="transaction-list-container h-full overflow-scroll">
                 {transactions.length === 0 && (
                     <div className="mx-auto h-full w-fit text-center flex flex-col gap-4 justify-center mt-[-30px]">
                         <ImDrawer2 size={200} className='text-gray-300' />

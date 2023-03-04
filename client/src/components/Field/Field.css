@@ -16,7 +16,11 @@
     padding: 10px !important;
     background-color: white !important;
 }
-
+.react-datepicker__current-month {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .react-datepicker__navigation-icon {
     top: 8px !important;
 }

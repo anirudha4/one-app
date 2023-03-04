@@ -8,11 +8,11 @@ import { Helmet } from 'react-helmet';
 function Splitwise() {
   const { id } = useParams();
   return (
-    <div className='integration-container p-3 max-w-[1200px] w-full mx-auto max-h-full'>
+    <div className='integration-container p-3 max-w-[1200px] w-full mx-auto'>
       <Helmet>
         <title>One App | Splitwise Integration</title>
       </Helmet>
-      <div className="flex flex-col pt-6 pb-3 px-6 border bg-white border-slate-100 rounded h-full">
+      <div className="flex flex-col pt-6 pb-3 px-6 border bg-white border-slate-100">
         <div className="mb-2 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to={'/app/integrations'}>

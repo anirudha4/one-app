@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { requestLogout } from '../slices/auth';
 import { currentUserSelector, currentWalletSelector } from '../../selectors/current';
-import ChooseWallet from './Wallet/ChooseWallet';
 import Alert from '../../components/Alert';
 import { NavLink } from 'react-router-dom';
 
